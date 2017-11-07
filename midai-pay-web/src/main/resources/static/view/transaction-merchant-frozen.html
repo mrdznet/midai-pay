@@ -1,0 +1,209 @@
+<div class="container-fluid">
+    <!--商户冻结管理 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-check"></i>请选择查询条件</h4>
+                </div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="merchantForzenForm">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户小票号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="merchant-forzen-ticket" maxlength="50"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">商户名称</label>
+
+                                    <div class="col-md-8">
+
+                                        <input type="text" class="form-control" name="merchant-forzen-name" maxlength="100"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">冻结日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text"  class="form-control required url" name="merchantf-date-begin" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text"  class="form-control required url" name="merchantf-date-end" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">解冻日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text"  class="form-control required url" name="merchant-sf-date-begin" maxlength="20">
+                                          <span class="input-group-addon bg-green">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">---</label>
+
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text"  class="form-control required url" name="merchant-sf-date-end" maxlength="20">
+                                          <span class="input-group-addon bg-green">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <button class="btn btn-default pull-right" id="merchantForzenEmpty">清空筛选条件</button>
+                            <button class="btn btn-success pull-right" id="merchantForzenSearch">查询</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding">
+                        <h4><i class="icon-list"></i>查询结果</h4>
+                    </div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding">
+                            <button class="btn btn-warning pull-right shop-many-frozen shdjgl-xzdj-btn">新增冻结</button>
+                            <button class="btn btn-warning pull-right shop-solve-frozen shdjgl-pljd-btn">批量解冻</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="merchantForzenListTable"
+                       class="table table-striped table-hover table-highlight-head" style="border-top: 1px solid #dddddd;"
+                       data-toggle="table" data-query-params="merchantSearchTable"
+                       data-side-pagination="server" data-method="post"
+                       data-pagination="true" data-url="../frozenreason/list"
+                       data-page-size="10" data-show-pagination-detail="false"
+                       data-pagination-first-text="First" data-pagination-pre-text="上一页"
+                       data-pagination-next-text="下一页" data-pagination-loop="false" data-page-list="[10, 20]"
+                       data-pagination-last-text="Last">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-checkbox="true" data-formatter="unfrozenTimeStyle"></th>
+                        <th data-field="mercId">商户小票号</th>
+                        <th data-field="mercName">商户名称</th>
+                        <th data-field="frozenTime">冻结日期</th>
+                        <th data-field="unfrozenTime">解冻日期</th>
+                        <th data-field="frozenReason">冻结原因</th>
+                        <th data-field="frozenPerson">冻结操作人</th>
+                        <th data-field="unfrozenPerson">解冻操作人</th>
+                    </tr>
+                    <caption align="top" class="clearfix">
+                        <button class="btn btn-success pull-right" id="merchantForzenDown">Excel下载</button>
+                    </caption>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--新增冻结模态框-->
+<div class="modal fade" id="addFrozenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form class="form-horizontal" id="addForzenMerchantCus"
+                  novalidate="novalidate">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="icon-form"></i>新增商户冻结</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"><label class="col-md-2 control-label">商户小票号<span
+                                    class="required">*</span></label>
+
+                                <div class="col-md-10">
+                                    <input type="text" id="forzenMerchantName" name="mercId" class="form-control required"  maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label class="col-md-2 control-label">冻结原因<span
+                                    class="required">*</span></label>
+
+                                <div class="col-md-10">
+                                    <textarea rows="5" cols="12" name="frozenReason" id="forzenMerchantCause" class="form-control"
+                                              style="resize: none;"  maxlength="200"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-success" id="">确定</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--批量解冻模态框-->
+<div class="modal fade" id="shopSolveFrozen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title"><i class="icon-form"></i>解冻</h4>
+            </div>
+            <div class="modal-body modal-delete-text">
+                <div class="col-md-12 text-left delete-word-wrap">您确认要将小票号为<span class="merchantForzenIds"></span>的商户解冻吗?</div>
+                <div class="col-md-12 text-left">解冻后商户将可以进行提现功能！</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-success" id="merchantForzenSure">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--交易商户冻结-->
+<script type="text/javascript" src="js/transation-audit/transaction-merchant-frozen.js"></script>

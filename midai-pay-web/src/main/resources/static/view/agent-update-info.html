@@ -1,0 +1,1007 @@
+<script type="text/tmpl" id="optionTmpl">
+					<option data-code="{{code}}" data-value="{{name}}" value="{{code}}">{{name}}</option>
+
+
+
+
+</script>
+<script type="text/tmpl" id="cityTmpl">
+					<option data-code="{{code}}" data-father="{{father}}" value="{{code}}">{{name}}</option>
+
+
+
+
+</script>
+<script type="text/tmpl" id="bankTmpl">
+					<option data-code="{{bankcode}}" data-shortcode="{{shortcode}}" data-value="{{showname}}" value="{{bankcode}}">{{showname}}</option>
+
+</script>
+<div class="container-fluid">
+    <!--代理商管理-代理商申请 start-->
+    <div class="row">
+        <form class="form-horizontal row-border" id="editAgentForm"
+              action=""
+              novalidate="novalidate">
+            <input type="text" name="agentVo.agentNo" value="" style="display: none;" id="edit_agentNo">
+            <input type="text" name="agentVo.id" value="" style="display: none;" id="edit_id">
+            <input type="text" name="agentVo.markId" value="" style="display: none;" id="edit_markId">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>基本信息</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">机构名称<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.name" id="" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">登录用户名<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.shortName" readonly class="form-control"> </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">父代理商编号<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="hidden" class="form-control" name="agentVo.parentAgentName" id="edit_parentAgentName" readonly>
+                                            <input type="text" class="form-control" name="agentVo.parentAgentId" id="edit_parentAgentId" readonly>
+                                            <span class="input-group-addon bg-green" id="edit_searchFagent"><span class="glyphicon glyphicon-search"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>证件信息</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">营业执照号<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.licenceNo" id="" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">税务登记号<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.taxId" id="" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">法人代表<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="">
+                                            <input type="text" class="form-control" name="agentVo.corpRepr">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">法人身份证号<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.corpReprNo" class="form-control"  maxlength="50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4><i class="icon-role-list-small"></i>商户资质附件
+                        </h4>
+                    </div>
+                    <div class="widget-content" style="padding-top:15px;">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <div class="upImgs" data-showmodal="up-showImg-madal">
+                                    <div class="main-div">
+                                        <a id="new_infoacc-del-1" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                        <a id="new_infoacc-show-1" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                        <div>
+                                            <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                 style="height: 154px !important;">
+                                        </div>
+                                        <input type="file" id="new_infoupload-file-1" class="file image-input">
+                                        <input type="button" id="new_infoacc-upload-1" class="showbtu" value="上传">
+                                        <input type="button" id="new_infoacc-download-1" class="downloadbtn" value="下载">
+                                        <input type="hidden" name="imgVo[0].type" value="1">
+                                        <input type="hidden" name="imgVo[0].url" class="fileUrl" value="">
+
+                                        <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="certificate-picture">营业执照</span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <div class="upImgs" data-showmodal="up-showImg-madal" >
+                                    <div class="main-div">
+                                        <a id="new_infoacc-del-2" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                        <a id="new_infoacc-show-2" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                        <div>
+                                            <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                 style="height: 154px !important;">
+                                        </div>
+                                        <input type="file" id="new_infoupload-file-2" class="file image-input">
+                                        <input type="button" id="new_infoacc-upload-2" class="showbtu" value="上传">
+                                        <input type="button" id="new_infoacc-download-2" class="downloadbtn" value="下载">
+                                        <input type="hidden" name="imgVo[1].type" value="2">
+                                        <input type="hidden" name="imgVo[1].url" class="fileUrl" value="">
+
+                                        <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="certificate-picture">税务登记证</span>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <div class="upImgs" data-showmodal="up-showImg-madal">
+                                    <div class="main-div">
+                                        <a id="new_infoacc-del-3" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                        <a id="new_infoacc-show-3" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                        <div>
+                                            <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                 style="height: 154px !important;">
+                                        </div>
+                                        <input type="file" id="new_infoupload-file-3" class="file image-input">
+                                        <input type="button" id="new_infoacc-upload-3" class="showbtu" value="上传">
+                                        <input type="button" id="new_infoacc-download-3" class="downloadbtn" value="下载">
+                                        <input type="hidden" name="imgVo[2].type" value="3">
+                                        <input type="hidden" name="imgVo[2].url" class="fileUrl" value="">
+
+                                        <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="certificate-picture">开户许可证</span>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <div class="upImgs" data-showmodal="up-showImg-madal">
+                                    <div class="main-div">
+                                        <a id="new_infoacc-del-5" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                        <a id="new_infoacc-show-5" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                        <div>
+                                            <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                 style="height: 154px !important;">
+                                        </div>
+                                        <input type="file" id="new_infoupload-file-5" class="file image-input">
+                                        <input type="button" id="new_infoacc-upload-5" class="showbtu" value="上传">
+                                        <input type="button" id="new_infoacc-download-5" class="downloadbtn" value="下载">
+                                        <input type="hidden" name="imgVo[3].type" value="4">
+                                        <input type="hidden" name="imgVo[3].url" class="fileUrl" value="">
+
+                                        <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="certificate-picture">组织机构代码证</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hideLoop init-hide show-custom-new">
+                            <div class="row" style="margin-top:20px;margin-bottom: 20px;">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <div class="upImgs" data-showmodal="up-showImg-madal">
+                                        <div class="main-div">
+                                            <a id="new_infoacc-del-6" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                            <a id="new_infoacc-show-6" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                            <div>
+                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                     style="height: 154px !important;">
+                                            </div>
+                                            <input type="file" id="new_infoupload-file-6" class="file image-input">
+                                            <input type="button" id="new_infoacc-upload-6" class="showbtu" value="上传">
+                                            <input type="button" id="new_infoacc-download-6" class="downloadbtn" value="下载">
+                                            <input type="hidden" name="imgVo[4].type" value="5">
+                                            <input type="hidden" name="imgVo[4].url" class="fileUrl" value="">
+
+                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="certificate-picture">法人证件正面照</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <div class="upImgs" data-showmodal="up-showImg-madal">
+                                        <div class="main-div">
+                                            <a id="new_infoacc-del-7" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                            <a id="new_infoacc-show-7" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                            <div>
+                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                     style="height: 154px !important;">
+                                            </div>
+                                            <input type="file" id="new_infoupload-file-7" class="file image-input">
+                                            <input type="button" id="new_infoacc-upload-7" class="showbtu" value="上传">
+                                            <input type="button" id="new_infoacc-download-7" class="downloadbtn" value="下载">
+                                            <input type="hidden" name="imgVo[5].type" value="6">
+                                            <input type="hidden" name="imgVo[5].url" class="fileUrl" value="">
+
+                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="certificate-picture">法人证件背面照</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <div class="upImgs" data-showmodal="up-showImg-madal">
+                                        <div class="main-div">
+                                            <a id="new_infoacc-del-8" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                            <a id="new_infoacc-show-8" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                            <div>
+                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                     style="height: 154px !important;">
+                                            </div>
+                                            <input type="file" id="new_infoupload-file-8" class="file image-input">
+                                            <input type="button" id="new_infoacc-upload-8" class="showbtu" value="上传">
+                                            <input type="button" id="new_infoacc-download-8" class="downloadbtn" value="下载">
+                                            <input type="hidden" name="imgVo[6].type" value="7">
+                                            <input type="hidden" name="imgVo[6].url" class="fileUrl" value="">
+
+                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="certificate-picture">法人手持照片或场地照片</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    <div class="upImgs" data-showmodal="up-showImg-madal">
+                                        <div class="main-div">
+                                            <a id="new_infoacc-del-9" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                            <a id="new_infoacc-show-9" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                            <div>
+                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                     style="height: 154px !important;">
+                                            </div>
+                                            <input type="file" id="new_infoupload-file-9" class="file image-input">
+                                            <input type="button" id="new_infoacc-upload-9" class="showbtu" value="上传">
+                                            <input type="button" id="new_infoacc-download-9" class="downloadbtn" value="下载">
+                                            <input type="hidden" name="imgVo[7].type" value="8">
+                                            <input type="hidden" name="imgVo[7].url" class="fileUrl" value="">
+
+                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="certificate-picture">协议</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>联系方式</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商联系人<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.agentContact" id="" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商电话<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.mobile" id="" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商邮箱</label>
+                                    <div class="col-md-8">
+                                        <div class="">
+                                            <input type="text" class="form-control" name="agentVo.agentEmail">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商邮编</label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.postalCode" class="form-control" ></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group"><label class="col-md-4 control-label">代理商地址<span
+                                        class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <select name="agentVo.provinceCode" id="edit-register-province"
+                                                class="form-control required">
+                                            <option value="0">--请选择省份--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <select name="agentVo.cityCode" id="edit-register-city"
+                                                class="form-control required">
+                                            <option value="0">--请选择市--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <select name="agentVo.areaCode" id="edit-register-area"
+                                                class="form-control required">
+                                            <option value="0">--请选择区--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="agentVo.address">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>结算信息</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group"><label class="col-md-4 control-label">开户总行名称<span
+                                        class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <select name="agentVo.bankCode" id="edit_merchantNewbankid" class="form-control required"></select>
+                                        <input type="text" name="agentVo.bankName" id="edit_bankName" style="display: none;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">开户支行名称<span class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" id="edit_merchantNewBranchbankName" name="agentVo.bankBranchName"
+                                                   class="form-control required" readonly="readonly"/>
+                                            <input type="hidden" id="edit_merchantNewBranchbankId" name="agentVo.bankBranchCode"
+                                                   class="form-control"/>
+                                            <span class="input-group-addon bg-green btn" data-toggle="modal"
+                                                  id="edit-bank-apply-modal-show"><span
+                                                    class="glyphicon glyphicon-search"></span></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">结算账号名称<span class="required">*</span></label>
+                                    <div class="col-md-8"><input type="text" name="agentVo.accountName" class="form-control"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">结算账户账号<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="">
+                                            <input type="text" class="form-control" name="agentVo.accountCardNo" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">结算方式<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <select name="agentVo.settlingMethod" class="form-control required">
+                                            <option value="1">对公</option>
+                                            <option value="2">对私</option>
+                                            <option value="3">虚拟</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">T+0提现限额<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.withdrawCashT0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>刷卡成本信息</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">借记卡封顶手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.swingCardLimit" class="form-control" placeholder="">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.swingCardDebitRate" class="form-control" placeholder="">
+                                            <span class="input-group-addon">%</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.swingCardCreditRate" placeholder="">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">交易结算手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.swingCardSettleFee" placeholder="">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>无卡成本信息（借贷记一致）</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">无卡手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.nonCardCreditRate" id="" class="form-control" placeholder="">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>传统POS成本信息（借记卡封顶费率及成本与手刷相同）</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">借记卡封顶手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.posDebitLimit"  class="form-control" placeholder="">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.posDebitRate"  class="form-control" placeholder="">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.posCreditRate" placeholder="">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">交易结算手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.posSettleFee" placeholder="">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>扫码成本信息（借贷记一致）</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">微信手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.scanCodeWxRate" id="" class="form-control" placeholder=""><span
+                                                class="input-group-addon">%</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">支付宝手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.scanCodeZfbRate" id="" class="form-control" placeholder="">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">银联扫码手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.scanCodeYlRate" placeholder=""><span
+                                                class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">花呗手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.scanCodeMyhbRate" placeholder="">
+                                            <span
+                                                    class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">其他手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.scanCodeOtherRate"  placeholder=""><span
+                                                class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">京东白条手续费<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.scanCodeJdbtRate"  placeholder="">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class="icon-form"></i>机具押金</h4></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">刷卡机具押金<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.terminalSwipeDeposit" id="" class="form-control" placeholder=""><span class="input-group-addon">元</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">刷卡机具返还条件<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" name="agentVo.terminalSwipeDepositReturn" id="" class="form-control" placeholder=""><span
+                                                class="input-group-addon">元</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">传统pos机具押金<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.terminalPosDeposit" placeholder=""><span
+                                                class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">传统pos机具押金返还条件<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.terminalPosDepositReturn" placeholder=""><span
+                                                class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">传统pos月押金<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="agentVo.terminalPosDepositMonthly" placeholder=""><span
+                                                class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="submit" value="确认" class="btn btn-success pull-right" id="sureAdd">
+                            <input type="button" value="取消" class="btn btn-default pull-right" id="closeAdd">
+                        </div>
+                    </div>
+                </div>
+                <div class="widget box" id="fot_box">
+                    <div class="widget-header">
+                        <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>代理商二维码</h4></div>
+                        <div class="col-md-8 no-padding">
+                            <div class="toolbar no-padding">
+                                <button type="button" class="btn btn-default pull-right del-device-btn sh_btn"  style="background:#1e6cb4;color:white;" id="del_imgs_code">删&nbsp;&nbsp;除</button>
+                                <button type="button" class="btn btn-success pull-right add-device-btn sh_btn"  id="add_imgs_code"  style="background:#00a4de;color:white;">增&nbsp;&nbsp;加</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-content">
+                        <table class="table table-striped table-hover table-bordered" id="agent_code"
+                               data-toggle="table" data-query-params="agent_code_searh"
+                               data-url="/qrcode/agent/paginate"  data-pagination="true"
+                               data-side-pagination="server" data-page-size="5"
+                               data-pagination-first-text="First"
+                               data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                               data-pagination-last-text="Last" data-method="post">
+                            <thead>
+                            <tr>
+                                <th data-field="" data-checkbox="true"></th>
+                                <th data-field="qrCodeId" data-align="left">二维码ID</th>
+                                <th data-field="mercNo" data-align="left">所属商户ID</th>
+                                <th data-field="agentNo" data-align="left">所属代理商ID</th>
+                                <th data-field="" data-align="left" data-formatter="agent_code_some">操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--代理商管理-代理商申请 end-->
+</div>
+
+<!--商户新建申请-->
+<!--模态框-查询父代理商 start-->
+<div class="modal fade" id="edit_fagent_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">查询父代理商</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="addFactoryCus"
+                      novalidate="novalidate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">代理商编号</label>
+                                <div class="col-md-8"><input type="text" id="fagent" class="form-control" maxlength="50"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button  class="btn btn-success pull-right" id="fagentQuery">查询</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+
+                <table class="table table-striped table-hover table-bordered" id="edit_fagentTable"
+                       data-toggle="table" data-query-params="agentAddParams"
+                       data-url="../agent/queryNoAndNameList" data-pagination="true"
+                       data-side-pagination="server" data-page-size="5"
+                       data-pagination-first-text="First" data-page-list="[5]"
+                       data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                       data-pagination-loop="false"
+                       data-pagination-last-text="Last" data-method="post">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-radio="true"></th>
+                        <th data-field="agentNo" data-align="left">代理商编号</th>
+                        <th data-field="name" data-align="left">代理商名称</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="edit_closeFagent">关&nbsp;&nbsp;闭</button>
+                <button type="button" class="btn btn-success" id="edit_sureFagent">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框-查询父代理商 end-->
+<!--支行信息模态框-->
+<div class="modal fade" id="edit-bank-apply-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">查询支行信息</h4>
+            </div>
+            <div class="modal-body">
+                <div id="sbbg-query" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-4 control-label">支行编号</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="branchbankcode" class="form-control"  maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-4 control-label">支行名称</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="branchbankname" class="form-control"  maxlength="50"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button class="btn btn-success bank-btn-query pull-right">查询</button>
+                        </div>
+                    </div>
+                </div>
+                <table data-toggle="table" id="edit_applybandTable"
+                       class="table table-striped table-checkable table-hover table-bordered"
+                       data-query-params="merchantNewBankBean"
+                       data-url="/system/bank/bankBranchList.json" data-pagination="true"
+                       data-side-pagination="server" data-page-size="5"
+                       data-pagination-first-text="First" data-page-list=[5]
+                       data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                       data-pagination-loop="false"
+                       data-pagination-last-text="Last" data-method="post">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-radio="true"></th>
+                        <th data-field="branchbankcode">支行编码</th>
+                        <th data-field="branchbankname">支行名称</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                <button type="button" class="btn btn-success btn-confirm">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 新增模态框结束 -->
+<!-- 图片预览模态框 -->
+<div class="modal fade" id="up-showImg-madal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center imgTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-pic-review">
+                    <img src="" width="100%" height="100%" style="width: 500px;height: 500px;">
+                    <input type="button" class="rotateImg" placeholder="顺时针旋转90°" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--二维码模态框-->
+<div class="modal fade" id="agent_img_uplod_updown" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog sm-modal">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center">二维码下载</h4>
+            </div>
+
+            <div class="modal-body">
+                <img src="" alt="" style="width: 207px;height: 207px;" id="agent_mer_imgcode">
+                <input type="text" id="agent_key" style="display: none">;
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-success confirm-btn" id="agent_profit_btn_code">下&nbsp;&nbsp;载</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--二维码删除-->
+<div class="modal fade" id="img_del_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog sm-modal">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center">二维码删除</h4>
+            </div>
+
+            <div class="modal-body">
+                <h4 id="qrCodeId" style="display: none;"></h4>
+                <h4>确定删除二维码</h4>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-success confirm-btn" id="agent_img_code_btn_del">确&nbsp;&nbsp;定</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="imgs_code_all" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">二维码管理</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline pull-left" style="margin-bottom:10px;">
+                    <div class="form-group">
+                        <label for="num_imgs">新增二维码数</label>
+                        <input type="text" class="form-control" style="margin-left: 10px;" id="num_imgs" placeholder="最大输入50" max="50" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">  个
+                    </div>
+                </form>
+                    <div class="form-group pull-right">
+                        <button id="bnts_img_down" class="btn btn-success pull-right shcx-xj-btn">批量下载二维码
+                        </button>
+                    </div>
+                <table class="table table-striped table-hover table-bordered" id="agent_code_add_table"
+                       data-toggle="table" data-query-params="agent_code_searh"
+                       data-url="/qrcode/agent/paginate"  data-pagination="true"
+                       data-side-pagination="server" data-page-size="5"
+                       data-pagination-first-text="First"
+                       data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                       data-pagination-last-text="Last" data-method="post">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-checkbox="true"></th>
+                        <th data-field="qrCodeId" data-align="left">二维码ID</th>
+                        <th data-field="mercNo" data-align="left">所属商户ID</th>
+                        <th data-field="agentNo" data-align="left">所属代理商ID</th>
+                        <!--<th data-field="" data-align="left" data-formatter="agent_code_some">操作</th>-->
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                <button type="button" class="btn btn-success btn-confirm" id="btn_add_img_code">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div><!-- /.modal -->
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script>
+<script type="text/javascript" src="js/zd-manage/agent-update-info.js"></script>
+

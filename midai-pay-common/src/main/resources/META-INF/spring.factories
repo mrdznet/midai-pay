@@ -1,0 +1,11 @@
+#mybatis #dubbo
+#com.midai.framework.config.dubbo.DubboAutoConfiguration,\
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.midai.framework.config.mybatis.MybatisAutoConfiguration,\
+com.midai.framework.config.mybatis.MyBatisMapperScannerConfig,\
+com.midai.framework.config.mybatis.DataSourceConfiguration,\
+com.midai.framework.config.redis.RedisAutoConfiguration,\
+com.midai.framework.config.dubbo.DubboAutoConfiguration,\
+com.midai.framework.config.otherpay.OtherPayAutoConfig,\
+com.midai.framework.monitor.MidaiLogAutoConfiguration,\
+com.midai.framework.config.zookeeper.ZookeeperDistributedLockAutoConfig

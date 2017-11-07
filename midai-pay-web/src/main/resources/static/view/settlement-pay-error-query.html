@@ -1,0 +1,127 @@
+<!-- 打款失败查询页面 -->
+<div class="container-fluid">
+   <!-- start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>查询结果</h4></div>
+                    <div class="col-md-8 no-padding">
+                    	<div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="dkcgMarkBtn">标记为打款成功</button>
+                        </div>
+                        <div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="alldksbcxBtn">批量自动打款</button>
+                        </div>
+                        <div class="col-md-5 col-lg-5 toolbar no-padding">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" style="padding-top:8px;text-align:right">打款通道</label>
+                                <div class="col-md-6">
+                                    <select name="payChannel" class="form-control" id="errorDkPath">
+                                        <option value="">请选择</option>
+                                        <!-- <option value="1">民生代付</option> -->
+                                        <option value="500302">矩真代付</option>
+                                        <!-- <option value="3">米刷代付</option> -->
+                                        <option value="G10002">畅捷代付</option>
+                                        <option value="MISHUA">米刷代付</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-hover table-highlight-head" id="dksbcxTable"
+                        data-toggle="table" style="border-top: 1px solid #dddddd;"
+                        data-url="/autopay/errList" data-query-params="dksbcxSearch" data-pagination="true"
+                        data-side-pagination="server" data-page-size="10"
+                        data-pagination-first-text="First" data-checkbox-header="false"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                        data-pagination-loop="false" data-row-style="changeSettltmentErrorPayStyle"
+                        data-pagination-last-text="Last" data-method="post">
+                         <caption align="top" class="clearfix">
+                            <button class="btn btn-success pull-right" id="dksbcxListUpdate">刷新</button>
+                        </caption>
+                        <thead>
+                            <tr>
+                           		<th data-checkbox="true"></th>
+                                <th data-field="tixianDatetime" data-formatter="FormatDateTime" data-align="left">提现日期</th>
+                                <th data-field="mercId" data-align="left">商户小票号</th>
+                                <th data-field="mercName" data-align="left">商户名称</th>
+                                <th data-field="payMoney" data-align="left">结算总金额</th>
+                                <th data-field="tixianFeeamt" data-align="left">结算手续费</th>
+                                <th data-field="accountName" data-align="left">开户名</th>
+                                <th data-field="accountNo" data-align="left">开户账号</th>
+                                <th data-field="bankName" data-align="left">开户行名称</th>
+                                <th data-field="payChannel" data-align="left">打款通道</th>
+                                <th data-field="payStatestr" data-align="left" data-formatter="dksbcxPayStateF">结算状态</th>
+                                <th data-field="errorMsg" data-align="left">备注</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--清算管理-自动打款 end-->
+</div>
+
+<!--模态框-确认打款 start-->
+    <div class="modal fade" id="payErrorQrdkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                    <h4 class="modal-title align-center">确认打款</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="modal-delete-text">
+                         确定将<span class="dksbcxCont"></span>进行自动打款
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn" id="payErrorQrdkBtn">确&nbsp;&nbsp;定</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--模态框-确认打款 end-->
+
+<!--模态框-标记为打款成功 start-->
+    <div class="modal fade" id="payErrorMarkPaySuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                    <h4 class="modal-title align-center">标记为打款成功</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="modal-delete-text">
+                         确定将<span class="dksbcxList"></span>标记为打款成功吗？
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn" id="markPaySuccessBtn">确&nbsp;&nbsp;定</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--模态框-标记为打款成功 end-->
+
+<script type="text/templ" id="setPayErrorTempl">
+    <a class="dksbcxBtn" style="color:#3968c6;text-decoration:none;cursor:pointer" href="javascript:errorPayZddkEvent('row.tixiLogno','row.mercId')">自动打款</a>
+</script>
+ <script type="text/javascript" src="js/zd-manage/settlement-pay-error-query.js"></script>

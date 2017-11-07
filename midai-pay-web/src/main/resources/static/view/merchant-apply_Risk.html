@@ -1,0 +1,78 @@
+<script>
+    //初始化省市区数据联动
+
+    //三级联动start
+    $.ajax({
+        url: "/system/address/loadAllData/0/0",
+        method: 'post',
+        data:"{'type':0,'code':0}",
+        success: function (res) {
+            var op='';
+            $.each(res,function (i,n){
+                op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+            });
+            $('#N_ApplyProvince').append(op);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+    function change_city(e,n) {
+        if(n==0){
+            console.log("城市")
+            $('#N_ApplyCity option:gt(0)').remove();
+            $('#N_ApplyArea option:gt(0)').remove();
+            return false;
+        }
+        $('#N_ApplyCity option:gt(0)').remove();
+        $('#N_ApplyArea option:gt(0)').remove();
+        $.ajax({
+            url: '/system/address/loadAllData/'+e+'/'+n,
+            method: 'post',
+            success: function (res) {
+
+                var op='';
+                $.each(res,function (i,n){
+                    op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                })
+                $('#N_ApplyCity').append(op);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+    function change_area(e,n) {
+        $('#N_ApplyArea option:gt(0)').remove();
+        $.ajax({
+            url: '/system/address/loadAllData/'+e+'/'+n,
+            method: 'post',
+            success: function (res) {
+
+                var op='';
+                $.each(res,function (i,n){
+                    op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                })
+                $('#N_ApplyArea').append(op);
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+    /* change_city(1,1000);
+     change_area(2,1000);*/
+    $("#N_ApplyProvince").change(function (){
+        var city=$(this).find("option:selected").attr("value");
+        var area=$("#N_ApplyCity").find("option:selected").attr("value");
+        change_city(1,city)
+
+    });
+    $("#N_ApplyCity").change(function (){
+        var area=$(this).find("option:selected").attr("value");
+        change_area(2,area)
+    });
+
+
+    //初始化省市区数据联动结束---------------------------
+</script>

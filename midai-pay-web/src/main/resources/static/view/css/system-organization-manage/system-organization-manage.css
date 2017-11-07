@@ -1,0 +1,113 @@
+/*改写ztree默认样式*/
+.ztree{
+    margin-top: 24px;
+}
+.ztree a{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+
+}
+.ztree li{
+    line-height: 30px!important;
+}
+
+.ztree li span.switch{
+    display: none;
+}
+.ztree li span.button.ico_open,.ztree li span.button.ico_close,.ztree li span.button.ico_docu {
+    width: 15px;
+    height: 15px;
+    margin-top: 6px;
+    background: url("../../../imgs/icon-circle.png")  no-repeat center center!important;
+    display: none;
+}
+.ztree li span.icon-left{
+    position: absolute;
+    right: 0px;
+    top: 4px;
+    width: 15px;
+    height: 15px;
+    background: url("../../../imgs/icon-left.png")  no-repeat center center!important;
+}
+.ztree li span.icon-down{
+    position: absolute;
+    right: 0px;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    background: url("../../../imgs/icon-down.png")  no-repeat center center!important;
+}
+.ztree li.level3 span.button.ico_docu{
+    background-image:none!important;
+}
+.ztree span.button.edit{
+    display: none;
+}
+.ztree span.button.remove{
+    display: none;
+}
+/*end*/
+
+
+/*组织机构左边栏样式*/
+.container-main,.containePage,.containerPage > .row,.containerPage > .row{
+    height: 100%;
+}
+.container-main,.containePage,.containerPage > .row,.containerPage > .row > .org-aside{
+    height: 100%;
+}
+.org-aside{
+    background-color:#f1f1f1;
+    border-right:1px solid #dddddd;
+}
+.org-aside > ul{
+   margin-left: 30px;
+}
+/*end*/
+/*角色机构左边栏样式*/
+.role-aside{
+    background-color:#f1f1f1;
+    border-right:1px solid #dddddd;
+}
+.role-aside > ul{
+    margin-left: 30px;
+}
+/*end*/
+.color_red{
+    color:red
+}
+.control-label{
+    padding-top: 8px;
+}
+.btn-orange{
+    background-color:#ea572b;
+    color: white;
+}
+.close{
+    color: #d6866e;
+    font-size: 24px;
+}
+.marginTop_7px{
+    margin-top: 7px;
+}
+.glyphicon-edit{
+    cursor: pointer;
+}
+.marginTop--18px{
+    margin-top: -18px;
+}
+#org-table caption{
+    border: 1px solid #dddddd;
+    border-bottom: none;
+    background-color: #f9f9f9
+}
+#roleTable caption{
+    border: 1px solid #dddddd;
+    border-bottom: none;
+    background-color: #f9f9f9
+}
+
+.ms-container {
+    width:411px;
+}

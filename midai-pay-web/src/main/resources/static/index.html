@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<style type="text/css">
+.form-signin .btn-login {
+	    width: 90%;
+	    border: 0px;
+	    margin: 10px 0 10px;
+	    border-radius: 3px !important;
+	    height: 50px !important;
+	}
+
+	.form-signin input[type="text"], .form-signin input[type="password"] {
+	    width: 90%;
+	}
+
+	.login-wrap {
+	    padding: 0 10px 20px 40px;
+	}
+
+	.fa-check:before {
+	    content: "";
+	}
+
+	.fa-check {
+		font-size: 20px !important;
+		font-weight: normal !important;
+		letter-spacing: 5px;
+	}
+	#loginMsg{
+		line-height: 30px;
+		color:#A00A03;
+		margin:0px;
+		padding:0px;
+		font-size:14px;
+		text-indent: -23px;
+		font-weight: 600;
+	}
+</style>
+
+</head>
+<body>
+	<div id="main"></div>
+
+	<button id="all">all</button>
+	<button id="insert">insert</button>
+	<button id="del">del</button>
+	<button id="update">update</button>
+	
+	<div style="width: 215px;height: 50px;">
+		<div style="float: left;margin-right:10px; width: 100px;">123</div>
+	<div style="float: left;margin-left: 5px;width: 100px; ">aaa</div>
+	
+	</div>
+	
+
+	<script type="text/javascript">
+		$(function() {
+			$("#all").on("click", function() {
+				
+				$.ajax({
+             	   url:"user/all",
+             	   type:"get",
+             	   contentType:"application/json;charset=utf-8",
+             	   success:function(res){
+             		   console.log(res);
+             	   }
+                });
+
+			});
+			$("#insert").on("click", function() {
+				 var data={
+						  createTime: "2016-09-09 08:08:08",
+						  name: "rqrewqww123",
+						  password: "123123213"
+						}
+				
+                 $.ajax({
+              	   url:"user",
+              	   type:"post",
+              	   data:JSON.stringify(data),
+              	   contentType:"application/json;charset=utf-8",
+              	   success:function(res){
+              		   alert(res);
+              	   }
+                 });
+					
+			});
+			$("#del").on("click", function() {
+				$.ajax({
+             	   url:"user/5",
+             	   type:"delete",
+             	   contentType:"application/json;charset=utf-8",
+             	   success:function(res){
+             		   alert(res);
+             	   }
+                });
+			});
+			
+			$("#update").on("click", function() {
+				   var data={
+						   id: 3,
+						   name: "gdfgfdg123"
+						 }
+				
+                   $.ajax({
+                	   url:"user",
+                	   type:"put",
+                	   data:JSON.stringify(data),
+                	   contentType:"application/json;charset=utf-8",
+                	   success:function(res){
+                		   alert(res);
+                	   }
+                   });
+			});
+			
+
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,1341 @@
+<script type="text/tmpl" id="optionTmpl">
+					<option data-code="{{code}}" data-value="{{name}}" value="{{code}}">{{name}}</option>
+
+
+
+
+</script>
+<script type="text/tmpl" id="cityTmpl">
+					<option data-code="{{code}}" data-father="{{father}}" value="{{code}}">{{name}}</option>
+
+
+
+
+</script>
+<script type="text/tmpl" id="bankTmpl">
+					<option data-code="{{bankcode}}" data-shortcode="{{shortcode}}" data-value="{{showname}}" value="{{bankcode}}">{{showname}}</option>
+
+
+
+
+</script>
+<div class="container-fluid" id="terminal-sbrk">
+
+    <!--商户新建申请-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-form"></i>商户申请</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border fv-form fv-form-bootstrap" id="customer-save-form">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户编号</label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="boCustomer.mercNo" readonly="readonly"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group"><label class="col-md-4 control-label">商户类型<span
+                                        class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <select id="merType" name="boCustomer.merType" class="form-control">
+                                            <option value="1" data-value=".live">个人</option>
+                                            <option value="3" data-value=".live.show-custom-new">普通商户</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group"><label class="col-md-4 control-label">代理商编号<span
+                                        class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="agentId" name="boCustomer.agentId"
+                                                   readonly="readonly"/>
+                                                <span class="input-group-addon bg-green btn" data-toggle="modal"
+                                                      id="merchant-apply-modal-show"><span
+                                                        class="glyphicon glyphicon-search"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商名称</label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="boCustomer.agentName"
+                                               readonly="readonly"/>
+                                        <!--顶级代理商ID  -->
+                                        <input type="hidden" name="boCustomer.topAgentId" id="topAgentId">
+                                        <!--顶级代理商名称 -->
+                                        <input type="hidden" name="boCustomer.topAgentName" id="topAgentName" readonly="readonly">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户名称<span class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control required" name="boCustomer.mercName" maxlength="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户手机号<span class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="boCustomer.mobile" class="form-control required boCustomerMobile" maxlength="11"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group"><label class="col-md-4 control-label">法人姓名<span
+                                        class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="boCustomer.legalName" id="reglegalName" class="form-control required" maxlength="30"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">法人身份证<span class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="boCustomer.idCard" class="form-control" maxlength="18"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="live show-custom-new">
+                            <div class="row hideLoop">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">商户注册地址<span class="required">*</span></label>
+
+                                        <div class="col-md-10">
+                                            <input type="text" name="boCustomer.address" class="form-control required" maxlength="100">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">商户类别</label>
+
+                                        <div class="col-md-8">
+                                            <label class="radio-inline"><input type="radio" class="uniform" name="boCustomer.merAuto"
+                                                                               value="1">自动到账商户</label>
+                                            <label class="radio-inline"><input type="radio" class="uniform" name="boCustomer.merAuto"
+                                                                               value="0" checked>普通商户</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+
+                            <div class="toggle-merchant-type">
+                                <div class="row hideLoop">
+                                    <div class="col-md-12">
+                                        <div class="form-group"><label class="col-md-1 control-label">许可经营范围 </label>
+
+                                            <div class="col-md-11">
+                                                <input type="text" name="boCustomer.scobus" class="form-control required" maxlength="200"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 hideLoop">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">申请设备</label>
+
+                                            <div class="col-md-10">
+                                                <input type="text" name="boCustomer.description" class="form-control" maxlength="100"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group"><label class="col-md-4 control-label">省<span
+                                                class="required">*</span></label>
+
+                                            <div class="col-md-8">
+                                                <select name="boCustomer.peovinceId" id="register-province"
+                                                        class="form-control required"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group"><label class="col-md-4 control-label">市<span
+                                                class="required">*</span></label>
+
+                                            <div class="col-md-8">
+                                                <select name="boCustomer.cityId" id="register-city"
+                                                        class="form-control required"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="addClearfix clearfix">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">开户名<span class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <input type="text" name="boCustomer.accountName" id="regaccountName" class="form-control required" readonly="readonly"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-4 control-label">开户主账号<span
+                                                    class="required">*</span></label>
+
+                                                <div class="col-md-8"><input type="text" name="boCustomer.accountNo"
+                                                                             class="form-control required" maxlength="19"/></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group"><label class="col-md-4 control-label">开户总行名称<span
+                                                class="required">*</span></label>
+
+                                            <div class="col-md-8">
+                                                <select name="boCustomer.bankId" id="merchantNewBankId" class="form-control required"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">开户支行名称<span class="required">*</span></label>
+
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" id="merchantNewBranchbankName" name="boCustomer.branchbankName"
+                                                           class="form-control required" readonly="readonly"/>
+                                                    <input type="hidden" id="merchantNewBranchbankId" name="boCustomer.branchbankId"
+                                                           class="form-control"/>
+                                                    <span class="input-group-addon bg-green btn" data-toggle="modal"
+                                                          id="bank-apply-modal-show"><span
+                                                            class="glyphicon glyphicon-search"></span></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hideLoop live show-custom-new">
+                                    <div class="toggle-merchant-type">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 control-label">业务联系人</label>
+
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="boCustomer.merlinkman" class="form-control" maxlength="30"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group"><label class="col-md-4 control-label">联系人手机</label>
+
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="boCustomer.merlinkmobile" class="form-control" maxlength="11"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group"><label class="col-md-4 control-label">联系人邮箱</label>
+
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="boCustomer.email" class="form-control" maxlength="30"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 control-label">联系人QQ</label>
+
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="boCustomer.qq" class="form-control" maxlength="20"/>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix" style="padding-top: 15px;">
+                                    <div class="widget box">
+                                        <div class="widget-header">
+                                            <h4><i class="icon-role-list-small"></i>商户资质附件
+                                            </h4>
+                                        </div>
+                                        <div class="widget-content" style="padding-top:15px;">
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    <div class="upImgs">
+                                                        <div class="main-div">
+                                                            <a id="new-acc-del-1" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                            <a id="new-acc-show-1" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                            <div>
+                                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                     style="height: 154px !important;">
+                                                            </div>
+                                                            <input type="file" id="new-upload-file-1" class="file image-input">
+                                                            <input type="button" id="new-acc-upload-1" class="showbtu" value="上传">
+                                                            <input type="button" id="new-acc-download-1" class="downloadbtn" value="下载">
+                                                            <input type="hidden" name="imgList[0].type" value="1">
+                                                            <input type="hidden" name="imgList[0].url" class="fileUrl" value="">
+
+                                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="certificate-picture">法人照片(手持身份证照片)</span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    <div class="upImgs">
+                                                        <div class="main-div">
+                                                            <a id="new-acc-del-2" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                            <a id="new-acc-show-2" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                            <div>
+                                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                     style="height: 154px !important;">
+                                                            </div>
+                                                            <input type="file" id="new-upload-file-2" class="file image-input">
+                                                            <input type="button" id="new-acc-upload-2" class="showbtu" value="上传">
+                                                            <input type="button" id="new-acc-download-2" class="downloadbtn" value="下载">
+                                                            <input type="hidden" name="imgList[1].type" value="2">
+                                                            <input type="hidden" name="imgList[1].url" class="fileUrl" value="">
+
+                                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="certificate-picture">法人身份证正面</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    <div class="upImgs">
+                                                        <div class="main-div">
+                                                            <a id="new-acc-del-3" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                            <a id="new-acc-show-3" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                            <div>
+                                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                     style="height: 154px !important;">
+                                                            </div>
+                                                            <input type="file" id="new-upload-file-3" class="file image-input">
+                                                            <input type="button" id="new-acc-upload-3" class="showbtu" value="上传">
+                                                            <input type="button" id="new-acc-download-3" class="downloadbtn" value="下载">
+                                                            <input type="hidden" name="imgList[2].type" value="3">
+                                                            <input type="hidden" name="imgList[2].url" class="fileUrl" value="">
+
+                                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="certificate-picture">法人身份证反面</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    <div class="upImgs">
+                                                        <div class="main-div">
+                                                            <a id="new-acc-del-4" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                            <a id="new-acc-show-4" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                            <div>
+                                                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                     style="height: 154px !important;">
+                                                            </div>
+                                                            <input type="file" id="new-upload-file-4" class="file image-input">
+                                                            <input type="button" id="new-acc-upload-4" class="showbtu" value="上传">
+                                                            <input type="button" id="new-acc-download-4" class="downloadbtn" value="下载">
+                                                            <input type="hidden" name="imgList[3].type" value="4">
+                                                            <input type="hidden" name="imgList[3].url" class="fileUrl" value="">
+
+                                                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" style="width: 0%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="certificate-picture">银行卡照片</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hideLoop init-hide show-custom-new">
+                                                <div class="row" style="margin-top:20px;margin-bottom: 20px;">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <div class="upImgs">
+                                                            <div class="main-div">
+                                                                <a id="new-acc-del-5" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                                <a id="new-acc-show-5" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                                <div>
+                                                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                         style="height: 154px !important;">
+                                                                </div>
+                                                                <input type="file" id="new-upload-file-5" class="file image-input">
+                                                                <input type="button" id="new-acc-upload-5" class="showbtu" value="上传">
+                                                                <input type="button" id="new-acc-download-5" class="downloadbtn" value="下载">
+                                                                <input type="hidden" name="imgList[4].type" value="5">
+                                                                <input type="hidden" name="imgList[4].url" class="fileUrl" value="">
+
+                                                                <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" style="width: 0%"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="certificate-picture">经营资质</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <div class="upImgs">
+                                                            <div class="main-div">
+                                                                <a id="new-acc-del-6" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                                <a id="new-acc-show-6" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                                <div>
+                                                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                         style="height: 154px !important;">
+                                                                </div>
+                                                                <input type="file" id="new-upload-file-6" class="file image-input">
+                                                                <input type="button" id="new-acc-upload-6" class="showbtu" value="上传">
+                                                                <input type="button" id="new-acc-download-6" class="downloadbtn" value="下载">
+                                                                <input type="hidden" name="imgList[5].type" value="6">
+                                                                <input type="hidden" name="imgList[5].url" class="fileUrl" value="">
+
+                                                                <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" style="width: 0%"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="certificate-picture">经营场景1</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <div class="upImgs">
+                                                            <div class="main-div">
+                                                                <a id="new-acc-del-7" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                                <a id="new-acc-show-7" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                                <div>
+                                                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                         style="height: 154px !important;">
+                                                                </div>
+                                                                <input type="file" id="new-upload-file-7" class="file image-input">
+                                                                <input type="button" id="new-acc-upload-7" class="showbtu" value="上传">
+                                                                <input type="button" id="new-acc-download-7" class="downloadbtn" value="下载">
+                                                                <input type="hidden" name="imgList[6].type" value="7">
+                                                                <input type="hidden" name="imgList[6].url" class="fileUrl" value="">
+
+                                                                <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" style="width: 0%"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="certificate-picture">经营场景2</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <div class="upImgs">
+                                                            <div class="main-div">
+                                                                <a id="new-acc-del-8" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                                <a id="new-acc-show-8" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                                <div>
+                                                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                         style="height: 154px !important;">
+                                                                </div>
+                                                                <input type="file" id="new-upload-file-8" class="file image-input">
+                                                                <input type="button" id="new-acc-upload-8" class="showbtu" value="上传">
+                                                                <input type="button" id="new-acc-download-8" class="downloadbtn" value="下载">
+                                                                <input type="hidden" name="imgList[7].type" value="8">
+                                                                <input type="hidden" name="imgList[7].url" class="fileUrl" value="">
+
+                                                                <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" style="width: 0%"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="certificate-picture">补充照片</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row" style="margin-top:20px;margin-bottom: 20px;">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <div class="upImgs">
+                                                            <div class="main-div">
+                                                                <a id="new-acc-del-9" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                                <a id="new-acc-show-9" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                                <div>
+                                                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                                                         style="height: 154px !important;">
+                                                                </div>
+                                                                <input type="file" id="new-upload-file-9" class="file image-input">
+                                                                <input type="button" id="new-acc-upload-9" class="showbtu" value="上传">
+                                                                <input type="button" id="new-acc-download-9" class="downloadbtn" value="下载">
+                                                                <input type="hidden" name="imgList[8].type" value="9">
+                                                                <input type="hidden" name="imgList[8].url" class="fileUrl" value="">
+
+                                                                <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" style="width: 0%"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="certificate-picture">其他照片</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">备注</label>
+
+                                            <div class="col-md-11">
+                                                <textarea class="form-control required url" name="boCustomer.note" rows="6" style="resize: none;" maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-actions">
+                                    <input type="submit" value="确认" id="customer_confirm_btn" class="btn btn-success pull-right">
+                                    <input type="button" value="取消" id="customer_cancel_btn" class="btn btn-default pull-right">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 代理商名称过滤条件模态框 -->
+<div class="modal fade" id="merchant-apply-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">过滤条件</h4>
+            </div>
+            <div class="modal-body">
+                <div id="sbck-query" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-5 control-label">代理商编号</label>
+
+                                <div class="col-md-7">
+                                    <input type="text" name="agentNo" class="form-control"  maxlength="50"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-md-5 control-label">代理商名称</label>
+
+                                <div class="col-md-7">
+                                    <input type="text" name="name" class="form-control"  maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success sbrk-agent-check-btn pull-right">查询</button>
+                        </div>
+                    </div>
+                </div>
+
+                <table data-toggle="table" id="agentTable"
+                       class="table table-striped table-checkable table-hover table-bordered"
+                       data-query-params="merchantNewAgentBean"
+                       data-url="/agent/queryNoAndNameTopList.json" data-pagination="true"
+                       data-side-pagination="server" data-page-size="5"
+                       data-pagination-first-text="First"
+                       data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                       data-pagination-loop="false" data-page-list=[5]
+                       data-pagination-last-text="Last" data-method="post">
+
+
+                    <thead>
+                    <tr>
+                        <th data-field="" data-radio="true"></th>
+                        <th data-field="agentNo">代理商编号</th>
+                        <th data-field="name">代理商名称</th>
+                        <th data-field="topAgentId">顶级代理商编号</th>
+                        <th data-field="topAgentName">顶级代理商名称</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                <button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--支行信息模态框-->
+<div class="modal fade" id="bank-apply-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">查询支行信息</h4>
+            </div>
+            <div class="modal-body">
+                <div id="sbbg-query" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-4 control-label">支行编号</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="branchbankcode" class="form-control"  maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-4 control-label">支行名称</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="branchbankname" class="form-control"  maxlength="50"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button class="btn btn-success bank-btn-query pull-right">查询</button>
+                        </div>
+                    </div>
+                </div>
+                <table data-toggle="table" id="applybandTable"
+                       class="table table-striped table-checkable table-hover table-bordered"
+                       data-query-params="merchantNewBankBean"
+                       data-url="/system/bank/bankBranchList.json" data-pagination="true"
+                       data-side-pagination="server" data-page-size="5"
+                       data-pagination-first-text="First" data-page-list=[5]
+                       data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                       data-pagination-loop="false"
+                       data-pagination-last-text="Last" data-method="post">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-radio="true"></th>
+                        <th data-field="branchbankcode">支行编码</th>
+                        <th data-field="branchbankname">支行名称</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                <button type="button" class="btn btn-success btn-confirm">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 新增模态框结束 -->
+
+
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script>
+<script type="text/javascript">
+    $(".change-del-equipment-btn").on("click", function () {
+        $("#sbbg-delete-madal").modal("show");
+    })
+</script>
+
+
+<script>
+
+
+    //代理商模态窗口初始化数据
+    function merchantNewAgentBean(argms) {
+        argms.agentNo = $("#merchant-apply-modal input[name='agentNo']").val().trim() || "";
+        argms.name = $("#merchant-apply-modal input[name='name']").val().trim() || "";
+        return argms;
+    }
+    ;
+
+    //银行支行模态窗口初始化数据
+    function merchantNewBankBean(argms) {
+        argms.bankcode = $("#merchantNewBankId  option:selected").data('shortcode');
+        argms.branchbankcode = $("#bank-apply-modal input[name='branchbankcode']").val().trim() || "";
+        argms.branchbankname = $("#bank-apply-modal input[name='branchbankname']").val().trim() || "";
+        return argms;
+    };
+
+    $(function () {
+        (function () {
+            var $form = $("#customer-save-form");
+            var $typeMerHide = $("#customer-save-form .hideLoop");
+            //弹出模态框
+            $('#merchant-apply-modal-show').on('click', function () {
+                $("#merchant-apply-modal").modal("show");
+            });
+            $('#bank-apply-modal-show').on('click', function () {
+                $("#bank-apply-modal").modal("show");
+            });
+
+            $("#customer-save-form .upImgs").each(function () {
+                $(this).uploadPreview();
+            });
+
+            $typeMerHide.hide();
+            $typeMerHide.find("input").prop("disabled", true);
+            $typeMerHide.find("select").prop("disabled", true);
+            $form.find('#register-province').prop("disabled", false);
+            $form.find('#register-city').prop("disabled", false);
+
+            //初始化省市联动
+            $.ajax({
+                url: "/system/address/loadprovince.json",
+                method: 'post',
+                success: function (res) {
+                    var $selectList = $form.find('select').filter(
+                            function () {//找的身份的select
+                                return ($(this).attr('id') || '').toLowerCase().indexOf('province') >= 0;
+                            });
+                    $selectList.empty();
+                    $selectList.each(function (index) {
+                        for (var i = 0; i < res.length; i++) {
+                            var str = $("#optionTmpl").html();
+                            $(this).append(str.replace(/\{\{code\}\}/g, res[i].code).replace(/\{\{id\}\}/g, res[i].code).replace(/\{\{name\}\}/g, res[i].name));
+                        }
+                        changeProvince($(this));
+                        $(this).change(function () {
+                            var $that = $(this);
+                            changeProvince($that);
+                        })
+                    });
+                    //$('#customer_firstReview_form #register-province').val(LOAD_PAGE_PARAM.fromParams.customer.peovinceId);
+                    //$('#customer_firstReview_form #register-city').val(LOAD_PAGE_PARAM.fromParams.customer.cityIdvv);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert("亲，初始化省列表出错，请联系管理员！");
+                }
+            })
+            // 省市区的数据联动
+            function changeProvince($that, success) {
+                var nameStr = $that.attr("id").toLowerCase().replace("province", "city");
+                var provinceCode = $('option:selected', $that).data('code').toString();
+                var provsValue = $that.find("option:selected").data("value");
+                var provincialCityFlag = "";
+                if (provsValue.substr(provsValue.length - 1, 1) == "市") {
+                    provincialCityFlag = "area";
+                    provinceCode = provinceCode.substr(0, provinceCode.length - 3) + "100";
+                } else {
+                    provincialCityFlag = "city";
+                }
+                // 找到和身份对应的城市
+                var $selectCity = $form.find('select').filter(function () {
+                    return ($(this).attr('id') || '').toLowerCase() == nameStr;
+                });
+                $.ajax({
+                    url: "/system/address/loadcity/" + provinceCode + "/" + provincialCityFlag + ".json",
+                    method: 'post',
+                    success: function (res) {
+                        $selectCity.empty();
+                        for (var i = 0; i < res.length; i++) {
+                            var cityStr = $('#cityTmpl').html();
+
+                            var cityName = cityStr.replace(/\{\{code\}\}/g,
+                                    res[i].code).replace(/\{\{name\}\}/g,
+                                    res[i].name).replace(/\{\{father\}\}/g,
+                                    provinceCode);
+                            $selectCity.append(cityName);
+                        }
+
+                        if (success && typeof success === 'function') {
+                            success();
+                        }
+
+                    }
+                })
+            }
+
+
+            //初始化开户总行名称列表
+            $.ajax({
+                url: "/system/bank/loadAllBank",
+                method: 'post',
+                success: function (res) {
+                    var $selectBankList = $form.find('select').filter(
+                            function () {
+                                return ($(this).attr('id') || '').toLowerCase()
+                                                .indexOf('bankid') >= 0;
+                            });
+                    $selectBankList.empty();
+                    $selectBankList.each(function (index) {
+                        for (var i = 0; i < res.length; i++) {
+                            var str = $("#bankTmpl").html();
+                            $(this)
+                                    .append(
+                                            //bankcode shortcode showname
+                                            str.replace(/\{\{code\}\}/g,
+                                                    res[i].bankcode).replace(/\{\{bankcode\}\}/g, res[i].bankcode).replace(/\{\{shortcode\}\}/g, res[i].shortcode)
+                                                    .replace(/\{\{showname\}\}/g, res[i].showname));
+                        }
+                        changeBank($(this));
+                        $(this).change(function () {
+                            var $that = $(this);
+                            changeBank($that);
+                        });
+                    });
+                },
+                error: function (xhr, textStatus,
+                                 errorThrown) {
+                    alert("亲，初始化开户总行名称列表出错，请联系管理员！");
+                }
+            });
+
+            function changeBank($that, success) {
+                var shortcodeCode = $('option:selected', $that).data('shortcode').toString();
+
+                $('#merchantNewBranchbankName').val('');
+                $('#merchantNewBranchbankId').val('');
+            }
+
+            // 初始化table
+            $('[data-toggle="table"]').bootstrapTable();
+
+            // 开户行模态框消失时校验状态更新
+            $("#bank-apply-modal").on('hide.bs.modal', function () {
+                $form.data('formValidation').updateStatus('boCustomer.branchbankName', 'NOT_VALIDATED', null);
+            });
+            // 代理商模态框消失后校验更新
+            $("#merchant-apply-modal").on('hide.bs.modal', function () {
+                $form.data('formValidation').updateStatus('boCustomer.agentId', 'NOT_VALIDATED', null).updateStatus('boCustomer.agentName', 'NOT_VALIDATED', null)
+            });
+
+            // 厂商模态框中的数据清空-初始化
+            $("#merchant-apply-modal").on('hide.bs.modal', function () {
+                $("#merchant-apply-modal input[name='agentNo']").val("");
+                $("#merchant-apply-modal input[name='name']").val("");
+                $("#agentTable").bootstrapTable("selectPage", 1);
+            });
+
+            // 代理商查询按钮点击事件
+            var  $shsqzhTableData =  $("#agentTable").bootstrapTable("getData");
+            $("#merchant-apply-modal .sbrk-agent-check-btn").on("click", function (e) {
+                e.preventDefault();
+                if($shsqzhTableData.length === 0 ){
+                    var randomNum = parseInt(Math.random()*99999);
+                    var shsqzhTableRefreshUrl =  $("#agentTable").data("url") + "?" + randomNum;
+                    $("#agentTable").bootstrapTable("refresh", {
+                        url:shsqzhTableRefreshUrl
+                    });
+                    $shsqzhTableData =  $("#agentTable").bootstrapTable("getData");
+                }
+                else{
+                    $("#agentTable").bootstrapTable("selectPage", 1);
+                }
+
+            });
+
+            // 代理商模态框中查询数据清空
+            $("#merchant-apply-modal").on('hide.bs.modal', function () {
+                $("#merchant-apply-modal input[name='agentNo']").val("");
+                $("#merchant-apply-modal input[name='name']").val("");
+                $("#merchant-apply-modal").bootstrapTable("selectPage", 1);
+            });
+
+            // 代理商确认按钮点击事件
+            $("#merchant-apply-modal .confirm-btn").on("click", function () {
+                var agent = $("#agentTable").bootstrapTable('getSelections');
+                if (agent.length > 0) {
+                    agent = agent[0];
+                    $form.find("input[name='boCustomer.agentName']").val(agent.name);
+                    $form.find("input[name='boCustomer.agentId']").val(agent.agentNo);
+                    $form.find("input[name='boCustomer.topAgentId']").val(agent.topAgentId);
+                    $form.find("input[name='boCustomer.topAgentName']").val(agent.topAgentName);
+                }
+                $("#merchant-apply-modal").modal("hide");
+            });
+
+
+            //银行支行模态窗
+            // 银行支行模态框中的数据清空-初始化
+
+            $("#bank-apply-modal").on('show.bs.modal', function () {
+                function merchantNewBankBean(argms) {
+                    argms.bankcode = $("#merchantNewBankId  option:selected").data('shortcode');
+                    argms.branchbankcode = $("#bank-apply-modal input[name='branchbankcode']").val().trim() || "";
+                    argms.branchbankname = $("#bank-apply-modal input[name='branchbankname']").val().trim() || "";
+                    return argms;
+                };
+                $("#applybandTable").bootstrapTable("selectPage", 1);
+            });
+
+
+            $("#bank-apply-modal").on('hide.bs.modal', function () {
+                $("#bank-apply-modal input[name='branchbankId']").val("");
+                $("#bank-apply-modal input[name='branchbankName']").val("");
+                $("#applybandTable").bootstrapTable("selectPage", 1);
+            });
+            // 银行支行查询按钮点击事件
+            var $sqdlsbhTableData =  $("#applybandTable").bootstrapTable("getData");
+            $("#bank-apply-modal .bank-btn-query").on("click", function (e) {
+                e.preventDefault();
+                if($sqdlsbhTableData.length === 0 ){
+                    var randomNum = parseInt(Math.random()*99999);
+                    var sqdlsbhTableRefreshUrl =  $("#applybandTable").data("url") + "?" + randomNum;
+                    $("#applybandTable").bootstrapTable("refresh", {
+                        url:sqdlsbhTableRefreshUrl
+                    });
+                    $sqdlsbhTableData =  $("#applybandTable").bootstrapTable("getData");
+                }
+                else{
+                    $("#applybandTable").bootstrapTable("selectPage", 1);
+                }
+
+            });
+            //银行支行模态框中查询数据清空
+            $("#bank-apply-modal").on('hide.bs.modal', function () {
+                $("#bank-apply-modal input[name='branchbankcode']").val("");
+                $("#bank-apply-modal input[name='branchbankname']").val("");
+                $("#bank-apply-modal").bootstrapTable("selectPage", 1);
+            });
+            // 银行支行确认按钮点击事件
+            $("#bank-apply-modal .btn-confirm").on("click", function () {
+                var manufacturer = $("#applybandTable").bootstrapTable('getSelections');
+                if (manufacturer.length > 0) {
+                    manufacturer = manufacturer[0];
+                    $form.find("input[id='merchantNewBranchbankId']").val(manufacturer.branchbankcode);
+                    $form.find("input[id='merchantNewBranchbankName']").val(manufacturer.branchbankname);
+                }
+                $("#bank-apply-modal").modal("hide");
+            });
+
+
+            $("#customer-save-form #merType").change(function () {
+                merTypeVal = $("#customer-save-form #merType").val();
+                if (merTypeVal == 1) {
+                    $typeMerHide.hide();
+                    $typeMerHide.find("input").prop("disabled", true);
+                    $typeMerHide.find("select").prop("disabled", true);
+                    $form.find('#register-province').prop("disabled", false);
+                    $form.find('#register-city').prop("disabled", false);
+                    $(".addClearfix").addClass("clearfix");
+
+                } else if (merTypeVal == 3) {
+                    $typeMerHide.show();
+                    $('#customer-save-form #register-province').prop("disabled", false);
+                    $('#customer-save-form #register-city').prop("disabled", false);
+                    $typeMerHide.find("input").prop("disabled", false);
+                    $typeMerHide.find("select").prop("disabled", false);
+                    $(".addClearfix").removeClass("clearfix");
+                }
+            });
+            // 取消按钮的事件
+            $("#customer_cancel_btn").click(function () {
+                UTIL.closeCurrentPage({
+                    "delUrl": "merchant-new-apply.html",
+                    "toUrl": "merchant-query.html"
+                })
+            });
+
+
+            //表单验证并提交
+            $form.formValidation({
+                        message: '此值无效', //此值无效
+                        excluded: ["#paramsYybName", "#directorUserName", "#ywzgName", ":disabled"],
+                        icon: {
+                            valid: 'glyphicon',
+                            invalid: 'glyphicon'
+                        },
+                        fields: {
+                            //代理商编号
+                            "boCustomer.agentId": {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '代理商编号不能为空！'
+                                    }
+                                }
+                            },
+                            //代理商名称
+                            "boCustomer.agentName": {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '代理商名称不能为空！'
+                                    }
+                                }
+                            },
+                            //商户名称
+                            "boCustomer.mercName": {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '商户名称不能为空！'
+                                    },
+                                    stringLength: {
+                                        min: 1,
+                                        max: 200,
+                                        message: '请输入200以内的字符！'
+                                    }
+                                }
+                            },
+                            //商户手机
+                            'boCustomer.mobile': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '商户手机号不能为空！'
+                                    },
+                                    regexp: {
+                                        regexp: /^1[34578]\d{9}$/,
+                                        message: '请填写11位正确的手机号码！'
+                                    },
+                                    callback: {
+                                        message: '商户手机号已存在！',
+                                        callback: function (value, validator) {
+                                            // console.log(validator);
+                                            var reg = /^1[34578]\d{9}$/;
+                                            var flag = 0;
+                                            if (reg.test(value)) {
+                                                $.ajax({
+                                                    url: "/customer/selectbymobile/" + value,
+                                                    type: "get",
+                                                    async: false,
+                                                    success: function (res) {
+                                                        flag = res;
+                                                    }
+                                                })
+                                                if (flag == 0) {
+                                                    return true;
+                                                }
+                                                else {
+                                                    return false;
+                                                }
+                                            }
+                                            else {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            //法人姓名
+                            'boCustomer.legalName': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '法人姓名不能为空！'
+                                    },
+                                    stringLength: {
+                                        min: 1,
+                                        max: 20,
+                                        message: "请输入20以内的字符！"
+
+                                    } ,
+                                    callback: {
+                                        callback: function (value, validator) {
+                                            $("#regaccountName").val(value);
+                                            return true;
+                                        }
+                                    }
+                                }
+                            },
+                            /*                     //开户名
+                             'boCustomer.accountName': {
+                             group: '.form-group',
+                             validators: {
+                             notEmpty: {
+                             message: '开户名不能为空！'
+                             },
+                             regexp: {
+                             regexp: /^[\u4E00-\u9FFF]{1,20}$/,
+                             message: '请填写1-20位汉字'
+                             },
+                             callback: {
+                             message: '开户名须和法人姓名一致！',
+                             callback: function (value, validator) {
+                             // console.log(validator);
+                             $("#reglegalName").val(value);
+                             /*     if(legalName!==""){
+                             if (value) {
+                             if(legalName==value){
+                             return true;
+                             }else{
+                             return false;
+                             }
+                             }
+                             else {
+                             return true;
+                             }
+                             }else{
+                             return true;
+                             }
+                             }
+                             }
+                             }
+                             }, */
+                            //身份证号码
+                            'boCustomer.idCard': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '身份证号码不能为空！'
+                                    },
+                                    regexp: {
+                                        regexp: /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/,
+                                        message: '请输入15或18位正确的身份证号码！'
+                                    }
+                                }
+                            },
+                            //商户注册地址
+                            'boCustomer.address': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '输入不能为空！'
+                                    },
+                                    stringLength: {
+                                        min: 1,
+                                        max: 200,
+                                        message: "请输入200以内的字符！"
+
+                                    }
+                                }
+                            },
+                            //许可经营范围
+                            'boCustomer.scobus': {
+                                group: '.form-group',
+                                validators: {
+                                    stringLength: {
+                                        min: 0,
+                                        max: 400,
+                                        message: "请输入400以内的字符！"
+
+                                    }
+                                }
+                            },
+                            //申请设备
+                            'boCustomer.description': {
+                                group: '.form-group',
+                                validators: {
+                                    stringLength: {
+                                        min: 0,
+                                        max: 200,
+                                        message: "请输入200以内的字符！"
+
+                                    }
+                                }
+                            },
+                            //开户主账号
+                            'boCustomer.accountNo': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '开户主账号不能为空！'
+                                    },
+                                    regexp: {
+                                        regexp: /^\d{16,19}$/,
+                                        message: '请输入为16至19位数字'
+                                    }
+                                }
+                            },
+                            //联系人手机
+                            'boCustomer.merlinkmobile': {
+                                group: '.form-group',
+                                validators: {
+                                    regexp: {
+                                        regexp: /^1[34578]\d{9}$/,
+                                        message: '请填写11位正确的手机号码！'
+                                    }
+                                }
+                            },
+                            //业务联系姓名
+                            'boCustomer.merlinkman': {
+                                group: '.form-group',
+                                validators: {
+                                    stringLength: {
+                                        min: 0,
+                                        max: 20,
+                                        message: "请输入20以内的字符！"
+
+                                    }
+                                }
+                            },
+                            //业务联系人邮箱
+                            'boCustomer.email': {
+                                group: '.form-group',
+                                validators: {
+                                    regexp: {
+                                        regexp: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+                                        message: '请填写正确格式的邮箱！'
+                                    },
+                                    stringLength: {
+                                        min: 0,
+                                        max: 50,
+                                        message: "请输入50以内的字符！"
+
+                                    }
+                                }
+                            },
+                            //业务联系人qq
+                            'boCustomer.qq': {
+                                group: '.form-group',
+                                validators: {
+                                    regexp: {
+                                        regexp: /^\d{0,20}$/,
+                                        message: '请输入20以内数字！'
+                                    }
+                                }
+                            },
+                            //开户总行名称
+                            'boCustomer.bankId': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '开户总行名称不能为空！'
+                                    }
+                                }
+                            },
+                            //开户支行名称
+                            'boCustomer.branchbankName': {
+                                group: '.form-group',
+                                validators: {
+                                    notEmpty: {
+                                        message: '开户支行名称不能为空！'
+                                    }
+                                }
+                            },
+
+                            //备注
+                            'boCustomer.note': {
+                                group: '.form-group',
+                                validators: {
+                                    stringLength: {
+                                        min: 0,
+                                        max: 200,
+                                        message: "请输入200以内的字符！"
+
+                                    }
+                                }
+                            },
+                        }
+                    })
+                    .on('success.form.fv',
+                            function (e, data) {
+                                e.preventDefault();
+
+                                $form.find('[type="submit"]').addClass('disabled').prop("disabled", true);
+                                //判断oss是否上传
+                                // var lpPhoto = $form.find('input[name="imgList[0].url"]').val();
+                                // var lpCardIdProsphoto = $form.find('input[name="imgList[1].url"]').val();
+                                // var lpCardIdConsPhoto = $form.find('input[name="imgList[2].url"]').val();
+                                // var bankPhoto = $form.find('input[name="imgList[3].url"]').val();
+
+
+                                // if (lpPhoto == null || lpPhoto == '' || lpPhoto == 'undefined') {
+                                //     UTIL.clickDisappearSwal("请上传法人图片", function () {
+                                //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                                //     });
+
+                                //     return;
+                                // }
+                                // if (lpCardIdProsphoto == null || lpCardIdProsphoto == '' || lpCardIdProsphoto == 'undefined') {
+                                //     UTIL.clickDisappearSwal("请上传法人身份证正面图片", function () {
+                                //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                                //     });
+                                //     return;
+                                // }
+                                // if (lpCardIdConsPhoto == null || lpCardIdConsPhoto == '' || lpCardIdConsPhoto == 'undefined') {
+                                //     UTIL.clickDisappearSwal("请上传法人身份证反面图片", function () {
+                                //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                                //     });
+                                //     return;
+                                // }
+                                // if (bankPhoto == null || bankPhoto == '' || bankPhoto == 'undefined') {
+                                //     UTIL.clickDisappearSwal("请上传银行卡照片图片", function () {
+                                //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                                //     });
+                                //     return;
+                                // }
+
+                                showLoading();
+                                UTIL.submitForm({
+                                    form: "#customer-save-form",
+                                    url: "/customer/save.json",
+                                    success: function () {
+                                        hideLoading();
+                                        // 新建成功之后刷新商户查询table
+                                        if ($("#custom-list")) {
+                                            $("#custom-list").bootstrapTable("selectPage", 1);
+                                        }
+                                        UTIL.autoDisappearSwal("商户申请成功!", function () {
+                                            UTIL.closeCurrentPage({
+                                                delUrl: "merchant-new-apply.html",
+                                                toUrl: "merchant-query.html"
+                                            });
+                                        })
+                                    }
+                                })
+                            });
+
+
+            //商户申请取消按钮
+            $("#customer_cancel_btn").click(function () {
+                UTIL.closeCurrentPage({
+                    "delUrl": "merchant-new-apply.html",
+                    "toUrl": "merchant-query.html"
+                })
+            })
+        })();
+
+    });
+</script>
+

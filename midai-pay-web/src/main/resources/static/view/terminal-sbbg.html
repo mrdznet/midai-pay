@@ -1,0 +1,311 @@
+<!-- form by  kaikai  2016.9.22-->
+<!-- 设备变更
+author:黄亚茹
+ -->
+<div class="container-fluid" id="terminal-sbbg">
+   <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-change-storage"></i>终端变更</h4>
+        </div>
+        <div class="widget-content">
+             <div class="row">
+                <div class="col-md-12">
+                    <div class="widget box">
+                        <div class="widget-header">
+                            <h4><i class="icon-check"></i>变更选择</h4>
+                             <span class="red" style="float:right; padding:17px 0;">批次号：<i class="batchNo"></i></span>
+                        </div>
+                        <div class="widget-content">
+                            <form class="form-horizontal row-border" id="sbbg-option-form"
+                                  novalidate="novalidate">
+                                  <input type="hidden" name="ckNo" />
+                                  <div class="row">
+                                      <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label">源代理商编号</label>
+                                                <div class="col-md-7">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="agentId" readonly />
+                                                         <span class="input-group-addon bg-green"  id="sbbg-source-agent-icon"><span class="glyphicon glyphicon-search"></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-5 control-label">源代理商名称</label>
+                                                <div class="col-md-7"><input type="text" name="agentName" readonly class="form-control required email"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                 <label class="col-md-5 control-label">目标代理商编号</label>
+                                                <div class="col-md-7">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="destagentId" readonly /> 
+                                                         <span class="input-group-addon bg-green" id="sbbg-mark-agent-icon"><span class="glyphicon glyphicon-search"></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-5 control-label">目标代理商名称</label>
+                                            <div class="col-md-7">
+                                                <input type="text" name="destagentName" class="form-control url" readonly/></div>
+                                            </div>
+                                        </div>
+                                  </div>
+                                  <br/> 
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                            <!-- <label class="col-md-1 control-label"></label> -->
+                                            <div class="col-md-12">
+                                                <p>说明：一、采用参考录入出库。 二、对于批次大于1000的，建议采用多批次出库。</p>
+                                            </div>
+                                      </div>
+                                  </div> 
+                                   <div class="form-actions" style="margin-top:0px;">
+                                         <input type="button" class="btn btn-success pull-right" id="sbbg-add-mark-btn" value="追加记录" />
+                                    </div>       
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget box">
+                        <div class="widget-header">
+                            <div class="col-md-4 no-padding">
+                                <h4><i class="icon-list"></i>变更设备明细</h4>
+                            </div>
+                            <div class="col-md-8 no-padding">
+                                <div class="toolbar no-padding">
+                                    <button class="btn btn-default pull-right change-del-equipment-btn">删&nbsp;&nbsp;除</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <table id="sbbg-table" data-toggle="table"
+                            data-side-pagination="server" 
+                            data-data-type="json"
+                            data-content-type="application/json" data-method="post"
+                            class="table table-striped table-checkable table-highlight-head table-hover">
+                            <thead>
+                                <tr>
+                                    <th data-field="" data-checkbox="true"></th>
+                                    <th data-field="deviceNo">机身号</th>
+                                    <th data-field="sbbgTestTime" data-formatter="sbbgTestTime">创建时间</th>
+                                    <th data-field="destagentName">目标代理商名称</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+             <div class="form-actions" style="margin-top: 0px;">
+                <button class="btn btn-success pull-right" id="sbbg-table-submit-btn">确认</button>
+                <button class="btn btn-default pull-right" id="sbbg-table-cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--追加记录模态框-->
+    <div class="modal fade" id="sbbg-plus-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">追加记录</h4>
+                </div>
+                <div class="modal-body">
+                  	<form id="sbbg-add-mark-query" class="form-horizontal">
+                        <input type="hidden" name="agentNo" />
+                  		<div class="row">
+                  			 <div class="col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">机身号始</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="bodyNoStart" class="form-control"  maxlength="50"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+	                                <label class="col-md-6 control-label">数量</label>
+
+	                                <div class="col-md-6">
+	                                    <input type="text" name="num" class="form-control"  maxlength="10">
+	                                 </div>
+                                </div>
+                            </div>
+                             <div class="col-md-2">
+                                <div class="form-group">
+                                	<input type="button" class="btn btn-success check-btn" value="查询" />
+                                </div>
+                            </div>
+                  		</div>
+                  	</form>
+                  	 <table id="sbbg-plus-table" data-toggle="table"
+                        data-side-pagination="server" data-query-params="sbbgAddMrkQuery"
+                        data-data-type="json" data-pagination="true"
+                        data-url="../device/list" data-page-size="10"
+                        data-content-type="application/json" data-method="post"
+                        data-show-pagination-detail="false" data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-page-list=[10]
+                        class="table table-hover table-striped table-bordered table-highlight-head">
+                        <thead>
+                            <tr>
+                                <th data-field="" data-checkbox="true"></th>
+                                <th data-field="deviceNo">机身号</th>
+                                <th data-field="modeName">型号</th>
+                                <th data-field="typeName">类型</th>
+                                <th data-field="customerId">商户号</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- 新增模态框结束 -->
+
+<!-- 删除设备模态框 -->
+<div class="modal fade" id="sbbg-delete-madal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="icon-delete"></i>删除设备</h4>
+                </div>
+                <div class="modal-body">
+                    <p>确定删除设备号为：<span class="del-deviceNo" style="word-wrap:break-word;word-break:break-all"></span>的设备吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+ <!-- 源代理商名称过滤条件模态框 -->
+   <div class="modal fade" id="sbbg-agent-source-modal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">过滤条件</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="sbbg-agent-source-query" class="form-horizontal">
+                        <div class="row">
+                             <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">代理商编号</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="agentNo" class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">代理商名称</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="name" class="form-control"  maxlength="50">
+                                     </div>
+                                </div>
+                            </div>
+                             <div class="col-md-2">
+                                 <button class="btn btn-success pull-right sbbg-agent-source-check-btn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                     <table id="sbbg-agent-source-table" data-toggle="table"
+                        data-side-pagination="server" data-query-params="sbbgAgentSourceQuery"
+                        data-data-type="json" data-pagination="true"
+                        data-url="../agent/queryNoAndNameList" data-page-size="5"
+                        data-content-type="application/json" data-method="post"
+                        data-show-pagination-detail="false" data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                        data-pagination-last-text="Last"  data-page-list=[5]
+                        class="table table-hover table-striped table-bordered table-highlight-head">
+                        <thead>
+                            <tr>
+                                <th data-field="" data-radio="true"></th>
+                                <th data-field="agentNo">代理商编号</th>
+                                <th data-field="name">代理商名称</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+      <!-- 目标代理商名称过滤条件模态框 -->
+   <div class="modal fade" id="sbbg-agent-mark-modal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">过滤条件</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="sbbg-agent-mark-query" class="form-horizontal">
+                        <div class="row">
+                             <div class="col-md-5">
+                                <div class="form-group"><label class="col-md-5 control-label">代理商编号</label>
+
+                                <div class="col-md-7">
+                                    <input type="text" name="agentNo" class="form-control"  maxlength="50"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label">代理商名称</label>
+
+                                    <div class="col-md-7">
+                                        <input type="text" name="name" class="form-control"  maxlength="50">
+                                     </div>
+                                </div>
+                            </div>
+                             <div class="col-md-2">
+                                 <input type="button" class="btn btn-success pull-right sbbg-agent-mark-check-btn" value="查询"/>
+                            </div>
+                        </div>
+                    </form>
+                     <table id="sbbg-agent-mark-table" data-toggle="table"
+                        data-side-pagination="server" data-query-params="sbbgAgentMarkQuery"
+                        data-data-type="json" data-pagination="true"
+                        data-url="../agent/queryNoAndNameTargetList" data-page-size="5"
+                        data-content-type="application/json" data-method="post"
+                        data-show-pagination-detail="false" data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-page-list=[5]
+                        class="table table-hover table-striped table-bordered table-highlight-head">
+                        <thead>
+                            <tr>
+                                <th data-field="" data-radio="true"></th>
+                                <th data-field="agentNo">代理商编号</th>
+                                <th data-field="name">代理商名称</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div> 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<script type="text/javascript" src="js/zd-manage/terminal-sbbg.js"></script>
+

@@ -1,0 +1,118 @@
+<!-- 自动打款页面 -->
+<div class="container-fluid">
+    <!--清算管理-自动打款 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>请选择查询条件</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="agent_profit_list_form"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商编号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="agentId" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户编号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercNo" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">提现日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="settlementTimeStart" class="form-control" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="settlementTimeEnd" class="form-control" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="agent_profit_list_remove">
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="agent_profit_search_list">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-2 no-padding">
+                        <h4><i class="icon-list"></i>查询结果</h4>
+                    </div>
+                    <div class="col-md-2 no-padding" style="margin-top: 5px;">
+                        <h5>交易总笔数：<strong id="transCount_List"></strong> 笔</h5>
+                    </div>
+                    <div class="col-md-2 no-padding" style="margin-top: 5px;">
+                        <h5>总利润：<strong id="profitTotalAmount_list"></strong> 元</h5>
+                    </div>
+                    <div class="col-md-2 no-padding" style="margin-top: 5px;">
+                        <h5>总净利润：<strong id="profitRetainedAmount_list"></strong> 元</h5>
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="agent_profit_down">报表下载</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-hover" id="profitTable_list"
+                           data-toggle="table"
+                           data-url="/agentprofit/detail/paginate" data-query-params="profitSearchList" data-pagination="true"
+                           data-side-pagination="server" data-page-size="10"
+                           data-pagination-first-text="First"
+                           data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                           data-pagination-loop="false" data-row-style="changeSettltmentPayStyle"
+                           data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                        <tr>
+                            <th data-field="" data-checkbox="true"></th>
+                            <th data-field="settlementTime" data-formatter="FormatDateTime" data-align="left">清算日期</th>
+                            <th data-field="agentId" data-align="left">代理商编号</th>
+                            <th data-field="mercNo" data-align="left">商户号</th>
+                            <th data-field="transCardNo" data-align="left">卡号</th>
+                            <th data-field="hostTransSsn" data-align="left">交易流水号</th>
+                            <th data-field="cardKind" data-align="left">卡类型</th>
+                            <th  data-field="profitTotal" data-align="left">总利润（元）</th>
+                            <th data-field="profit" data-align="left">本级利润（元）</th>
+                            <th data-field="transType" data-align="left" data-formatter="type_list">交易类型</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--清算管理-自动打款 end-->
+</div>
+<script type="text/javascript" src="js/zd-manage/agent-profit-list.js"></script>

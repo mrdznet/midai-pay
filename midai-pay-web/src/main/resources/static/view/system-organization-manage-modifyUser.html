@@ -1,0 +1,206 @@
+<!--编辑用户界面-->
+<div class="widget box" id="modifyUser">
+    <form class="form-horizontal" role="form" action="" id="modifyUserForm">
+        <div class="widget-header">
+            <div class="col-md-3 no-padding">
+                <h4><i class="icon-list"></i>列表--编辑用户</h4>
+            </div>
+            <div class="col-md-9 no-padding">
+                <div class="toolbar no-padding">
+                    <input class="btn btn-warning" id="initPwd" type="button" value="初始化密码"/>
+                  <!--   <input class="btn btn-warning" style="margin-left: 8px;" id="loginNameDisabled" type="button" value="注销账号"/> -->
+                    <input class="btn btn-warning" style="margin-left: 8px;" id="delLoginName" type="button" value="删除账号"/>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    基本信息
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" >账号<span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" class=" form-control" id="modifyUserLoginName" name="modifyUserLoginName" maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label  class="col-md-3 control-label">姓名<span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="modifyUserUsername" name="modifyUserUsername" maxlength="30">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label  class="col-md-3 control-label">邮箱<span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="modifyUserMail" name="modifyUserMail" maxlength="30">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">手机<span class="required">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="modifyUserMobile" name="modifyUserMobile" maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">隶属单位</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="modifyUserParent" name="modifyUserParent" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">角色信息</div>
+                <div class="panel-body">
+                    <div class="group">
+                        <label class="control-label col-md-3">角色</label>
+                        <div class="col-md-4">
+                            <select name="modifyUserRoleMsg" id='modifyUserRoleMsg' multiple='multiple'>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer clearfix">
+            <div class="pull-right">
+                <input class="btn btn-default" id="close_modifyUser" type="button" value="关闭"/>
+                <input type="submit" id="modifyUser-submit" class="btn btn-success" value="确认" />
+            </div>
+        </div>
+    </form>
+</div>
+<!--end-->
+<script>
+    //关闭用户编辑页面
+    $(document).on('click','#close_modifyUser',function(){
+        $("#orgHandle").hide();
+        $("#orgHandleTable").show();
+    });
+    //用户更新验证并提交
+    $('#modifyUserForm').formValidation({
+                message : '此值无效', //此值无效
+                icon : {
+                    valid: 'glyphicon',
+                    invalid: 'glyphicon'
+                },
+                fields : {
+                    //账号
+                    'modifyUserLoginName': {
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            }
+                        }
+                    },
+                    //姓名
+                    'modifyUserUsername': {
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            }
+                        }
+                    },
+                    //邮箱
+                    'modifyUserMail': {
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            regexp: {
+                                regexp: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+                                        message: '请填写正确的邮箱！'
+                            }
+                        }
+                    },
+                    //手机
+                    'modifyUserMobile': {
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            regexp: {
+                                regexp: /^1[34578]\d{9}$/,
+                                message: '请填写11位正确的手机号码！'
+                            }
+                        }
+                    }
+                }
+            })
+            .on(
+                    'success.form.fv',
+                    function(e, data) {
+                        e.preventDefault();
+                        var roleIds = $('#modifyUserRoleMsg option:selected').map(function(){
+                            return $(this).val()
+                        }).get().join(',');
+                        var data ={
+                            "id": editingUser.id,
+                            "loginname": $('#modifyUserLoginName').val(),
+                            "mail": $('#modifyUserMail').val(),
+                            "mobile": $('#modifyUserMobile').val(),
+                            "orgid":editingUser.orgid,
+                            "roleIds": roleIds,
+                            "username": $('#modifyUserUsername').val()
+                        };
+                        $.ajax({
+                            method:'post',
+                            url:'/system/user/update',
+                            data:JSON.stringify(data),
+                            dataType:'json'
+                        }).done(function(response){
+                            // swal('','修改成功','success');
+                             UTIL.clickDisappearSwal("修改成功");
+                            $("#orgHandle").hide();
+                            $("#orgHandleTable").show();
+                            $('#org-table').bootstrapTable('refresh');
+                            loadZtree();
+                            $(window).scrollTop("0");
+                        });
+                    });
+
+    //    初始化密码
+    $('#initPwd').on('click',function(){
+        $.ajax({
+            method:'post',
+            url:'/system/user/initpwd/'+editingUser.id
+        }).done(function(response){
+            // swal('修改成功');
+            UTIL.clickDisappearSwal("修改成功");
+        });
+    });
+    //    删除账号
+    $('#delLoginName').on('click',function(){
+        $.ajax({
+            method:'delete',
+            url:'/system/user/del/'+editingUser.id
+        }).done(function(){
+            // swal( '删除成功')
+            UTIL.clickDisappearSwal("删除成功",function(){
+            	 $("#orgHandle").hide();          
+            	 $("#orgHandleTable").show();  
+            	 $('#orgHandleTable').bootstrapTable('refresh');
+            	    $('#org-table').bootstrapTable('refresh');
+            	 loadZtree();
+            });
+        });
+    });
+</script>

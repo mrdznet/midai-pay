@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>米付登录</title>
+<link rel="icon" href="view/favicon.ico"/>
+<script type="text/javascript" src="view/js/jquery-1.12.2.js"></script>
+<style type="text/css">
+   body,html{
+      width:100%;
+      height:100%;
+      background-color: #f1f1f1;
+      position: relative;
+      font-size:14px;
+      font-family: "微软雅黑";
+   }
+   *{
+      margin:0px;
+      padding:0px;
+   }
+   a{
+         text-decoration: none;
+   }
+   .login-bg{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+   }
+   .container{
+      width: 100%;
+      overflow: hidden;
+   }
+   .login{
+      width:383px;
+      height:338px;
+      border:2px solid #d9d9d9;
+      position: absolute;
+      left:50%;
+      top:230px;
+      margin-left:-199px;
+      background-color: #fff;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 23px;
+   }
+   .header{
+      width: 380px;
+      height: 55px;
+      line-height: 55px;
+      text-align: center;
+      margin: 150px auto 0px;
+      position: absolute;
+      left: 50%;
+      margin-left: -198px;
+   }
+   .header h2{
+      font-size: 32px;
+      color: #ed8027;
+      font-weight: 500;
+   }
+   .login-header h4 span.cn-title, .login-header h4 span.en-title{
+      font-size: 24px;
+      color: #888;
+      font-weight: 400;
+      letter-spacing: 6px;
+   }
+   .login-header h4 span.en-title{
+      font-size: 12px;
+      letter-spacing: 1px;
+      padding-left: 11px;
+   }
+   .login-main{
+      widows: 320px;
+      padding-top: 22px;
+   }
+   .login-info{
+      width: 320px;
+   }
+   .login-info .userInfo,.login-info .pwdInfo{
+      padding-top: 10px;
+      width: 100%;
+      border-bottom: 1px solid #d5d5d5;
+      height: 35px;
+   }
+   .login-info .userInfo img,.login-info .pwdInfo img{
+      vertical-align: top;
+      display: inline-block;
+      margin-top: 7px;
+   }
+    .login-info .login-in{
+      border: none;
+      outline: none;
+      line-height: 35px;
+      background-color: #fff;
+      text-indent: 5px; 
+      font-size: 16px;
+      color: #555;
+      width: 294px;
+   }
+   .login-btn-block{
+      width: 320px;
+      height: 40px;
+      margin-top: 24px;
+   }
+   .login-btn-block button{
+      width: 100%;
+      height: 100%;
+      background-color: #f58326;
+      outline: none;
+      border: 1px solid #888;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+   }
+   .remenber-login-info{
+      margin-top: 16px;
+   }
+   .error-msg{
+      width: 320px;
+      height: 20px;
+      font-size: 12px;
+      color: red;
+      padding-top: 10px;
+   }
+   .error-msg p{
+      display: none;
+   }
+</style>
+</head>
+<body>
+   <img class="login-bg" src="imgs/bg.jpg">
+   <div class="container" id="container">
+      <div class="header">
+         <h2>银行卡收单综合服务平台</h2>
+      </div>
+      <div class="login">
+         <div class="login-header">
+            <h4><span class="cn-title">米袋付</span><span class="en-title">MIDAI PAY</span></h4>
+         </div>
+         <div class="login-main">
+            <div class="login-info">
+               <div class="userInfo">
+                  <img src="imgs/user.png">
+                  <input type="text" name="username" autocomplete="off" class="login-in" id="username" placeholder="用户名" />
+               </div>
+               <div class="pwdInfo">
+                  <img src="imgs/password.png">
+                  <input type="text" name="password" onfocus="this.type='password'" autocomplete="off" class="login-in" id="password" placeholder="密码" />
+               </div>
+               <div class="error-msg">
+                  <p id="errorInfo">用户登录名或密码输入错误</p>
+               </div>
+            </div>
+            <div class="login-btn-block">
+               <button id="login-btn">登&nbsp;录</button>
+            </div>
+            <div class="remenber-login-info">
+               <span style="float:left;">
+                  <input type="checkbox" name="remenber-password" /><i style="margin-left:3px;font-style:normal;font-size:12px;vertical-align:top; color: #555;">记住我</i>
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <script type="text/javascript">
+      // var flag = 2;
+   // if(navigator.userAgent.indexOf("MSIE")>0)  
+   // {   
+   //     if(navigator.userAgent.indexOf("MSIE 6.0")>0)  
+   //     {   
+   //     flag = 0;  
+   //     }   
+   //     else if(navigator.userAgent.indexOf("MSIE 7.0")>0)  
+   //     {  
+   //     flag = 0;  
+   //     }   
+   //     else if(navigator.userAgent.indexOf("MSIE 8.0")>0)  
+   //     {
+   //       flag = 1;  
+   //     }
+   // }
+   // if(flag === 0){
+   //    $(document).empty();
+   //    document.write("请选择高版本的浏览器");
+   // }
+   // else if(flag === 1){  
+   //     var $parentContainer = $("#password").parent();
+   //     $("#password").remove();
+   //     $parentContainer.append('<input type="password" autocomplete="off" id="password" placeholder="密码" />');
+
+   // }
+   // else{
+   //    $("#password").on("focus", function(){
+   //       $(this).attr("type", "password");
+   //    })
+   // }
+  function setCookie(name, value, iDay) 
+   {
+       var oDate=new Date();
+        
+       oDate.setDate(oDate.getDate()+iDay);
+        
+       document.cookie=name+'='+encodeURIComponent(value)+';expires='+oDate;
+   }
+    
+function getCookie(name)
+{
+    var arr=document.cookie.split('; ');
+    var i=0;
+    for(i=0;i<arr.length;i++)
+    {
+        //arr2->['username', 'abc']
+        var arr2=arr[i].split('=');
+         
+        if(arr2[0]==name)
+        {  
+            var getC = decodeURIComponent(arr2[1]);
+            return getC;
+        }
+    }
+     
+    return '';
+}
+
+
+// 判断cookie中有没有值，如果有值就放入相对应的输入框
+var username = getCookie("mifu-username");
+var password = getCookie("mifu-password");
+$("#username").val("");
+$("#password").val("");
+if(username && password){
+   $("#password").attr("type","password")
+   $("#username").val(username);
+   $("#password").val(password);
+   $(".remenber-login-info input[name='remenber-password']").prop("checked", true)
+}
+setCookie("test", "1234", 7);
+
+
+$(function(){
+   $(".login-info-container").find("input").each(function(){
+         $(this).on("keydown",function(){
+            $("#errorInfo").css({
+               "display":"none"
+            })
+            var e = window.event || arguments.callee.caller.arguments[0];
+            if (e && e.keyCode == 13 ) {
+               $("#login-btn").trigger("click");
+            }
+         })
+      })
+
+
+   $(".login-info").find("input").each(function(){
+      $(this).on("keydown",function(){
+         var e = window.event || arguments.callee.caller.arguments[0];
+         if(e && e.keyCode == 13){
+            $("#login-btn").trigger("click");
+         }
+      });
+   });
+
+
+   $("#login-btn").on("click",function(){
+      if($(".remenber-login-info input[name='remenber-password']").prop("checked")){
+         setCookie("mifu-username",$("#username").val(),7);
+         setCookie("mifu-password",$("#password").val(),7);
+      }
+      $.ajax({
+         url:"login",
+         type:"post",
+         data:{username:$("#username").val(),password:$("#password").val()},
+         success:function(res){
+            window.location="view/index.html";
+         },
+         error : function(){
+            $("#errorInfo").css({
+               "display":"block"
+            })
+         }
+      });
+   })
+})
+   
+   </script>
+   
+
+</body>
+</html>

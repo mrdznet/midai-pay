@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.midaigroup.com/namespace" xmlns:pay="http://www.midaigroup.com/namespace"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" >
+
+	<xs:element name="midai">
+		<xs:complexType>
+			<xs:sequence >
+				<xs:element name="field_type" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="field_id"  use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:integer">
+									<xs:minInclusive value="0" />
+									<xs:maxInclusive value="128" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="etf_name" use="required"></xs:attribute>
+						<xs:attribute name="length_type" >
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="CONST" />
+									<xs:enumeration value="VAR2" />
+									<xs:enumeration value="VAR3" />
+									<xs:enumeration value="VAR4" />
+								</xs:restriction>
+							</xs:simpleType>
+
+						</xs:attribute>
+						<xs:attribute name="data_type" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="ASCBCD" />
+									<xs:enumeration value="BIT" />
+									<xs:enumeration value="CharASCII" />
+								</xs:restriction>
+							</xs:simpleType>
+
+						</xs:attribute>
+						
+							<xs:attribute name="length" type="xs:integer" use="required">
+							</xs:attribute>
+						
+						<xs:attribute name="align_mode"  >
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="left" />
+									<xs:enumeration value="right" />
+								</xs:restriction>
+							</xs:simpleType>
+
+						</xs:attribute>
+						
+						<xs:attribute name="var_type" type="xs:string" >
+						</xs:attribute>
+						<xs:attribute name="convert" type="xs:string" >
+						</xs:attribute>
+						
+
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="message" maxOccurs="unbounded">
+					<xs:complexType>		
+						<xs:sequence>
+							<xs:element name="field" maxOccurs="unbounded" minOccurs="0">
+								<xs:complexType>
+									<xs:attribute name="index" type="xs:integer"  use="required"></xs:attribute>
+									<xs:attribute name="value" type="xs:string"></xs:attribute>
+									<xs:attribute name="required" type="xs:boolean"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+								
+							<xs:attribute name="tpdu" type="xs:string" use="required">
+							</xs:attribute>
+							<xs:attribute name="head" type="xs:string" use="required">
+							</xs:attribute>
+							<xs:attribute name="type" type="xs:string" use="required" ></xs:attribute>
+							<xs:attribute name="channel" type="xs:string" use="required"></xs:attribute>
+							<xs:attribute name="id" type="xs:string" use="required" ></xs:attribute>
+							
+
+					</xs:complexType>
+
+				</xs:element>
+
+			</xs:sequence>
+
+		</xs:complexType>
+	</xs:element>
+
+
+
+</xs:schema>

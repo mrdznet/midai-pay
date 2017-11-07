@@ -1,0 +1,166 @@
+<!-- 打款结果查询页面 -->
+<div class="container-fluid">
+   <!--清算管理-打款结果查询 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>查询条件录入</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="dkResultForm"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户小票号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercId" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercName" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">收款人姓名</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="accountName" class="form-control" maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">收款人账号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="accountNo" class="form-control" maxlength="19">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">开户行</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="branchBankName" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">结算状态</label>
+                                    <div class="col-md-8">
+                                        <select name="payState" class="form-control">
+                                            <option value="">请选择</option>
+                                            <option value="0">待结算</option>
+                                            <option value="5">受理中</option>
+                                            <option value="3">结算成功</option>
+                                            <option value="4">结算失败</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">结算日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="payTimeStart" id="" class="form-control" maxlength="20">
+                                                <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="payTimeEnd" id="" class="form-control" maxlength="20">
+                                                <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="dkResultEmptyBtn">
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="dkResultSearchBtn"> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>打款结果查询</h4></div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="autoUpdateSettleStatus">自动刷新结算状态</button>
+                        </div>
+                        <div class="col-md-5 col-lg-5 toolbar no-padding">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" style="padding-top:8px;text-align:right">刷新时间间隔</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="settltUpdateTime">
+                                        <option value="5">5s</option>
+                                        <!-- <option value="1">民生代付</option> -->
+                                        <option value="10">10s</option>
+                                        <!-- <option value="3">米刷代付</option> -->
+                                        <option value="15">15s</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-hover table-highlight-head" id="dkResultTable"
+                        data-toggle="table" style="border-top:1px solid #ddd"
+                        data-url="../autopay/list" data-query-params="dkResultSearch" data-pagination="true"
+                        data-side-pagination="server" data-page-size="10"
+                        data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                        data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-method="post">
+                        <caption align="top" class="clearfix">
+                            <button class="btn btn-success pull-right" id="downDkjgBtn">Excel下载</button>
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-field="mercId" data-align="left">商户小票号</th>
+                                <th data-field="mercName" data-align="left">商户名称</th>
+                                <th data-field="tixianDatetime" data-formatter="FormatDateTime" data-align="left">提现日期</th>
+                                <th data-field="payTime" data-align="left">结算日期</th>
+                                <th data-field="payMoney" data-align="left">结算金额</th>
+                                <th data-field="tixianFeeamt" data-align="left">结算手续费</th>
+                                <th data-field="bankName" data-align="left">开户行</th>
+                                <th data-field="accountName" data-align="left">收款人姓名</th>
+                                <th data-field="accountNo" data-align="left">收款人账号</th>
+                                <th data-field="payChannel" data-align="left">打款通道</th>
+                                
+
+                                <th data-field="payStatestr" data-align="left" data-formatter="payStateF">结算状态</th>
+                                <th data-field="errorMsg" data-align="left">备注</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+ <script type="text/javascript" src="js/zd-manage/settlement-pay-search.js"></script>

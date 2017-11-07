@@ -1,0 +1,701 @@
+<!-- 代理商查询页面 -->
+<div class="container-fluid">
+        <div class="widget box">
+            <div class="widget-header">
+                <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>商户等级查询</h4></div>
+                <div class="col-md-8 no-padding">
+                    <div class="toolbar no-padding">
+                        <button class="btn btn-success pull-right  dlscx-xj-btn" id="edit_level">修改</button>
+                        <button class="btn btn-success pull-right  dlscx-xj-btn" id="delect_level">删除</button>
+                        <button class="btn btn-success pull-right  dlscx-plxgkl-btn" id="new_level">新建</button>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content no-padding">
+                <table
+                        class="table table-striped table-hover table-highlight-head" id="merchant_level_table"
+                        data-toggle="table" style="border-top: 1px solid #dddddd;"
+                        data-url="/customer/level/query" data-query-params="searchData" data-pagination="true"
+                        data-side-pagination="server" data-page-size="20"
+                        data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-method="post">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-checkbox="true"></th>
+                        <th data-field="level" data-align="left">等级</th>
+                        <th data-field="limitTradSingle" data-align="left">单笔限额</th>
+                        <th data-field="limitSingleCardMax" data-align="left">单卡最高限额</th>
+                        <th data-field="limitSingleCardMin" data-align="left">单卡最低限额</th>
+                        <th data-field="limitSingleCardCount" data-align="left">单卡限额笔数</th>
+                        <th data-field="limitTradDay" data-align="left">日限额</th>
+                        <th data-field="limitTradDayCount" data-align="left">日限额笔数</th>
+                        <th data-field="limitTradMonth" data-align="left">月限额</th>
+                        <th data-field="limitTradMonthCount" data-align="left">月限额笔数</th>
+                        <th data-field="note" data-align="left">备注</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+</div>
+<!--代理商管理-代理商查询 end-->
+<div class="modal fade" id="add_merchant_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content container-fluid">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title text-center">商户等级添加</h4>
+            </div>
+            <form class="form-horizontal row-border" id="add_level_form" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="widget box">
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">等级<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="level" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单笔限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradSingle" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md- col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单卡最高限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitSingleCardMax" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单卡最低限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitSingleCardMin" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单卡限额笔数</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitSingleCardCount" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单日限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradDay" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">日限额笔数</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradDayCount" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单月限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradMonth" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">月限额笔数</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradMonthCount" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">备注</label>
+                                            <div class="col-md-10">
+                                                <div class="">
+                                                    <textarea class="form-control required url" name="note" rows="6" style="resize: none;" maxlength="200"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="sureLevel">确&nbsp;&nbsp;定</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit_merchant_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content container-fluid">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title text-center">商户等级修改</h4>
+            </div>
+            <form class="form-horizontal row-border" id="edit_level_form" novalidate="novalidate">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="widget box">
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">等级<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="level" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单笔限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradSingle" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md- col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单卡最高限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitSingleCardMax" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单卡最低限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitSingleCardMin" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单卡限额笔数</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitSingleCardCount" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单日限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradDay" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">日限额笔数</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradDayCount" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">单月限额（元）</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradMonth" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">月限额笔数</label>
+                                            <div class="col-md-8">
+                                                <div class="">
+                                                    <input type="text" name="limitTradMonthCount" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">备注</label>
+                                            <div class="col-md-10">
+                                                <div class="">
+                                                    <textarea class="form-control required url" name="note" rows="6" style="resize: none;" maxlength="200"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="sureLevel">确&nbsp;&nbsp;定</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    //增加商户等级
+    $("#new_level").on('click',function () {
+        $("#add_merchant_modal").modal("show");
+    })
+//    删除商户等级
+    $("#delect_level").on('click',function () {
+        selectAgent=$("#merchant_level_table").bootstrapTable("getSelections");
+        if(selectAgent.length<1){
+            UTIL.clickDisappearSwal("请先选择一个商户等级！");
+            //    获取其中的选中的id;
+        }else{
+            console.log(selectAgent)
+            var new_id_row=[]
+            $.each(selectAgent,function (i,n){
+                new_id_row.push(selectAgent[i].level)
+            })
+//            删除商户等级
+            $.ajax({
+                type : "post",
+                dataType : "json",
+                contentType : "application/json",
+                url : "/customer/level/delete/"+new_id_row,
+                success : function(res) {
+                    UTIL.clickDisappearSwal("删除商户等级成功!")
+                    $("#merchant_level_table").bootstrapTable("refresh");
+                },
+                error : function() {
+                    hideLoading();
+                    UTIL.clickDisappearSwal("删除失败!")
+                }
+            });
+        }
+    })
+
+//编辑商户等级
+    $("#edit_level").on('click',function () {
+        selectAgent=$("#merchant_level_table").bootstrapTable("getSelections");
+        if(selectAgent.length!=1){
+            UTIL.clickDisappearSwal("请选择一个商户等级！");
+            //    获取其中的选中的id;
+        }else{
+            var merchant_level=selectAgent[0].level;
+//            修改商户等级
+            $.ajax({
+                type : "post",
+                dataType : "json",
+                contentType : "application/json",
+                url : "/customer/level/updateLoad/"+merchant_level,
+                success : function(res) {
+                    $("#edit_merchant_modal").modal("show");
+                    $("#edit_level_form").json2form(res);
+                },
+                error : function() {
+                    hideLoading();
+                    UTIL.clickDisappearSwal("获取商户等级信息失败，请联系管理员!")
+                }
+            });
+        }
+
+    })
+
+//    等级修改提交
+    $('#edit_level_form').formValidation({
+        message : '此值无效', //此值无效
+        icon : {
+            valid: 'glyphicon',
+            invalid: 'glyphicon'
+        },
+        fields : {
+            //等级
+            'level' : {
+                validators : {
+                    notEmpty : {
+                        message : '等级不能为空!'
+                    }
+                }
+            },
+            //单笔限额
+            'limitTradSingle' : {
+                validators : {
+                    notEmpty : {
+                        message : '单笔限额不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单卡最高限额
+            'limitSingleCardMax' : {
+                validators : {
+                    notEmpty : {
+                        message : '单卡最高限额不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单卡最低限额
+            'limitSingleCardMin' : {
+                validators : {
+                    notEmpty : {
+                        message : '单卡最低限额不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单卡限额笔数
+            'limitSingleCardCount' : {
+                validators : {
+                    notEmpty : {
+                        message : '单卡限额笔数不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单日限额
+            'limitTradDay' : {
+                validators : {
+                    notEmpty : {
+                        message : '日限额笔数不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //日限额笔数
+            'limitTradDayCount' : {
+                validators : {
+                    notEmpty : {
+                        message : '单日限额不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单月限额
+            'limitTradMonth' : {
+                validators : {
+                    notEmpty : {
+                        message : '单月限额不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //月限额笔数
+            'limitTradMonthCount' : {
+                validators : {
+                    notEmpty : {
+                        message : '月限额笔数不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            }
+        }
+    }).on('success.form.fv', function (e, data) {
+        e.preventDefault();
+        showLoading();
+        var formjson = UTIL.form2json({
+            form: "#edit_level_form"
+        });
+        $("#edit_merchant_modal").modal("hide");//防止连续提交
+
+        $.ajax({
+            type : "post",
+            dataType : "json",
+            contentType : "application/json",
+            url : "/customer/level/UpdateAdd",
+            data : JSON.stringify(formjson),
+            success : function(res) {
+                hideLoading();
+                if (res.result == "success") {
+                    UTIL.clickDisappearSwal("商户等级修改成功!",function(){
+                        $("#edit_merchant_modal").modal("hide");
+                        $("#merchant_level_table").bootstrapTable('refresh');
+                    });
+
+                } else {
+                    var text = res.errorMsg;
+                    UTIL.clickDisappearSwal(text)
+                }
+            },
+            error : function() {
+                hideLoading();
+                UTIL.clickDisappearSwal("商户等级修改失败!")
+            }
+        });
+    })
+
+
+
+
+//    等级提交验证
+    $('#add_level_form').formValidation({
+        message : '此值无效', //此值无效
+        icon : {
+            valid: 'glyphicon',
+            invalid: 'glyphicon'
+        },
+        fields : {
+            //等级
+            'level' : {
+                validators : {
+                    notEmpty : {
+                        message : '等级不能为空!'
+                    }
+                }
+            },
+            //单笔限额
+            'limitTradSingle' : {
+                validators : {
+                    notEmpty : {
+                        message : '单笔限额不能为空!'
+                    },
+                    regexp : {
+                        regexp : /^[1-9]\d{0,4}\.?\d{0,2}?$/,
+                        message : '数值必须为0-100000可带两位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                    }
+                }
+            },
+            //单卡最高限额
+            'limitSingleCardMax' : {
+                validators : {
+                    notEmpty : {
+                        message : '单卡最高限额不能为空!'
+                    },
+                    regexp : {
+                        regexp : /^[1-9]\d{0,4}\.?\d{0,2}?$/,
+                        message : '数值必须为0-100000可带两位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                    }
+                }
+            },
+            //单卡最低限额
+            'limitSingleCardMin' : {
+                validators : {
+                    notEmpty : {
+                        message : '单卡最低限额不能为空!'
+                    },
+                    regexp : {
+                        regexp : /^[1-9]\d{0,4}\.?\d{0,2}?$/,
+                        message : '数值必须为0-100000可带两位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                    }
+                }
+            },
+            //单卡限额笔数
+            'limitSingleCardCount' : {
+                validators : {
+                    notEmpty : {
+                        message : '单卡限额笔数不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单日限额
+            'limitTradDay' : {
+                validators : {
+                    notEmpty : {
+                        message : '单日限额不能为空!'
+                    },
+                    regexp : {
+                        regexp : /^[1-9]\d{0,4}\.?\d{0,2}?$/,
+                        message : '数值必须为0-100000可带两位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                    }
+                }
+            },
+            //日限额笔数
+            'limitTradDayCount' : {
+                validators : {
+                    notEmpty : {
+                        message : '日限额笔数不能为空!'
+                    },
+                    between: {
+                        min: 1,
+                        max: 88888888888,
+                        message: '请输入符合要求的数值'
+                    }
+                }
+            },
+            //单月限额
+            'limitTradMonth' : {
+                validators : {
+                    notEmpty : {
+                        message : '单月限额不能为空!'
+                    },
+                    regexp : {
+                        regexp : /^[1-9]\d{0,4}\.?\d{0,2}?$/,
+                        message : '数值必须为0-100000可带两位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                    }
+                }
+            },
+            //月限额笔数
+            'limitTradMonthCount' : {
+                validators : {
+                    notEmpty : {
+                        message: '月限额笔数不能为空!'
+                    },
+                        between: {
+                            min: 1,
+                            max: 88888888888,
+                            message: '请输入符合要求的数值'
+                        }
+                }
+            }
+        }
+    }).on('success.form.fv', function (e, data) {
+        e.preventDefault();
+        showLoading();
+        var formjson = UTIL.form2json({
+            form: "#add_level_form"
+        });
+        $("#edit_descrate_modal").modal("hide");//防止连续提交
+
+        $.ajax({
+            type : "post",
+            dataType : "json",
+            contentType : "application/json",
+            url : "/customer/level/add",
+            data : JSON.stringify(formjson),
+            success : function(res) {
+                hideLoading();
+                if (res.result == "success") {
+                    $('#add_level_form input').val()
+                    $("#add_merchant_modal").modal("hide");
+                    UTIL.clickDisappearSwal("新建商户等级成功!",function(){
+                        $("#merchant_level_table").bootstrapTable('refresh');
+                    });
+
+                } else {
+                    var text = res.errorMsg;
+                    UTIL.clickDisappearSwal(text)
+                }
+            },
+            error : function() {
+                hideLoading();
+                UTIL.clickDisappearSwal("新建商户等级失败!")
+            }
+        });
+        // })
+    })
+
+//实例化表格
+    $('[data-toggle="table"]').bootstrapTable();
+
+    //商户等级查询搜索参数设置
+    function searchData(args){
+        args.pageNumber=0;
+        args.pageSize=10;
+        return args;
+    }
+
+
+
+</script>

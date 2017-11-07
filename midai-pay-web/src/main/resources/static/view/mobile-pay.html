@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>支付金额</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline:none;
+            -webkit-appearance:none;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .clearfix:after {
+            content: "\200B";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+
+        /*IE/7/6*/
+
+        .shuru div::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            -webkit-transition: 1s;
+        }
+
+        .shuru div::-webkit-scrollbar-thumb {
+            background-color: #a7afb4;
+            background-clip: padding-box;
+            min-height: 28px;
+        }
+
+        .shuru div::-webkit-scrollbar-thumb:hover {
+            background-color: #525252;
+            background-clip: padding-box;
+            min-height: 28px;
+        }
+
+        .shuru div::-webkit-scrollbar-track-piece {
+            background-color: #ccd0d2;
+        }
+
+        .wrap {
+            position: relative;
+            margin: auto;
+            max-width: 640px;
+            min-width: 320px;
+            width: 100%;
+            height: 100%;
+            background: #f6f6f6;
+            overflow: hidden;
+        }
+
+        .layer-content {
+            margin-top: 30px;
+        }
+
+        /* 输入表单 */
+
+        .edit_cash {
+            display: block;
+            margin-top: 15px;
+            padding: 10px;
+            margin: 0 auto;
+            width: 90%;
+            border: 1px solid #CFCFCF;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .edit_cash p {
+            font-size: 14px;
+            color: #8D8D8F;
+        }
+
+        .shuru {
+            position: relative;
+        }
+        /*输入框*/
+        .shuru div {
+            font-family: Arial;
+            border: none;
+            width: 100%;
+            height: 50px;
+            font-size: 30px;
+            line-height: 50px;
+            text-indent: 30px;
+            outline: none;
+            white-space: pre;
+            overflow-x: scroll;
+        }
+
+        .shuru .first_text {
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-size: 20px;
+            color: #bbbbbb;
+        }
+        .shuru .last_money {
+            font-family: Arial;
+            position: absolute;
+            top: 12px;
+            font-size: 25px;
+            right: 0px;
+            color: #bbbbbb;
+        }
+        /*提交*/
+        .submit {
+            position: absolute;
+            text-align: center;
+            bottom: 0;
+            left: 50%;
+            margin-left:-50%;
+            width: 100%;
+            height: 55px;
+            line-height: 55px;
+            font-size: 20px;
+            color: #ffffff;
+            background: #0060ff;
+        }
+
+
+        /* 键盘 */
+
+        .form_edit {
+            width: 100%;
+            background: #D1D4DD;
+        }
+
+        .form_edit> div {
+            font-family: Arial;
+            margin-bottom: 1px;
+            margin-right: 1px;
+            float: left;
+            width: 33%;
+            height: 55px;
+            text-align: center;
+            color: #000000;
+            line-height: 55px;
+            font-size: 30px;
+            background-color: #fff;
+        }
+
+        .form_edit> div:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .form_edit> div:last-child {
+            background-color: #f6f6f6;
+        }
+        .header_img{
+            margin: 20px auto 10px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+        }
+        .header_title{
+            width: 100%;
+            margin:0px auto 20px;
+            text-align: center;
+        }
+        .bg_color{
+            background-color: #f6f6f6 !important;
+        }
+        .active{
+            background-color:#dddddd;
+            border:1px solid #dddddd;
+        }
+        .remarks_box{
+            display: none;
+        }
+        .remarks_box_title{
+            width: 100%;
+            height: 60px;
+            background-color: #f6f6f6;
+            clear: both;
+        }
+        .title_text{
+            color:#999999;
+            font-size: 16px;
+            margin-top: 30px;
+            float: left;
+            margin-left: 20px;
+        }
+        .remarks_text{
+            position: relative;
+        }
+        .remarks_text textarea{
+            font-size: 14px;
+            padding-top: 10px;
+            padding-left: 10px;
+            width: 100%;
+            border: 0px;
+            height: 200px;
+            resize:none;
+            border-top: 1px solid #cccccc;
+            border-bottom: 1px solid #cccccc;
+        }
+       #remark_textarea::-webkit-input-placeholder{
+           font-size: 14px;
+           font-weight: 400;
+           color:#cccccc;
+       }
+        .remarks_right{
+            font-family: Arial;
+            color: #999999;
+            font-size: 14px;
+            position: absolute;
+            bottom:10px;
+            right:5px;
+        }
+        .cancel_btn{
+            width: 40.85%;
+            height: 40px;
+            background-color:#dddddd;
+            border-radius: 5px;
+            color: white;
+            margin-left: 6.1%;
+        }
+        .confirm_btn{
+            width: 40.85%;
+            height: 40px;
+            border-radius: 5px;
+            background-color:#23abf6;
+            color:white;
+            margin-top: -5px;
+            margin-left: 6.1%;
+        }
+        footer{
+            font-size: 0px;
+            margin-top:25px;
+        }
+        .new_remarks{
+            background-color: #fff;
+            border-bottom: 1px solid #CFCFCF;
+            border-top: 1px solid #CFCFCF;
+            position: relative;
+            color: #cccccc;
+            height: 50px;
+            line-height: 50px;
+        }
+        .new_remarks>span:nth-child(1){
+            position: absolute;
+            left:20px;
+
+        }
+        .new_remarks>span:nth-child(2){
+            position: absolute;
+            left:50px;
+        }
+        .new_remarks>span:nth-child(3){
+            font-size: 25px;
+            position: absolute;
+            right:30px;
+        }
+        .cancel_btn{
+            font-size: 18px;
+        }
+        .confirm_btn{
+            font-size: 18px;
+        }
+        .text_center{
+            font-family: Arial;
+        }
+        #load_box{
+            display: none;
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+<div class="remarks_box">
+    <header class="remarks_box_title">
+        <div class="title_text">添加备注</div>
+    </header>
+    <div class="remarks_text">
+        <textarea name="" placeholder="请在次填写备注" id="remark_textarea" maxlength="100"></textarea>
+        <span class="remarks_right">您可以输入100个中英字符</span>
+    </div>
+    <footer>
+        <span id="confirm_text" style="display: none;"></span>
+        <button class="cancel_btn">取消</button>
+        <button class="confirm_btn">确认</button>
+    </footer>
+</div>
+<div id="load_box">
+    <img id="load_img" src="/imgs/load.gif" alt="" style="width: 32px; height: 32px;position: absolute;left: 50%;top: 50%;margin-top: -16px;margin-left: -16px;">
+</div>
+<div class="wrap">
+    <header>
+        <div class="header_img">
+            <img src="/imgs/logo_ph.png" alt="" style="width: 100%">
+        </div>
+        <div class="header_title">
+            <span style="color:#999999;">向</span><span id="mercName"></span><span style="color:#999999;">付款</span>
+        </div>
+    </header>
+    <form class="edit_cash">
+        <div class="shuru">
+            <span class="first_text">金额</span>
+            <div id="number_box" style="text-align: right;"></div>
+            <span class="last_money">0.00</span>
+        </div>
+    </form>
+    <div class="layer-content">
+        <div class="new_remarks">
+            <span><img src="/imgs/bz.png" alt="" style="width:16px;height: 16px;"></span>
+            <span class="text_center">添加备注</span>
+            <span><img src="/imgs/more.png" alt="" style="height: 18px;"></span>
+        </div>
+        <div class="form_edit clearfix">
+            <div class="num">1</div>
+            <div class="num">2</div>
+            <div class="num">3</div>
+            <div class="num">4</div>
+            <div class="num">5</div>
+            <div class="num">6</div>
+            <div class="num">7</div>
+            <div class="num">8</div>
+            <div class="num">9</div>
+            <div class="num bg_color">.</div>
+            <div class="num">0</div>
+            <div id="remove"><img src="/imgs/del.png" alt="" style="height: 30px;margin-top: 10px;"></div>
+        </div>
+    </div>
+    <button class="submit">支付</button>
+</div>
+<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript">
+    $(function() {
+        FastClick.attach(document.body);
+    });
+    //    获取页面参数；
+    function GetQueryString(key){
+        var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
+        var result = window.location.search.substr(1).match(reg);
+        return result?decodeURIComponent(result[2]):null;
+    }
+    var qrcode=GetQueryString('qrcode');
+    var mercNo=null;
+    $(function () {
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : '/mifu/mobile/customer/info/'+qrcode,
+            success : function(res) {
+                 mercNo=res.mercNo;
+                $('#mercName').text(res.mercName);
+            }
+        });
+    })
+    $(function(){
+//        处理屏幕高度不够时的样式
+        var winWidth = window.innerHeight;
+        if(winWidth<=568){
+            $(".header_img").css('height','30px');
+            $(".header_img").css('width','30px');
+            $(".form_edit div").css('height','40px');
+            $(".form_edit .num").css('line-height','40px');
+            $(".form_edit .num").css('font-size','20px');
+            $("#remove img").css('margin-top','2px')
+        }
+       var on_off=true;
+        // 监听#div内容变化，改变支付按钮的颜色
+        $('#number_box').on('DOMNodeInserted', function(){
+            var box_length=$("#number_box").text().length;
+            if (box_length>8) {
+                on_off=false;
+            }else{
+                on_off=true;
+            }
+//            非空判断
+            if($("#number_box").text()!=""){
+                $('.last_money').hide();
+                $('.submit').removeClass('active');
+                $('.submit').attr('disabled', false);
+                if($("#number_box").text()>=1){
+                    $('.submit').removeClass('active');
+                    $('.submit').attr('disabled', false);
+                }else{
+                    $('.submit').addClass('active');
+                    $('.submit').attr('disabled', true);
+                }
+            }else{
+                $('.last_money').show();
+                $('.submit').addClass('active');
+                $('.submit').attr('disabled', true);
+            }
+        })
+
+        $('#number_box').trigger('DOMNodeInserted');
+
+            $('.form_edit .num').click(function(){
+            var be_text=$("#number_box").text();
+            var click_text=$(this).text();
+            var new_text_box=be_text+click_text;
+            var box_length=new_text_box.length;
+            var text_sp=new_text_box.indexOf('.');
+                if (text_sp>-1){
+                var sub_c=be_text.substring(text_sp,box_length);
+                    var mix_dn=sub_c.length
+            }
+            if (box_length>8||mix_dn>2) {
+                on_off=false;
+            }else{
+                on_off=true;
+            }
+//            非空判断
+            if($("#number_box").text()!=""){
+                $('.last_money').hide();
+                $('.submit').removeClass('active');
+                $('.submit').attr('disabled', false);
+                if($("#number_box").text()>=1){
+                    $('.submit').removeClass('active');
+                    $('.submit').attr('disabled', false);
+                }else{
+                    $('.submit').addClass('active');
+                    $('.submit').attr('disabled', true);
+                }
+            }else{
+                $('.last_money').show();
+                $('.submit').addClass('active');
+                $('.submit').attr('disabled', true);
+            }
+
+                if (on_off==true){
+                    var oDiv = document.getElementById("number_box");
+                    oDiv.innerHTML += this.innerHTML;
+                }else{
+                    console.log('最多输入11位')
+                }
+
+            })
+
+//        删除
+        $('#remove').click(function(){
+            var oDiv = document.getElementById("number_box");
+            var oDivHtml = oDiv.innerHTML;
+            oDiv.innerHTML = oDivHtml.substring(0,oDivHtml.length-1);
+            // 删除完毕验证
+            if($("#number_box").text()!=""){
+                $('.last_money').hide();
+                $('.submit').removeClass('active');
+                $('.submit').attr('disabled', false);
+                if($("#number_box").text()>=1){
+                    $('.submit').removeClass('active');
+                    $('.submit').attr('disabled', false);
+                }else{
+                    $('.submit').addClass('active');
+                    $('.submit').attr('disabled', true);
+                }
+            }else{
+                $('.last_money').show();
+                $('.submit').addClass('active');
+                $('.submit').attr('disabled', true);
+            }
+        })
+//        备注添加
+        $('.new_remarks').on('click',function () {
+            var text_context=$("#confirm_text").text()
+                $("#remark_textarea").val(text_context)
+            $(".wrap").css('display','none');
+            $(".remarks_box").css('display','block');
+        })
+        $(".cancel_btn").on('click',function () {
+             var text_ce=$("#remark_textarea").val();
+            $("#remark_textarea").val(text_ce);
+            $(".wrap").css('display','block');
+            $(".remarks_box").css('display','none');
+        })
+        $(".confirm_btn").on('click',function () {
+            var text_ce=$("#remark_textarea").val();
+            $("#confirm_text").text(text_ce);
+            if (text_ce.length>0){
+                if (text_ce.length>10){
+                    var text_new=$("#remark_textarea").val().substring(0,10)
+                    $(".text_center").html(text_new+"......")
+                }else{
+                    $(".text_center").html(text_ce)
+                }
+                $(".wrap").css('display','block');
+                $(".remarks_box").css('display','none');
+            }
+        })
+
+
+    $(".submit").on('click',function(event) {
+        var money=Number($("#number_box").text());
+        var remarks=$("#remark_textarea").val();
+        $('.submit').attr('disabled', true);
+        $("#load_box").show();
+        var searchDate={"merNo":mercNo,"transAmt":money,"remarks":remarks}
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : '/mifu/mobile/scanhandler',
+            data:JSON.stringify(searchDate),
+            success : function(res) {
+                $("#load_box").hide();
+                var rspcod=res.rspcod
+                var rspmsg=res.rspmsg
+                var imgurl=res.imgurl
+                if (rspcod==00){
+                    window.location.href=imgurl;
+                }else{
+                    alert(rspmsg)
+                    window.location.reload();
+                }
+            }
+        });
+    });
+
+
+    })
+</script>
+</body>
+</html>

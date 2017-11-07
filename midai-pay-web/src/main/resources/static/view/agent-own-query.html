@@ -1,0 +1,386 @@
+<!-- 代理商查询页面 -->
+<div class="container-fluid">
+    <!--代理商管理-代理商查询 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>查询条件录入</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="own_agent-query-search-agcondition"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="agentInfo.name" class="form-control" maxlength="50"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商编号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="agentInfo.agentNo" class="form-control" maxlength="50"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商等级</label>
+                                    <div class="col-md-8">
+                                        <select name="agentInfo.level" class="form-control required">
+                                            <option value="0">所有代理商</option>
+                                            <option value="1">子代理商</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="own_agentQueryEmptySearch">
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="own_agentSearch">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>代理商隶属查询</h4></div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding">
+                            <button class="btn btn-success pull-right hide-default dlslscx-plxgkl-btn" id="own_lotEditRate">批量修改扣率</button>
+                            <button class="btn btn-success pull-right hide-default dlslscx-xj-btn" id="own_newAgent">新建</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table
+                            class="table table-striped table-hover table-highlight-head" id="own_agentListTable"
+                            data-toggle="table" style="border-top: 1px solid #dddddd;"
+                            data-url="../agent/agentList" data-query-params="searchData" data-pagination="true"
+                            data-side-pagination="server" data-page-size="10"
+                            data-pagination-first-text="First"
+                            data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                            data-pagination-last-text="Last" data-method="post">
+                        <caption align="top" class="clearfix">
+                            <button class="btn btn-success pull-right" id="own_agentListDown">Excel下载</button>
+                        </caption>
+                        <thead>
+                        <tr>
+                            <th data-field="" data-checkbox="true"></th>
+                            <th data-field="id" data-align="left">ID</th>
+                            <th data-field="agentNo" data-align="left">代理商编号</th>
+                            <th data-field="name" data-align="left">代理商名称</th>
+                            <th data-field="parentAgentName" data-align="left">父代理商名称</th>
+                            <th data-field="parentAgentId" data-align="left">父代理商编号</th>
+                            <th data-field="custCount" data-align="left">商户数量</th>
+                            <th data-field="createTime" data-align="left">创建时间</th>
+                            <th data-field="" data-align="left" data-formatter="agentUpdataDetail">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--代理商管理-代理商查询 end-->
+</div>
+
+<!--模态框-批量修改扣率 start-->
+<div class="modal fade" id="own_edit_descrate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content container-fluid">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title text-center">批量修改扣率</h4>
+            </div>
+            <form class="form-horizontal row-border" id="own_editRateNew" novalidate="novalidate">
+                <input type="text" id="agentsId" style="display: none;" name="ids">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="widget box">
+                            <div class="widget-header"><h4><i class="icon-form"></i>刷卡成本信息</h4></div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">借记卡封顶手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="swingCardLimit" class="form-control" placeholder="">
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="swingCardDebitRate" class="form-control" placeholder="">
+                                                    <span class="input-group-addon">%</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="swingCardCreditRate" placeholder="">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">交易结算手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="swingCardSettleFee" placeholder="">
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget box">
+                            <div class="widget-header"><h4><i class="icon-form"></i>无卡成本信息（借贷记一致）</h4></div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">无卡手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="nonCardCreditRate" id="" class="form-control" placeholder="">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget box">
+                            <div class="widget-header"><h4><i class="icon-form"></i>传统POS成本信息（借记卡封顶费率及成本与手刷相同）</h4></div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">借记卡封顶手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="posDebitLimit"  class="form-control" placeholder="">
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="posDebitRate"  class="form-control" placeholder="">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="posCreditRate" placeholder="">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">交易结算手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="posSettleFee" placeholder="">
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget box">
+                            <div class="widget-header"><h4><i class="icon-form"></i>扫码成本信息（借贷记一致）</h4></div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">微信手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="scanCodeWxRate" id="" class="form-control" placeholder=""><span
+                                                        class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">支付宝手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="scanCodeZfbRate" id="" class="form-control" placeholder="">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">银联扫码手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="scanCodeYlRate" placeholder=""><span
+                                                        class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">花呗手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="scanCodeMyhbRate" placeholder="">
+                                                    <span
+                                                            class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">其他手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="scanCodeOtherRate"  placeholder=""><span
+                                                        class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">京东白条手续费<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="scanCodeJdbtRate"  placeholder="">
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="widget box">
+                            <div class="widget-header"><h4><i class="icon-form"></i>机具押金</h4></div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">刷卡机具押金<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="terminalSwipeDeposit" id="" class="form-control" placeholder=""><span class="input-group-addon">元</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">刷卡机具返还条件<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" name="terminalSwipeDepositReturn" id="" class="form-control" placeholder=""><span
+                                                        class="input-group-addon">元</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">传统pos机具押金<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="terminalPosDeposit" placeholder=""><span
+                                                        class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">传统pos机具押金返还条件<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="terminalPosDepositReturn" placeholder=""><span
+                                                        class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">传统pos月押金<span class="required">*</span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="terminalPosDepositMonthly" placeholder=""><span
+                                                        class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="own_closeEditRate">关&nbsp;&nbsp;闭</button>
+                    <button type="submit" class="btn btn-success" id="own_sureEditRate">确&nbsp;&nbsp;定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--模态框-批量修改扣率 end-->
+<script type="text/temp" id="agentOwnQueryUpdata">
+    <a href="javascript:UTIL.openNewPage({'targetUrl':'pageurl','data':'agentNo=row.agentNo&agentId=row.id&markId=row.markId'})"><img src="../imgs/edit-sign.png" alt=""/></a>
+</script>
+<script type="text/temp" id="agentInfoView">
+    <a href="javascript:UTIL.openNewPage({'targetUrl':'pageurl','data':'agentNo=row.agentNo&agentId=row.id&markId=row.markId'})"><img src="../imgs/search-info.png" alt=""/></a>
+</script>
+<script type="text/javascript" src="js/zd-manage/agent-own-query.js"></script>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<midai xmlns="http://www.midaigroup.com/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.midaigroup.com/namespace midai-pay.xsd ">
+      <field_type field_id='0'   etf_name='MSG_ID'          length_type='CONST'  data_type='ASCBCD'    length='4'/> <!-- 消息类型 -->
+      <field_type field_id='1'   etf_name='BIT_MAP'         length_type='CONST'  data_type='BIT'       length='16'/> <!-- 位图 -->
+      <field_type field_id='2'   etf_name='PAN'             length_type='VAR2'   data_type='ASCBCD'    length='19' align_mode="left" var_type="bin"/> <!-- 主帐号 -->
+      <field_type field_id='3'   etf_name='PRO_COD'         length_type='CONST'  data_type='ASCBCD'    length='6'/> <!-- 交易处理码 -->
+      <field_type field_id='4'   etf_name='TTXN_AMT'        length_type='CONST'  data_type='ASCBCD'    length='12' align_mode="right"/> <!-- 交易金额 -->
+      <field_type field_id='5'   etf_name='SetAmt'          length_type='CONST'  data_type='ASCBCD'    length='12'/> <!-- 结算金额:暂不使用 -->
+      <field_type field_id='6'   etf_name='BilAmt'          length_type='CONST'  data_type='ASCBCD'    length='12'/> <!-- 持卡人扣账金额:暂不使用 -->
+      <field_type field_id='7'   etf_name='TmsTim'          length_type='CONST'  data_type='ASCBCD'    length='10'/> <!-- 交易传输时间:暂不使用 -->
+      <field_type field_id='8'   etf_name='F8'              length_type='CONST'  data_type='ASCBCD'    length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='9'   etf_name='SetRat'          length_type='CONST'  data_type='ASCBCD'    length='8'/>  <!-- 结算汇率:暂不使用 -->
+      <field_type field_id='10'  etf_name='BilRat'          length_type='CONST'  data_type='ASCBCD'    length='8'/>  <!-- 持卡人扣款汇率:暂不使用 -->
+      <field_type field_id='11'  etf_name='CSEQ_NO'         length_type='CONST'  data_type='ASCBCD'    length='6'/>  <!-- 系统跟踪号 -->
+      <field_type field_id='12'  etf_name='CTXN_TM'         length_type='CONST'  data_type='ASCBCD'    length='6'/>  <!-- 受卡方所在地时间 -->
+      <field_type field_id='13'  etf_name='CTXN_DT'         length_type='CONST'  data_type='ASCBCD'    length='4'/>  <!-- 受卡方所在地日期 -->
+      <field_type field_id='14'  etf_name='EXP_DT'          length_type='CONST'  data_type='ASCBCD'    length='4'/>  <!-- 卡有效期 -->
+      <field_type field_id='15'  etf_name='STL_DAT'         length_type='CONST'  data_type='ASCBCD'    length='4'/>  <!-- 清算日期 -->
+      <field_type field_id='16'  etf_name='ConDat'          length_type='CONST'  data_type='ASCBCD'    length='4'/>  <!-- 兑换日期:暂不使用 -->
+      <field_type field_id='17'  etf_name='F17'             length_type='VAR2'  data_type='CharASCII'  length='99'/>  <!-- 中行交换中心的清算日期:暂不使用 -->
+      <field_type field_id='18'  etf_name='MCC_CD'          length_type='CONST'  data_type='ASCBCD'    length='4'/>  <!-- 商户类型:暂不使用 -->
+      <field_type field_id='19'  etf_name='CtyCod'          length_type='CONST'  data_type='ASCBCD'    length='3'/>  <!-- 暂不使用:受理国家代码 -->
+      <field_type field_id='20'  etf_name='F20'             length_type='CONST'  data_type='ASCBCD'    length='3'/>  <!-- 暂不使用:暂不使用 -->
+      <field_type field_id='21'  etf_name='F21'             length_type='CONST'  data_type='ASCBCD'    length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='22'  etf_name='IN_MOD'          length_type='CONST'  data_type='ASCBCD'    length='3' align_mode="left"/>  <!-- 服务点输入方式码 -->
+      <field_type field_id='23'  etf_name='SEP_NUM'         length_type='CONST'  data_type='ASCBCD'    length='3'/>  <!-- 卡片序列号 -->
+      <field_type field_id='24'  etf_name='F24'             length_type='CONST'  data_type='ASCBCD'    length='32'/>  <!-- 国际网络标识域:暂不使用 -->
+      <field_type field_id='25'  etf_name='CON_MOD'         length_type='CONST'  data_type='ASCBCD'    length='2'/>  <!-- 服务点条件码 -->
+      <field_type field_id='26'  etf_name='PIN_CAP_CODE'    length_type='CONST'  data_type='ASCBCD'    length='2'/>  <!-- 服务点PIN获取码 -->
+      <field_type field_id='27'  etf_name='TXN_MCC_CD'      length_type='CONST'  data_type='ASCBCD'    length='3'/>  <!-- 指定费率模板 -->
+      <field_type field_id='28'  etf_name='FeeAmt'          length_type='CONST'  data_type='ASCBCD'    length='1'/>  <!-- 暂不使用 手续费-->
+      <field_type field_id='29'  etf_name='F29'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='30'  etf_name='F30'             length_type='VAR3'   data_type='CharASCII' length='512' var_type="bin" convert="hex"/> <!-- 解磁道KEY -->
+      <field_type field_id='31'  etf_name='F31'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='32'  etf_name='ACQ_NO'          length_type='VAR2'   data_type='ASCBCD'    length='11' align_mode="left" var_type="bin"/> <!-- 受理方标识码 -->
+      <field_type field_id='33'  etf_name='FOR_COD'         length_type='VAR2'   data_type='ASCBCD'    length='11' var_type="bin"/> <!-- 暂不使用 发送机构标识码-->
+      <field_type field_id='34'  etf_name='SPE_USE'         length_type='VAR3'   data_type='CharASCII' length='28' var_type="bin"/> <!-- 银盛特色交易使用 -->
+      <field_type field_id='35'  etf_name='TRACK_2'         length_type='VAR2'   data_type='ASCBCD'    length='37' align_mode="left" var_type="bin"/> <!-- 第二磁道数据 -->
+      <field_type field_id='36'  etf_name='TRACK_3'         length_type='VAR3'   data_type='ASCBCD'    length='104' align_mode="left" var_type="bin"/><!-- 第三磁道数据 -->
+      <field_type field_id='37'  etf_name='SREF_NO'         length_type='CONST'  data_type='CharASCII' length='12'/> <!-- 检索参考号 -->
+      <field_type field_id='38'  etf_name='AUT_CD'          length_type='CONST'  data_type='CharASCII' length='6'/>  <!-- 授权标识应答码 -->
+      <field_type field_id='39'  etf_name='CPSCOD'          length_type='CONST'  data_type='CharASCII' length='2'/>  <!-- 应答码 -->
+      <field_type field_id='40'  etf_name='F40'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='41'  etf_name='TRM_NO'          length_type='CONST'  data_type='CharASCII' length='8'/>  <!-- 受卡机终端标识码 -->
+      <field_type field_id='42'  etf_name='MERC_ID'         length_type='CONST'  data_type='CharASCII' length='15'/> <!-- 受卡方标识码 -->
+      <field_type field_id='43'  etf_name='MERC_NM'         length_type='CONST'  data_type='CharASCII' length='40'/> <!-- 卡接受者的名称和地址:暂不使用 -->
+      <field_type field_id='44'  etf_name='ADD_DATA'        length_type='VAR2'   data_type='CharASCII' length='25' var_type="bin"/>    <!-- 附加响应数据 -->
+      <field_type field_id='45'  etf_name='Track1'             length_type='VAR2'   data_type='CharASCII' length='79' var_type="bin"/> <!-- 暂不使用 第一磁道数据-->
+      <!--field_type field_id='46'  etf_name='F46'             length_type='CONST'  data_type='CharASCII' length='10'/--> <!-- 暂不使用 -->
+      <field_type field_id='46'  etf_name='F46'             length_type='VAR3'  data_type='CharASCII' length='10' var_type="bin" /> <!-- 暂不使用 -->
+      <field_type field_id='47'  etf_name='F47'             length_type='VAR4'  data_type='CharASCII' length='9999' var_type="bin" convert="hex" /> <!-- 暂不使用 -->
+      <!--field_type field_id='47'  etf_name='F47'             length_type='CONST'  data_type='CharASCII' length='10'/--> <!-- 暂不使用 -->
+      <field_type field_id='48'  etf_name='PRI_USE'         length_type='VAR3'   data_type='CharASCII' length='322' var_type="bin"  align_mode="left"/>   <!-- 附加数据 -->
+      <field_type field_id='49'  etf_name='CCY'             length_type='CONST'  data_type='CharASCII' length='3'/>  <!-- Field4货币代码 -->
+      <field_type field_id='50'  etf_name='StlCcy'             length_type='CONST'  data_type='ASCBCD'    length='3'/>  <!-- 暂不使用 结算币种-->
+      <field_type field_id='51'  etf_name='BilCcy'             length_type='CONST'  data_type='ASCBCD'    length='3'/>  <!-- 暂不使用 持卡人帐户货币币种-->
+      <field_type field_id='52'  etf_name='PIN_DATA'        length_type='CONST'  data_type='BIT'       length='16'/>  <!-- 个人标识码数据 -->
+      <field_type field_id='53'  etf_name='SECUR_INF'       length_type='CONST'  data_type='ASCBCD'    length='16'/> <!-- 安全控制信息 -->
+      <field_type field_id='54'  etf_name='BAL_AMT'         length_type='VAR3'   data_type='CharASCII' length='20' var_type="bin"/> <!-- 余额 -->
+      <field_type field_id='55'  etf_name='IC_DAT'          length_type='VAR3'   data_type='CharASCII' length='255' var_type="bin" convert='hex'/> <!-- IC卡数据域 -->
+      <field_type field_id='56'  etf_name='RSP_INF'         length_type='VAR3'   data_type='CharASCII' length='999' var_type="bin"/> <!-- 应答信息 -->
+      <field_type field_id='57'  etf_name='AddDat'             length_type='VAR3'   data_type='CharASCII' length='999' var_type="bin"/> <!-- 用于将来的使用 -->
+      <field_type field_id='58'  etf_name='PBOC_DATA'       length_type='VAR3'   data_type='CharASCII' length='100' var_type="bin"/> <!-- PBOC电子钱包标准的交易信息 -->
+      <field_type field_id='59'  etf_name='DetInq'             length_type='VAR3'   data_type='CharASCII' length='600' var_type="bin"/>   <!-- 暂不使用 明细查询数据-->
+      <field_type field_id='60'  etf_name='RESE_PRI_60'     length_type='VAR3'   data_type='ASCBCD'    length='17' align_mode="left" var_type="bin"/>  <!-- 自定义域 -->
+      <field_type field_id='61'  etf_name='ORI_MES'         length_type='VAR3'   data_type='ASCBCD'    length='29' align_mode="left" var_type="bin"/>  <!-- 原始信息域 -->
+      <field_type field_id='62'  etf_name='RESE_PRI_62'     length_type='VAR3'   data_type='CharASCII' length='512' var_type="bin"/> <!-- 自定义域 -->
+      
+      <field_type field_id='63'  etf_name='RESE_PRI_63'     length_type='VAR3'   data_type='CharASCII' length='163' var_type="bin"/>  <!-- 自定义域 -->
+      <field_type field_id='64'  etf_name='MAC'             length_type='CONST'  data_type='BIT'       length='16'/> <!-- MAC报文鉴别码 -->
+      <field_type field_id='65'  etf_name='F65'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='66'  etf_name='SetCod'             length_type='CONST'  data_type='CharASCII' length='1'/>  <!-- 暂不使用 清算代码-->
+      <field_type field_id='67'  etf_name='F67'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='68'  etf_name='F68'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='69'  etf_name='F69'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='70'  etf_name='NetCod'             length_type='CONST'  data_type='CharASCII' length='3'/>  <!-- 暂不使用 -->
+      <field_type field_id='71'  etf_name='USR_NO'          length_type='CONST'  data_type='ASCBCD'    length='11' align_mode="left"/> <!-- 会员编号 -->
+      <field_type field_id='72'  etf_name='MEM_LEV'         length_type='CONST'  data_type='CharASCII' length='1'/>  <!-- 会员级别编号 -->
+      <field_type field_id='73'  etf_name='MEM_DIS'         length_type='CONST'  data_type='ASCBCD'    length='4' align_mode="right"/> <!-- 会员折扣 -->
+      <field_type field_id='74'  etf_name='MEMBER_COU'      length_type='VAR3'   data_type='CharASCII' length='999' var_type="bin"/> <!-- 会员优惠券列表 -->
+      <field_type field_id='75'  etf_name='MERCHANT_COU'    length_type='VAR3'   data_type='CharASCII' length='999' var_type="bin"/> <!-- 商户优惠券列表 -->
+      <field_type field_id='76'  etf_name='MEM_POI_BAL'     length_type='CONST'  data_type='ASCBCD'    length='10' align_mode="right"/> <!-- 会员积分余额 -->
+      <field_type field_id='77'  etf_name='COU_ID'          length_type='VAR2'   data_type='CharASCII' length='30' var_type="bin"/>  <!-- 券号 -->
+      <field_type field_id='78'  etf_name='TXN_RSV1'        length_type='VAR2'   data_type='CharASCII' length='20' var_type="bin"/> <!-- 暂不使用 -->
+      <field_type field_id='79'  etf_name='RTfrNm'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='80'  etf_name='MEM_CASH'        length_type='CONST'  data_type='ASCBCD'    length='12' align_mode="right"/> <!-- 会员消费现金额 -->
+      <field_type field_id='81'  etf_name='MEM_POI'         length_type='CONST'  data_type='ASCBCD'    length='10' align_mode="right"/> <!-- 会员消费积分额 -->
+      <field_type field_id='82'  etf_name='F82'             length_type='VAR2'   data_type='CharASCII' length='48' var_type="bin"/> <!-- 暂不使用 -->
+      <field_type field_id='83'  etf_name='F83'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='84'  etf_name='DRFee'             length_type='CONST'  data_type='CharASCII' length='12'/> <!-- 暂不使用 -->
+      <field_type field_id='85'  etf_name='F85'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='86'  etf_name='CRAmt'             length_type='CONST'  data_type='CharASCII' length='16'/> <!-- 暂不使用 -->
+      <field_type field_id='87'  etf_name='RCRAmt'             length_type='CONST'  data_type='CharASCII' length='16'/> <!-- 暂不使用 -->
+      <field_type field_id='88'  etf_name='MERC_ABBR'       length_type='VAR2'   data_type='CharASCII' length='40' var_type="bin"/> <!-- 商户简称 -->
+      <field_type field_id='89'  etf_name='MEM_AVI_POI'     length_type='CONST'  data_type='ASCBCD'    length='10' align_mode="right"/> <!-- 会员可用积分余额 -->
+      <field_type field_id='90'  etf_name='UOrnDat'             length_type='CONST'  data_type='CharASCII' length='42'/> <!-- 暂不使用 原始数据元-->
+      <field_type field_id='91'  etf_name='F91'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='92'  etf_name='F92'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='93'  etf_name='F93'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='94'  etf_name='F94'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='95'  etf_name='RplAmt'             length_type='CONST'  data_type='CharASCII' length='42'/> <!-- 暂不使用 交换金额-->
+      <field_type field_id='96'  etf_name='MsgSec'             length_type='CONST'  data_type='BIT'       length='8'/>  <!-- 暂不使用 消息安全码-->
+      <field_type field_id='97'  etf_name='StlAmt'             length_type='CONST'  data_type='CharASCII' length='17'/> <!-- 暂不使用 结算轧差额-->
+      <field_type field_id='98'  etf_name='F98'             length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='99'  etf_name='StlOrg'             length_type='VAR2'   data_type='CharASCII' length='11' var_type="bin"/> <!-- 暂不使用 结算机构标识码-->
+      <field_type field_id='100' etf_name='UIssINo'            length_type='VAR2'   data_type='CharASCII' length='11' var_type="bin"/> <!-- 暂不使用 接收机构标识码-->
+      <field_type field_id='101' etf_name='F101'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='102' etf_name='ActNo'            length_type='VAR2'   data_type='CharASCII' length='28' var_type="bin"/> <!-- 暂不使用 转出帐户-->
+      <field_type field_id='103' etf_name='CrdNo1'            length_type='VAR2'   data_type='CharASCII' length='28' var_type="bin"/> <!-- 暂不使用 转入帐户-->
+      <field_type field_id='104' etf_name='TRM_SN'          length_type='CONST'  data_type='CharASCII' length='16'/> <!-- 设备序列号 -->
+      <field_type field_id='105' etf_name='TER_PARA'        length_type='VAR3'   data_type='CharASCII' length='320' var_type="bin"/><!-- 终端业务参数 -->
+      <field_type field_id='106' etf_name='RULES_NUM'       length_type='CONST'  data_type='ASCBCD'    length='2'/>  <!-- 业务规则编号 -->
+      <field_type field_id='107' etf_name='RULES_INF'       length_type='VAR2'   data_type='CharASCII' length='16' var_type="bin"/> <!-- 业务规则信息 -->
+      <field_type field_id='108' etf_name='PAC_NUM'         length_type='CONST'  data_type='ASCBCD'    length='6' align_mode="right"/> <!-- 报文序号 -->
+      <field_type field_id='109' etf_name='PAC_FLAG'        length_type='CONST'  data_type='ASCBCD'    length='1'/> <!-- 报文后续标识 -->
+      <field_type field_id='110' etf_name='MEM_DIS_FLAG'    length_type='CONST'  data_type='ASCBCD'    length='1'/> <!-- 会员折扣计算标识 -->
+      <field_type field_id='111' etf_name='INF_SYNC'        length_type='VAR2'   data_type='CharASCII' length='20' var_type="bin"/><!-- 信息同步参数 -->
+      <field_type field_id='112' etf_name='MER_LEV_INF'     length_type='VAR3'   data_type='CharASCII' length='999' var_type="bin"/> <!-- 会员级别信息 -->
+      <field_type field_id='113' etf_name='APP_NUM'         length_type='CONST'  data_type='CharASCII' length='6' align_mode="left"/> <!-- 终端应用编号 -->
+      <field_type field_id='114' etf_name='APP_VER'         length_type='CONST'  data_type='CharASCII' length='10' align_mode="left"/> <!-- 终端应用版本号 -->
+      <field_type field_id='115' etf_name='SELF_PARA'       length_type='VAR3'   data_type='CharASCII' length='256' var_type="bin"/><!-- 自定义参数 -->
+      <field_type field_id='116' etf_name='F116'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='117' etf_name='F117'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='118' etf_name='F118'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='119' etf_name='F119'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='120' etf_name='F120'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='121' etf_name='CpsRsv'            length_type='VAR3'   data_type='CharASCII' length='100' var_type="bin"/><!-- 暂不使用 CPUS保留-->
+      <field_type field_id='122' etf_name='UAcqRsv'            length_type='VAR3'   data_type='CharASCII' length='100' var_type="bin"/><!-- 暂不使用 受理方保留-->
+      <field_type field_id='123' etf_name='UIsuRsv'            length_type='VAR3'   data_type='CharASCII' length='100' var_type="bin"/><!-- 暂不使用 发卡方保留-->
+      <field_type field_id='124' etf_name='F124'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='125' etf_name='F125'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='126' etf_name='F126'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='127' etf_name='F127'            length_type='CONST'  data_type='CharASCII' length='10'/> <!-- 暂不使用 -->
+      <field_type field_id='128' etf_name='F128'             length_type='CONST'  data_type='BIT'       length='16'/>  <!-- ====== -->
+  
+	  <message  tpdu="6001040000" head="600100000000" type="0200" channel="mishuai" id="mishuai-0200">
+      	<field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="000000"></field>
+      	<field index="4" required="true"  ></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="22" required="true"  ></field>
+      	<field index="23"   ></field>
+      	<field index="25" required="true"  value="00"></field>
+      	<field index="26" required="true"   value="06"></field>
+      	<field index="31" required="true"   ></field>
+      	<field index="32" required="true" value="00005210" ></field>
+      	<field index="35" required="true"  ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="49" required="true"  value="156" ></field>
+      	<field index="52" required="true"  ></field>
+      	<field index="53" required="true"  value="2600000000000000"></field>
+      	<field index="55"   ></field>
+      	<field index="60" required="true"  value="2200000100050"></field>
+      	<field index="64" required="true"  ></field>
+      </message>  
+      <message  tpdu="6001040000" head="600100000000" type="0210" channel="mishuai" id="mishuai-0210">
+      </message>
+      
+      <message tpdu="6001040000" head="600100000000" type="0200" channel="mishuai" id="mishuai-daifu">
+        <field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="290000"></field>
+      	<field index="4" required="true"  ></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="31" required="true"  ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="44" required="true"  ></field>
+      	<field index="56" required="true"  ></field>
+      	<field index="60" required="true"  ></field>
+      	<field index="63" required="true"  ></field>
+      	<field index="64" required="true"  ></field>
+      </message>
+      
+      <message tpdu="6001040000" head="600100000000" type="0220" channel="mishuai" id="mishuai-daifu-chaxun">
+        <field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="290000"></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="31" required="true"  ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="60" required="true"  ></field>
+      	<field index="61" required="true"  ></field>
+      	<field index="64" required="true"  ></field>
+      </message>
+      
+       <message  tpdu="6001040000" head="600100000000" type="0200" channel="xinku" id="xinku-0200">
+      	<field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="000000"></field>
+      	<field index="4" required="true"  ></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="22" required="true"  ></field>
+      	<field index="23"   ></field>
+      	<field index="25" required="true"  value="00"></field>
+      	<field index="26" required="true"   value="06"></field>
+      	<field index="35" required="true"  ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="49" required="true"  value="156" ></field>
+      	<field index="52" required="true"  ></field>
+      	<field index="53" required="true"  value="2600000000000000"></field>
+      	<field index="55"   ></field>
+      	<field index="60" required="true"  value="22000001000"></field>
+      	<field index="63" required="true"  value="CUP" ></field>
+      	<field index="64" required="true"  ></field>
+      </message>
+        
+      <message  tpdu="6001040000" head="600100000000" type="0400" channel="mishuai" id="mishuai-0400">
+      	<field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="000000"></field>
+      	<field index="4" required="true"  ></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="22" required="true"  ></field>
+      	<field index="23"   ></field>
+      	<field index="25" required="true"  value="00"></field>
+      	<field index="26" required="true"   value="06"></field>
+      	
+      	<field index="31" required="true"   ></field>
+      	<field index="32" required="true" value="00005210" ></field>  	
+      	<field index="39" required="true" value="98" ></field>
+      	
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="49" required="true"  value="156" ></field>
+      	
+      	<field index="55"   ></field>
+      	<field index="60" required="true"  value="2200000100050"></field>
+      	<field index="64" required="true"  ></field>
+      </message>  
+      <message  tpdu="6001040000" head="600100000000" type="0410" channel="mishuai" id="mishuai-0410">
+      </message>
+      
+      <!-- shenxin -->
+      <message  tpdu="6000040000" head="603100000000" type="0200" channel="shenxin" id="shenxin-0200">
+      	<field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="000000"></field>
+      	<field index="4" required="true"  ></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="22" required="true"  ></field>
+      	<field index="23"   ></field>
+      	<field index="25" required="true"  value="00"></field>
+      	<field index="26" required="true"   value="06"></field>
+      	<!-- <field index="32" required="true" value="00000022" ></field> -->
+      	<field index="32" required="true" value="00000081" ></field>
+      	<field index="35" required="true"  ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="49" required="true"  value="156" ></field>
+      	<field index="52" required="true"  ></field>
+      	<field index="53" required="true"  value="2600000000000000"></field>
+      	<field index="55"   ></field>
+      	<field index="60" required="true"  value="2200000100050"></field>
+      	<field index="64" required="true"  ></field>
+      </message>  
+      <message tpdu="6000040000" head="603100000000" type="0210" channel="shenxin" id="shenxin-0210">
+      </message>
+      <message tpdu="6000040000" head="603100000000" type="0400" channel="shenxin" id="shenxin-0400">
+      	<field index="2" required="true" ></field>
+      	<field index="3" required="true" value="000000"></field>
+      	<field index="4" required="true" ></field>
+      	<field index="11" required="true" ></field>
+      	<field index="22" required="true" ></field>
+      	<field index="23" ></field>
+      	<field index="25" required="true" value="00"></field>
+      	<!-- <field index="32" required="true" value="00000022" ></field> -->
+      	<field index="32" required="true" value="00000081" ></field>  	
+      	<field index="39" required="true" value="98" ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="49" required="true"  value="156" ></field>
+      	<field index="55" ></field>
+      	<field index="60" required="true"  value="2200000100050"></field>
+      	<field index="64" required="true"  ></field>
+      </message>  
+      <message  tpdu="6000040000" head="603100000000" type="0410" channel="shenxin" id="shenxin-0410">
+      </message>
+      
+      <!-- jidian -->
+      <message  tpdu="6000000000" head="600100000000" type="0200" channel="jidian" id="jidian-0200">
+      	<field index="2" required="true"  ></field>
+      	<field index="3" required="true"  value="190000"></field>
+      	<field index="4" required="true"  ></field>
+      	<field index="11" required="true"  ></field>
+      	<field index="12" required="true"  ></field>
+      	<field index="13" required="true"  ></field>
+      	<field index="14"   ></field>
+      	<field index="22" required="true"  ></field>
+      	<field index="23"   ></field>
+      	<field index="25" required="true"  value="82"></field>
+      	<field index="32" required="true"  ></field>
+      	<field index="35"   ></field>
+      	<field index="41" required="true"  ></field>
+      	<field index="42" required="true"  ></field>
+      	<field index="48" required="true"  ></field>
+      	<field index="49" required="true"  value="156" ></field>
+      	<field index="52"  ></field>
+      	<field index="55"   ></field>
+      	<field index="60"   ></field>
+      	<field index="64" required="true"  ></field>
+      </message>  
+      <message  tpdu="6000000000" head="600100000000" type="0210" channel="jidian" id="jidian-0210">
+      </message>
+</midai>

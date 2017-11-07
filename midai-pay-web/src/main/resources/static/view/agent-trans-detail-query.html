@@ -1,0 +1,217 @@
+<div class="container-fluid">
+   <!--交易查询管理-代理商交易明细 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>查询条件录入</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="agentTransForm"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">流水号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="hostTransSsn"  class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户小票号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mchntCodeIn"  class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">设备号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="deviceNoIn"  class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">交易状态</label>
+                                    <div class="col-md-8">
+                                        <select name="transStatus" class="form-control">
+                                            <option value="">请选择</option>
+                                            <option value="0">成功</option>
+                                            <option value="5">失败</option>
+                                            <option value="1">已上传</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">交易类型</label>
+                                    <div class="col-md-8">
+                                        <select name="transCode"  class="form-control">
+                                            <option value="">请选择</option>
+                                            <option value="0200">消费</option>
+                                            <option value="0400">消费冲正</option>
+                                            <!-- <option value="2">余额查询</option>
+                                            <option value="3">提现申请</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">银行卡号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="transCardNo"  class="form-control"  maxlength="19">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">交易日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="transTimeBegin"  class="form-control"  maxlength="20">
+                                                <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="transTimeEnd"  class="form-control"  maxlength="20">
+                                                <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mchntName"  class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">大商户号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mchntCodeOut"  class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">金额范围</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="transAmtBegin"  class="form-control"  maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="transAmtEnd"  class="form-control"  maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户手机号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mobile"  class="form-control"  maxlength="11">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">通道机构</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="routInstIdCd"  class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="emptyATBtn">
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="searchATBtn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>代理商交易明细</h4></div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding">
+                            <button class="btn btn-success pull-right" id="downATbtn">Excel下载</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-hover table-bordered" id="agentTransTable"
+                        data-toggle="table" data-query-params="searchATData" style="table-layout:fixed"
+                        data-url="../dealtotal/agentList" data-pagination="true"
+                        data-side-pagination="server" data-page-size="10"
+                        data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                            <tr>
+                                <th data-width="120px" data-field="hostTransSsn" data-align="left">流水号</th>
+                                <th data-width="70px" data-field="respCdLoc" data-align="left">返回码</th>
+                                <th data-width="180px" data-field="respCdLocDsp" data-align="left">返回信息</th>
+                                <th data-width="180px" data-field="mchntCodeOut" data-align="left">大商户号</th>
+                                <th data-width="180px" data-field="mchntCodeIn" data-align="left">商户小票号</th>
+                                <th data-width="220px" data-field="mchntName" data-align="left">商户名称</th>
+                                <th data-width="120px" data-field="mobile" data-align="left">商户手机号</th>
+                                <th data-width="180px" data-field="deviceNoIn" data-align="left">终端号</th>
+                                <th data-width="180px" data-field="transTime" data-align="left">交易时间</th>
+                                <th data-width="100px" data-field="transAmt" data-align="left">交易金额</th>
+                                <th data-width="200px" data-field="transCardNo" data-align="left">银行卡号</th>
+                                <th data-width="100px" data-field="cardIssName" data-align="left">发卡行</th>
+                                <th data-width="80px" data-field="cardKind" data-align="left" data-formatter="historyCardType">卡类型</th>
+                                <th data-width="110px" data-field="cardIssId" data-align="left">发卡行编号</th>
+                                <th data-width="100px" data-field="transCode" data-align="left" data-formatter="transType">交易类型</th>
+                                <!-- <th data-width="100px" data-field="specialFeeType" data-align="left">商户类型</th> -->
+                                <th data-width="100px" data-field="transStatus" data-align="left" data-formatter="transStatus">交易状态</th>
+                                <th data-width="120px" data-field="routInstIdCd" data-align="left">通道机构</th>
+                                <th data-width="220px" data-field="agentId" data-align="left">代理商编号</th>
+                                <th data-width="200px" data-field="agentName" data-align="left">代理商名称</th>
+                                <th data-width="200px" data-field="mchntSingleFee" data-align="left">提现手续费(固定值)元</th>
+                            <!--     <th data-width="200px" data-field="instFeeMax" data-align="left">结算手续费（封顶值）%</th> -->
+                                <th data-width="100px" data-field="mchntRate" data-align="left">商户扣率(%)</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--交易查询管理-代理商交易明细 end-->
+</div>
+
+
+<script type="text/javascript" src="js/zd-manage/agent-trans-detail-query.js"></script>

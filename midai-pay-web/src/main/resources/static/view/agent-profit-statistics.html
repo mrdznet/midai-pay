@@ -1,0 +1,192 @@
+<!-- 自动打款页面 -->
+<div class="container-fluid">
+    <!--清算管理-自动打款 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>请选择查询条件</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="agent_profit_static_form"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商编号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="agentId" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="agentName" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户等级</label>
+                                    <div class="col-md-8">
+                                        <select name="flag" class="form-control">
+                                            <option value="0">本级</option>
+                                            <option value="1">所有下级</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">提现日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="settlementTimeStart" class="form-control" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="settlementTimeEnd" class="form-control" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="agent_profit_remove">
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="agent_profit_search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-2 no-padding">
+                        <h4><i class="icon-list"></i>查询结果</h4>
+                    </div>
+                    <div class="col-md-2 no-padding" style="margin-top: 5px;">
+                        <h5>交易总笔数：<strong id="transCount"></strong> 笔</h5>
+                    </div>
+                    <div class="col-md-2 no-padding" style="margin-top: 5px;">
+                        <h5>总利润：<strong id="profitTotalAmount"></strong> 元</h5>
+                    </div>
+                    <div class="col-md-2 no-padding" style="margin-top: 5px;">
+                        <h5>总净利润：<strong id="profitRetainedAmount"></strong> 元</h5>
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="agent_profit_static_down">报表下载</button>
+                        </div>
+                        <div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="agent_profit_more" style="margin-right: 20px;">批量分润</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table" id="profitTable"
+                           data-toggle="table"
+                           data-url="/agentprofit/statistics/paginate" data-query-params="profitSearch" data-pagination="true"
+                           data-side-pagination="server" data-page-size="10"
+                           data-pagination-first-text="First"
+                           data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                           data-pagination-loop="false" data-row-style="changeSettltmentPayStyle"
+                           data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                        <tr>
+                            <th data-field="" data-checkbox="true"></th>
+                            <th data-field="settlementTime"  data-align="left">清算日期</th>
+                            <th data-field="agentId" data-align="left"  data-formatter="age">代理商编号</th>
+                            <th data-field="parentAgentId" data-align="left"  data-formatter="age2">父代理商编号</th>
+                            <th data-field="transCount" data-align="left">交易笔数</th>
+                            <th data-field="transAmt" data-align="left">交易金额（元）</th>
+                            <th data-field="profitTotal" data-align="left">总利润（元）</th>
+                            <th data-field="profit" data-align="left">本级分润（元）</th>
+                            <th data-field="profitOut" data-align="left">本级已发利润（元）</th>
+                            <th data-field="profitSubOut" data-align="left">下级已发利润（元）</th>
+                            <th data-field="" data-align="left" data-formatter="agentDetailUpdata">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--清算管理-自动打款 end-->
+</div>
+<script type="text/temp" id="agentDetailUpdata">
+
+</script>
+<!--分润- start-->
+<div class="modal fade" id="agernt_profit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog sm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center">确认分润</h4>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="modal-delete-text text-center" style="margin-top: 50px;margin-bottom: 50px;">
+                    是否确认分润至代理商
+                </h3>
+                <span id="profit_agentid" style="display: none"></span>
+                <span id="profit_settlementTime" style="display: none"></span>
+                <span id="profit_code" style="display: none"></span>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-success confirm-btn" id="agent_profit_btn">确&nbsp;&nbsp;定</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--分润 end-->
+<!--批量分润- start-->
+<div class="modal fade" id="agernt_profit_modal_ids" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog sm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center">确认分润</h4>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="modal-delete-text text-center" style="margin-top: 50px;margin-bottom: 50px;">
+                    是否确认分润至代理商
+                </h3>
+                <sapn id="ids_box"></sapn>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-success confirm-btn" id="agent_profit_btn_ids">确&nbsp;&nbsp;定</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--批量分润-->
+<script type="text/javascript" src="js/zd-manage/agent-profit-statics.js"></script>

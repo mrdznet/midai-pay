@@ -1,0 +1,661 @@
+<div class="container-fluid">
+    <form class="form-horizontal row-border" method="post" role="form" id="merchant-deduction-rate-form">
+
+        <!--刷卡成本信息-->
+        <input type="hidden" id="deductionRate_MercNo" name="agentNo" class="form-control required url">
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    刷卡成本信息
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">借记卡手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" name="swingCardDebitRate">
+
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">贷记卡手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if swingCardCreditRate}}
+                                     <input type="text" class="form-control" name="swingCardCreditRate"
+                                            placeholder="{{swingCardCreditRate}}">
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="swingCardCreditRate">
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if swingCardSettleFee}}
+                                     <input type="text" class="form-control" name="swingCardSettleFee"
+                                            placeholder="{{swingCardSettleFee}}">
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="swingCardSettleFee">
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!--无卡成本信息（借贷记一致）-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    无卡成本信息（借贷记一致）
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">无卡手续费<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control noCard_One" name="nonCardRate">
+
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--传统POS成本信息（借记卡封顶费率及成本与手刷相同）-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    传统POS成本信息
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--  {{#if posDebitRate}}
+                                      <input type="text" name="posDebitRate" class="form-control"
+                                             placeholder="{{posDebitRate}}">
+                                      {{else}}-->
+                                    <input type="text" name="posDebitRate" class="form-control">
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if posCreditRate}}
+                                     <input type="text" class="form-control" name="posCreditRate"
+                                            placeholder="{{posCreditRate}}">
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="posCreditRate">
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--{{#if posSettleFee}}
+                                    <input type="text" class="form-control" name="posSettleFee"
+                                           placeholder="{{posSettleFee}}">
+                                    {{else}}-->
+                                    <input type="text" class="form-control" name="posSettleFee">
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--扫码成本信息（借贷记一致）-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    扫码成本信息（借贷记一致）
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">微信手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" name="scanCodeWxRate" class="form-control">
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">支付宝手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" name="scanCodeZfbRate" class="form-control">
+                                    <!--{{/if}}-->
+
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">银联扫码手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" name="scanCodeYlRate">
+
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="submit" value="确认" class="btn btn-success pull-right">
+                    <input type="button" value="取消" class="btn btn-default pull-right" id="">
+                </div>
+            </div>
+        </div>
+
+
+        <!--分润比率-->
+        <!--<div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    分润比率
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">m-pos分润比例<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" name="profitMpos" class="form-control">
+
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">无卡分润比例<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" name="profitNoCard" class="form-control">
+
+
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">大pos分润比例<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" name="profitTerminalPos">
+
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">扫码分润比例<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" name="profitScanCode">
+
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="确认" class="btn btn-success pull-right">
+                    <input type="button" value="取消" class="btn btn-default pull-right" id="">
+                </div>
+
+            </div>
+        </div>-->
+
+    </form>
+</div>
+<script>
+    var agent_up =null;
+    var rateForm=$("#merchant-deduction-rate-form");
+    $.ajax({
+//        url: "/agent/getInsertInfo",
+        url: "/agent/templet/getCustomerTemplet",
+        method: 'get',
+        async:false,
+        success: function (res) {
+            $.each(res, function (i, n) {
+                if (res[i] == null) {
+                    res[i] = 0;
+                }
+            });
+                //为费率赋值
+            rateForm.find($("input[name='swingCardDebitRate']")).val(res.swingCardDebitRate);
+            rateForm.find($("input[name='swingCardCreditRate']")).val(res.swingCardCreditRate);
+            rateForm.find($("input[name='swingCardSettleFee']")).val(res.swingCardSettleFee);
+            rateForm.find($("input[name='nonCardRate']")).val(res.nonCardRate);
+
+
+            rateForm.find($("input[name='posDebitRate']")).val(res.posDebitRate);
+            rateForm.find($("input[name='posCreditRate']")).val(res.posCreditRate);
+            rateForm.find($("input[name='posSettleFee']")).val(res.posSettleFee);
+            rateForm.find($("input[name='scanCodeWxRate']")).val(res.scanCodeWxRate);
+            rateForm.find($("input[name='scanCodeZfbRate']")).val(res.scanCodeZfbRate);
+            rateForm.find($("input[name='scanCodeYlRate']")).val(res.scanCodeYlRate);
+
+
+        }
+    });
+
+    //----------------------------------
+    $.ajax({
+       // url: "/agent/templet/updateCustomerTemplet",//更新的接口，参数字段：customerTempletVo
+//        url: "/agent/templet/getCustomerTemplet",//获取的接口
+        url: "/agent/getInsertInfo",
+        method: 'get',
+        async:false,
+        success: function (res) {
+
+            $("#deductionRate_MercNo").val(res.agentNo);
+                $.each(res, function (i, n) {
+                    if (res[i] == null) {
+                        res[i] = 0;
+                    }
+                });
+                //为费率赋值
+            rateForm.find($("input[name='swingCardDebitRate']")).attr("placeholder","请输入"+res.swingCardDebitRate+"~100之间的数值！");
+            rateForm.find($("input[name='swingCardCreditRate']")).attr("placeholder","请输入"+res.swingCardCreditRate+"~100之间的数值！");
+            rateForm.find($("input[name='swingCardSettleFee']")).attr("placeholder","请输入不小于"+res.swingCardSettleFee+"的数值！");
+            rateForm.find($("input[name='nonCardRate']")).attr("placeholder","请输入"+res.nonCardCreditRate+"~100之间的数值！");
+
+
+            rateForm.find($("input[name='posDebitRate']")).attr("placeholder","请输入"+res.posDebitRate+"~100之间的数值！");
+            rateForm.find($("input[name='posCreditRate']")).attr("placeholder","请输入"+res.posCreditRate+"~100之间的数值！");
+            rateForm.find($("input[name='posSettleFee']")).attr("placeholder","请输入不小于"+res.posSettleFee+"的数值！");
+            rateForm.find($("input[name='scanCodeWxRate']")).attr("placeholder","请输入"+res.scanCodeWxRate+"~100之间的数值！");
+            rateForm.find($("input[name='scanCodeZfbRate']")).attr("placeholder","请输"+res.scanCodeZfbRate+"~100之间的数值！");
+            rateForm.find($("input[name='scanCodeYlRate']")).attr("placeholder","请输入"+res.scanCodeYlRate+"~100之间的数值！");
+              //  $("input[name='profitMpos']").val(res.profitMpos).attr("placeholder","请输入"+res.profitMpos+"~100之间的数值！");
+//                $("input[name='profitNoCard']").val(res.profitNoCard).attr("placeholder","请输入"+res.profitNoCard+"~100之间的数值！");
+//                $("input[name='profitTerminalPos']").val(res.profitTerminalPos).attr("placeholder","请输入"+res.profitTerminalPos+"~100之间的数值！");
+//                $("input[name='profitScanCode']").val(res.profitScanCode).attr("placeholder","请输入"+res.profitScanCode+"~100之间的数值！");
+
+            agent_up=res;
+
+        }
+    });
+    var rateForm=$("#merchant-deduction-rate-form");
+    $(function(){
+        rateForm.formValidation({ //开始表单验证
+            message: '此值无效', //此值无效
+            excluded: ["#paramsYybName", "#directorUserName", "#ywzgName", ":disabled"],
+            icon: {
+                valid: 'glyphicon',
+                invalid: 'glyphicon'
+            },
+            fields: {
+                "swingCardDebitRate": {//借记卡手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.swingCardDebitRate,
+                            max:100,
+                            message:"请输入"+agent_up.swingCardDebitRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+                "swingCardCreditRate": {//贷记卡手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.swingCardCreditRate,
+                            max:100,
+                            message:"请输入"+agent_up.swingCardCreditRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+                "swingCardSettleFee": {//交易结算手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.swingCardSettleFee,
+                            max:10000000000,
+                            message:"请输入不小于"+agent_up.swingCardSettleFee+"的数值！"
+                        },
+                        regexp : {
+                            regexp :/^\d+(?:\.\d{1,2})?$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+                "posSettleFee": { //交易结算手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.posSettleFee,
+                            max:10000000000,
+                            message:"请输入不小于"+agent_up.posSettleFee+"的数值！"
+                        },
+                        regexp : {
+                            regexp : /^\d+(?:\.\d{1,2})?$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+
+                //无卡成本信息（借贷记一致）、
+                "nonCardRate": {//无卡手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.nonCardCreditRate,
+                            max:100,
+                            message:"请输入不小于"+agent_up.nonCardCreditRate+"的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+
+                // 传统POS成本信息
+                "posDebitRate": { //借记卡手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.posDebitRate,
+                            max:100,
+                            message:"请输入"+agent_up.posDebitRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+                "posCreditRate": { //贷记卡手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.posCreditRate,
+                            max:100,
+                            message:"请输入"+agent_up.posCreditRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+                //扫码成本信息（借贷记一致）
+
+                "scanCodeWxRate": { //微信手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.scanCodeWxRate,
+                            max:100,
+                            message:"请输入"+agent_up.scanCodeWxRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+
+                "scanCodeZfbRate": { //支付宝手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.scanCodeZfbRate,
+                            max:100,
+                            message:"请输入"+agent_up.scanCodeZfbRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },
+
+                "scanCodeYlRate": { //银联扫码手续费
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.scanCodeYlRate,
+                            max:100,
+                            message:"请输入"+agent_up.scanCodeYlRate+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                }
+
+                // 分润比率
+
+             /*   "profitMpos": { //m-pos分润比例
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.profitMpos,
+                            max:100,
+                            message:"请输入"+agent_up.profitMpos+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },*/
+             /*   "profitNoCard": { //无卡分润比例
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.profitNoCard,
+                            max:100,
+                            message:"请输入"+agent_up.profitNoCard+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },*/
+              /*  "profitTerminalPos": { //大pos分润比例
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.profitTerminalPos,
+                            max:100,
+                            message:"请输入"+agent_up.profitTerminalPos+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                },*/
+              /*  "profitScanCode": { //扫码分润比例
+                    group: '.form-group',
+                    validators: {
+                        notEmpty: {
+                            message: '此处不能为空！'
+                        },
+                        between:{
+                            min:agent_up.profitScanCode,
+                            max:100,
+                            message:"请输入"+agent_up.profitScanCode+"~100之间的数值！"
+                        },
+                        regexp : {
+                            regexp : /^(((\d|[1-9]\d)(\.\d{1,2})?)|100|100.0|100.00)$/,
+                            message : '数值必须为0-100可带2位小数'//0-100数值输入。可带两位小数，且不能为0 way2
+                        }
+                    }
+                }*/
+            }
+        })
+                .on('err.validator.fv',
+                        function (e, data) {
+                            e.preventDefault();
+                            data.element.data('fv.messages')
+                                    .find('.help-block[data-fv-for="' + data.field + '"]').hide()
+                                    .filter('[data-fv-validator="' + data.validator + '"]').show();
+                })
+                .on('success.form.fv',
+                function (e, data) {
+                    e.preventDefault();
+
+                    rateForm.find('[type="submit"]').addClass('disabled').prop("disabled", true);
+
+                    showLoading();
+                    UTIL.submitForm({
+                        form: "#merchant-deduction-rate-form",
+                        url: "/agent/templet/updateCustomerTemplet",
+                        success: function () {
+                            hideLoading();
+                            UTIL.autoDisappearSwal("修改成功!", function () {
+                                UTIL.closeCurrentPage({
+                                    delUrl: "merchant-deduction-rate.html",
+                                    toUrl: "merchant-query.html"
+                                });
+                            })
+                        }
+                    })
+                })
+    })
+</script>

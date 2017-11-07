@@ -1,0 +1,1385 @@
+
+
+<script type="text/tmpl" id="optionTmplReview">
+					<option data-code="{{id}}" data-value="{{name}}">{{name}}</option>
+</script>
+<script type="text/tmpl" id="cityTmplReview">
+					<option data-code="{{code}}" data-father="{{father}}" >{{name}}</option>
+</script>
+<script type="text/tmpl" id="bankTmpl">
+	<option data-code="{{bankcode}}" data-shortcode="{{shortcode}}" data-value="{{showname}}" value="{{bankcode}}">{{showname}}</option>
+</script>
+
+
+<div class="container-fluid">
+    <form class="form-horizontal row-border" method="post" role="form" id="customer-riskMpos-form-review">
+
+        <input type="hidden" name="taskId" id="current_Id">
+        <!--{{!第一个widget box 商户基本信息，注：此类为handlebars特有注释，勿动}}-->
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    商户基本信息
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">所属代理商<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="parentAgentName" name="customer.agentName" readonly>
+                                    <input type="hidden" class="form-control" id="parentAgentId" name="customer.agentId">
+                                    <span class="input-group-addon btn bg-green"  style="cursor: not-allowed;">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">商户名称<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="customer.mercName" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">商户简称<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="customer.mercNameShort" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--{{!第二个widget box 商户附加信息}}-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    商户附加信息
+                </h4>
+            </div>
+            <div class="widget-content" style="padding-top:15px;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">商户所属行业<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <select name="customer.industry" id="M_risk_HangYe_Top" class="form-control required" readonly>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">商户类别(MCC)<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <select name="customer.mcc" id="M_risk_HangYe_Second" class="form-control required" readonly>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">商户所属地址<span class="required">*</span></label>
+                            <div class="col-md-10">
+                                <input type="text" name="customer.address" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">商户营业执照号<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <input type="text" name="customer.businessLicense" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">法人姓名<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <input type="text" name="customer.legalName" class="form-control" maxlength="20" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">法人手机号<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <input type="text" name="customer.mobile" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">身份证号码<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <input type="text" name="customer.idCard" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row hideLoop">
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">商户经营地址<span
+                                class="required">*</span></label>
+                            <div class="col-md-8">
+                                <select name="customer.peovinceId" id="M_risk_province" class="form-control required" readonly>
+                                    <option value="0">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label"></label>
+                            <div class="col-md-11">
+                                <select name="customer.cityId" id="M_risk_city" class="form-control required" readonly>
+                                    <option value="0">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label"></label>
+                            <div class="col-md-11">
+                                <select name="customer.areaCode" id="M_risk_area" class="form-control required" readonly>
+                                    <option value="0">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label"></label>
+                            <div class="col-md-11">
+                                <input type="text" name="customer.businessAddress" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">结算开户行名称<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <select id="merchantNewBankId" class="form-control required" name="customer.bankId" readonly></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">开户支行名称<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" name="customer.branchbankName" class="form-control required" id="M_risk_branchBank_content" readonly/>
+                                    <input type="hidden" id="M_risk_merchantNewBranchbankId" name="customer.branchbankId"
+                                           class="form-control"/>
+                                                    <span class="input-group-addon bg-green btn" data-toggle="modal" style="cursor: not-allowed;"><span
+                                                            class="glyphicon glyphicon-search"></span></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">结算账户名称<span
+                                class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="customer.accountName" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">结算账户账号<span
+                                class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="customer.accountNo" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        商户资质附件
+                    </div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-1" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-1" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-1"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-1" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-1" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[0].type" value="1">
+                                <input type="hidden" name="imgs[0].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span class="certificate-picture">营业执照</span>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-2" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-2" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-2"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-2" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-2" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[1].type" value="2">
+                                <input type="hidden" name="imgs[1].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">税务登记证</span>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-3" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-3" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-3"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-3" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-3" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[2].type" value="3">
+                                <input type="hidden" name="imgs[2].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">银行卡正面</span>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-4" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-4" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-4"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-4" class="showbtu" value="上传">
+                                <input type="button" id="review-acc-download-4" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[3].type" value="4">
+                                <input type="hidden" name="imgs[3].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">组织机构代码证</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-5" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-5" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-5"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-5" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-5" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[4].type" value="5">
+                                <input type="hidden" name="imgs[4].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">法人证件正面照</span>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-6" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-6" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-6"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-6" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-6" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[5].type" value="6">
+                                <input type="hidden" name="imgs[5].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">法人证件背面照</span>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-7" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-7" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-7"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-7" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-7" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[6].type" value="7">
+                                <input type="hidden" name="imgs[6].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">法人手持照片或场地照片</span>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="upImgs" data-showmodal="M_risk_review-showImg-madal" data-readonly="true">
+                            <div class="main-div">
+                                <a id="Nrisk-acc-del-8" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                <a id="Nrisk-acc-show-8" class="show-btu show-normal" href="javascript:void(0);"></a>
+                                <div>
+                                    <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+                                </div>
+                                <input type="file" id="Nrisk-upload-file-8"  class="file image-input">
+                                <input type="button" id="Nrisk-acc-upload-8" class="showbtu" value="上传">
+                                <input type="button" id="Nrisk-acc-download-8" class="downloadbtn" value="下载">
+                                <input type="hidden" name="imgs[7].type" value="8">
+                                <input type="hidden" name="imgs[7].url" class="fileUrl" value="">
+                                <div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="certificate-picture">协议</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--{{!第三个widget box 刷卡成本信息}}-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    刷卡成本信息
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">借记卡手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--{{#if swingCardDebitRate}}
+                                    <input type="text" class="form-control" name="customer.swingCardDebitRate"
+                                           placeholder="{{swingCardDebitRate}}">
+                                    {{else}}-->
+                                    <input type="text" class="form-control" name="customer.swingCardDebitRate" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">贷记卡手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if swingCardCreditRate}}
+                                     <input type="text" class="form-control" name="customer.swingCardCreditRate"
+                                            placeholder="{{swingCardCreditRate}}">
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="customer.swingCardCreditRate" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if swingCardSettleFee}}
+                                     <input type="text" class="form-control" name="customer.swingCardSettleFee"
+                                            placeholder="{{swingCardSettleFee}}">
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="customer.swingCardSettleFee" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!--{{!第四个widget box 无卡成本信息（借贷记一致）}}-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    无卡成本信息（借贷记一致）
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">无卡手续费<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--{{#if nonCardCreditRate}}
+                                    <input type="text" class="form-control noCard_One" name="customer.nonCardCreditRate" placeholder="{{nonCardCreditRate}}">
+                                    {{else}}-->
+                                    <input type="text" class="form-control noCard_One" name="customer.nonCardCreditRate" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--{{!第二个无卡手续费，已被隐藏}}-->
+                    <div class="col-md-3 hide">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">无卡手续费2<span class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--{{#if nonCardDebitRate}}
+                                    <input type="text" class="form-control noCard_Copy" name="customer.nonCardDebitRate"
+                                           placeholder="{{nonCardDebitRate}}">
+                                    {{else}}-->
+                                    <input type="text" class="form-control noCard_Copy" name="customer.nonCardDebitRate" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--{{!第五个widget box 传统POS成本信息（借记卡封顶费率及成本与手刷相同）}}-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    传统POS成本信息
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--  {{#if posDebitRate}}
+                                      <input type="text" name="customer.posDebitRate" class="form-control"
+                                             placeholder="{{posDebitRate}}">
+                                      {{else}}-->
+                                    <input type="text" name="customer.posDebitRate" class="form-control" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if posCreditRate}}
+                                     <input type="text" class="form-control" name="customer.posCreditRate"
+                                            placeholder="{{posCreditRate}}">
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="customer.posCreditRate" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+                                class="required">*</span></label>
+
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--{{#if posSettleFee}}
+                                    <input type="text" class="form-control" name="customer.posSettleFee"
+                                           placeholder="{{posSettleFee}}">
+                                    {{else}}-->
+                                    <input type="text" class="form-control" name="customer.posSettleFee" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--{{!第六个widget box 扫码成本信息（借贷记一致）}}-->
+
+        <div class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-role-list-small"></i>
+                    扫码成本信息（借贷记一致）
+                </h4>
+            </div>
+
+            <div class="widget-content">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">微信手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!--{{#if scanCodeWxRate}}-->
+                                    <!--<input type="text" name="customer.scanCodeWxRate" class="form-control"-->
+                                    <!--placeholder="{{scanCodeWxRate}}">-->
+                                    <!--{{else}}-->
+                                    <input type="text" name="customer.scanCodeWxRate" class="form-control" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">支付宝手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if scanCodeZfbRate}}
+                                     <input type="text" name="customer.scanCodeZfbRate" class="form-control"
+                                            placeholder="{{scanCodeZfbRate}}">
+                                     {{else}}-->
+                                    <input type="text" name="customer.scanCodeZfbRate" class="form-control" readonly>
+                                    <!--{{/if}}-->
+
+                                    <span class="input-group-addon">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">银联扫码手续费<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- {{#if scanCodeYlRate}}
+                                     <input type="text" class="form-control" name="customer.scanCodeYlRate"
+                                            placeholder="{{scanCodeYlRate}}">
+
+                                     {{else}}-->
+                                    <input type="text" class="form-control" name="customer.scanCodeYlRate" readonly>
+                                    <!--{{/if}}-->
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--{{!最后一个weideg box table表格 不做表单验证}}-->
+
+
+        <div class="widget box">
+            <div class="widget-header">
+                <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>手机商户设备表</h4></div>
+                <div class="col-md-8 no-padding">
+
+                </div>
+            </div>
+            <div class="widget-content no-padding">
+
+                <table data-toggle="table" id="edit-device-list"
+                       class="table table-striped table-checkable table-hover table-bordered"
+                       data-query-params="deviceListQuery"
+                       data-url="/customer/loadCustomerDevice.json"
+                       data-method="post">
+
+                    <thead>
+                    <tr>
+                        <th data-field="" data-align="center"
+                            data-checkbox="true"><input type="checkbox"
+                                                        data-toggle="checkbox" class="uniform"/>
+                        </th>
+                        <th data-field="deviceNo" data-align="left">机身号</th>
+                        <th data-field="createTime" data-align="left">创建时间</th>
+                        <th data-field="isFirst" data-align="left" data-formatter="firstSelectUpdate">首选项</th>
+                        <th data-field="typeName" data-align="left">设备类型</th>
+                        <th data-field="modeName" data-align="left">设备名称</th>
+                    </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+
+
+        <!--初审的审核意见-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4>
+                            <i class="icon-form"></i>审核意见
+                        </h4>
+                    </div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">审核结果</label>
+                                    <div class="col-md-8">
+                                        <label class="radio-inline"><input type="radio" class="uniform" name="review.reviewResult" value="1" checked  disabled>同意</label>
+                                        <label class="radio-inline"><input type="radio" class="uniform" name="review.reviewResult" value="0" disabled>退回</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户状态<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <select name="customer.opstate" class="form-control" readonly="">
+                                            <option value="1">开通</option>
+                                            <option value="0">关闭</option>
+                                            <option value="2">冻结</option>
+                                            <option value="3">黑名单</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户渠道<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <select name="customer.channel" class="form-control" readonly="">
+
+                                            <option value="1">大pos</option>
+                                            <option value="2">M-pos</option>
+                                            <option value="0">无卡</option>
+
+                                            <option value="3">智能-pos</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">商户通道</label>
+                                    <input type="hidden" name="instCode" id="checkBoxVal">
+                                    <div class="col-md-11" id="N_risk_custom_tongdao">
+                                        <!--<label class="radio-inline"><input type="checkbox" class="uniform" name="" value="1" checked>全通道</label>-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <input type="hidden" name="customer.opstate" value="1" />
+                            <!--                                     <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户状态<span class="required">*</span> </label>
+                                    <div class="col-md-8">
+                                        <select name="customer.opstate" class="form-control">
+                                            <option value="1">开通</option>
+                                            <option value="0">关闭</option>
+                                            <option value="2">冻结</option>
+                                            <option value="3">黑名单</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">审核意见</label>
+                                    <div class="col-md-11">
+                                        <input type="hidden" id="customer_MercNo" name="customer.mercNo">
+
+                                        <textarea readonly class="form-control required url cs_advice" name="review.advice" rows="6" style="resize: none;" maxlength="200"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="clearfix"></div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <form class="form-horizontal row-border" method="post" role="form" id="customer_second_review_form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget box">
+                        <div class="widget-header"><h4><i class="icon-form"></i>风控意见</h4></div>
+                        <div class="widget-content">
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">审核结果<span class="required">*</span> </label>
+                                        <div class="col-md-8">
+                                            <label class="radio-inline">
+
+                                                <input type="hidden" id="secondReview_mercNo" name="mercNo"  class="form-control required">
+
+                                                <input type="radio" class="uniform reviewResult" name="reviewResult"
+                                                       value="0" checked>同意</label>
+                                            <label class="radio-inline">
+                                                <input type="radio" class="uniform reviewResult" name="reviewResult"
+                                                       value="1" >退回</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">商户风险等级</label>
+                                        <div class="col-md-8">
+                                            <select name="customerLevel" class="form-control" id="M_risk_level_risk">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="col-md-1 control-label">审核意见</label>
+                                        <div class="col-md-11">
+                                            <textarea type="text" id="advice" name="advice"  class="form-control required" rows="5" style="resize: none;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <p class="form-actions">
+                                <input type="submit" value="确认" id="customer_fs_confirm_btn" class="btn btn-success pull-right">
+                                <input type="button" value="取消" id="M_customer_fs_cancel_btn" class="btn btn-default pull-right">
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- {{!底部的提交按钮}}-->
+        <!--  <div class="row">
+              <ul class="pager">
+                  <li>
+                      <input type="button" class="btn btn-primary sh_btn" value="取消">
+                      <input type="submit" class="btn btn-primary sh_btn" value="确认">
+                  </li>
+              </ul>
+          </div>-->
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 图片预览模态框 -->
+<div class="modal fade" id="M_risk_review-showImg-madal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center imgTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-pic-review">
+                    <img src="" width="100%" height="100%" style="width: 500px;height: 500px;">
+                    <input type="button" class="rotateImg" placeholder="顺时针旋转90°" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 新增模态框结束 -->
+
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script><script>
+
+    //获取当前页面的参数
+    var review_args = UTIL.readUrlData({"currentUrl" : "merchant-riskNormal-apply.html"});
+    var review_mercNo = review_args["mercNo"];
+    var review_agentId = review_args["agentId"];
+
+    var current_taskId=review_args["taskId"];
+    var $form=$("#customer-riskMpos-form-review");
+
+    var city_code=null;
+    var area=null;
+    var custom_Mcc=null;
+    var custom_industry=null;//商户所属行业-top
+    var custom_mcc=null;//商户所属行业mcc
+    var bank_bankId=null;//结算开户行名称
+    var bank_branchbankName=null;//开户支行名称
+    var area2=null;
+    // 页面加载的时候先拿到数据
+
+
+    $.ajax({
+        url: "/inst/allInst",
+        method: 'get',
+        async:false,
+        success: function (res) {
+
+            $.each(res,function(i,v){
+                $("#N_risk_custom_tongdao").append('<label class="radio-inline"><input disabled type="checkbox" class="uniform" name="" value="'+res[i].instCode+'">'+res[i].instName+'</label>');
+            })
+        }
+    });
+
+    var N_risk_tongdao_CheckBox=$("#N_risk_custom_tongdao").find("input[type='checkbox']");
+
+
+    $.ajax({
+        type:'get',
+        url:"/customer/find/"+review_mercNo+".json",
+        async: false,
+        success:function(res){
+
+            console.log(res.customer);
+            city_code=res.customer.peovinceId;
+            area=res.customer.cityId;
+            area2=res.customer.areaCode;
+
+            custom_industry=res.customer.industry;
+            custom_mcc=res.customer.mcc;
+            bank_bankId=res.customer.bankId;
+            bank_branchbankName=res.customer.branchbankName;
+
+            if(res.instCode){
+                var N_risk_Arr=res.instCode.split(",");
+
+                $.each(N_risk_tongdao_CheckBox,function(k,v){
+
+                    var _this=$(this);
+                    $.each(N_risk_Arr,function(i,v){
+                        if(_this.attr("value")==N_risk_Arr[i]){
+
+                            _this.attr("checked", true);
+                        }
+                    })
+                })
+
+            }
+
+        }
+    });
+
+    // 手机商户设备列表参数
+    function deviceListQuery(argms) {
+        argms.mercNo = review_mercNo || "";
+        return argms;
+    };
+
+
+    //手机商户设备表  ---首选项
+    function firstSelectUpdate(index, row) {
+        var firstSelectList = row.isFirst;
+        if (firstSelectList == "0") {
+            return "否"
+        } else {
+            return "是"
+        }
+    }
+
+    //银行支行模态窗口初始化数据
+    function merchantNewBankBean(argms) {
+        argms.bankcode = $("#merchantNewBankId option:selected").data('shortcode');
+        argms.branchbankcode = $("#bank-apply-modal input[name='boCustomer.branchbankcode']").val().trim() || "";
+        argms.branchbankname = $("#bank-apply-modal input[name='boCustomer.branchbankname']").val().trim() || "";
+        return argms;
+    };
+
+
+
+
+    $('[data-toggle="table"]').bootstrapTable();
+    //点击增加弹出模态框
+
+    //---------------------------------------------------------
+
+    //初始化开户总行名称列表
+    $.ajax({
+        url: "/system/bank/loadAllBank",
+        method: 'post',
+        success: function (res) {
+            var $selectBankList = $form.find('select').filter(
+                    function () {
+                        return ($(this).attr('id') || '').toLowerCase()
+                                        .indexOf('bankid') >= 0;
+                    });
+            $selectBankList.empty();
+            $selectBankList.each(function (index) {
+                for (var i = 0; i < res.length; i++) {
+                    var str = $("#bankTmpl").html();
+                    $(this).append(str.replace(/\{\{code\}\}/g, res[i].bankcode).replace(/\{\{bankcode\}\}/g, res[i].bankcode).replace(/\{\{shortcode\}\}/g, res[i].shortcode).replace(/\{\{showname\}\}/g, res[i].showname));
+                }
+                changeBank($(this));
+                $(this).change(function () {
+                    var $that = $(this);
+                    changeBank($that);
+                });
+            });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("亲，初始化开户总行名称列表出错，请联系管理员！");
+        }
+    });
+
+
+
+    function changeBank($that, success) {
+        var shortcodeCode = $('option:selected', $that).data('shortcode').toString();
+
+        $('#M_risk_branchBank_content').val('');
+        $('#M_risk_merchantNewBranchbankId').val('');
+    }
+    // 初始化table
+    $('[data-toggle="table"]').bootstrapTable();
+
+    //----------------------银行结束
+
+    $("#merchantNewBankId").val(bank_bankId);
+
+    //------------------------------------------------商户所属行业
+    //先请求到数据再填充
+    $.ajax({
+        url:"/system/mcc/loadData/0",
+        type:"get",
+        async:false,
+        dataType:"json",
+        success:function(res){
+
+            $.each(res,function(i,v){
+                if(res[i].id==custom_industry){
+                    $("#M_risk_HangYe_Top").empty();
+                    $("#M_risk_HangYe_Top").append('<option value ='+res[i].id+'>'+res[i].name+'</option>');
+                }
+            })
+
+
+        }
+    });
+
+
+    $.ajax({
+        url:"/system/mcc/loadData/"+custom_industry,
+        type:"get",
+        async:false,
+        dataType:"json",
+        success:function(res){
+
+            $.each(res,function(i,v){
+                if(res[i].id==custom_mcc){
+                    $("#M_risk_HangYe_Second").empty();
+                    $("#M_risk_HangYe_Second").append('<option value ='+res[i].id+'>'+res[i].name+'</option>');
+                }
+
+            })
+        }
+    });
+
+    //----------------------------------------------------------------------------
+
+    //底部改变商户等级
+    $.ajax({
+        url: "/customer/level/all",
+        dataType:"json",
+        type:"get",
+        success:function(res){
+            var str="";
+            $.each(res,function(k,v){
+
+                str+='<option name="customerLevel" value='+res[k].level+'>'+res[k].level+'</option>';
+            })
+            $("#M_risk_level_risk").append(str);
+        }
+    });
+
+
+
+    //-----------------------------------------------------页面加载默先加载省，三级联动start
+    $.ajax({
+        url: "/system/address/loadAllData/0/0",
+        method: 'post',
+        data:"{'type':0,'code':0}",
+        success: function (res) {
+
+            $.each(res,function (i,n){
+                if(res[i].code==city_code){
+                    $("#M_risk_province").empty();
+                    $("#M_risk_province").append('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                }
+            });
+
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("亲，初始化省列表出错，请联系管理员！");
+        }
+    });
+
+
+    $.ajax({
+        url:'/system/address/loadAllData/'+1+'/'+city_code,
+        method: 'post',
+        data:"{'type':0,'code':0}",
+        success: function (res) {
+            var op='';
+            $.each(res,function (i,n){
+                if(res[i].code==area){
+                    $("#M_risk_city").empty();
+                    $("#M_risk_city").append('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                }
+            })
+
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("亲，初始化省列表出错，请联系管理员！");
+        }
+    });
+
+    $.ajax({
+        url:  '/system/address/loadAllData/'+2+'/'+area,
+        method: 'post',
+        data:"{'type':0,'code':0}",
+        success: function (res) {
+
+            var op='';
+            $.each(res,function (i,n){
+                if(res[i].code==area2){
+                    $("#M_risk_area").empty();
+                    $("#M_risk_area").append('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                }
+            })
+
+        },
+        error: function (xhr, textStatus,
+                         errorThrown) {
+            alert("亲，初始化省列表出错，请联系管理员！");
+        }
+    });
+
+
+    //-----------------------------------------------------------
+
+    // 回显更新页面的数据
+    $.ajax({
+        type:'post',
+        url:"/customer/loadSecondReview/"+review_mercNo+".json",
+        success:function(res){
+            $("#customer-riskMpos-form-review").json2form(res);
+            $.each(res.firstRreviewList,function(k,v){
+                if(res.firstRreviewList[k].advice){
+                    $(".cs_advice").eq(k).val(res.firstRreviewList[k].advice)
+                }
+            });
+
+            //遍历拿取图片
+            $("#customer-riskMpos-form-review .upImgs").each(function () {
+                $(this).uploadPreview();
+            });
+        }
+    });
+
+
+    var agent_up = null;
+    //新增代理商身份识别
+    $.ajax({
+        url: "/agent/getInsertInfo",
+        method: 'get',
+        async: false,
+        success: function (res) {
+            if (res.parentAgentName == null) {
+
+            } else {
+
+                $('#parentAgentName').val(res.parentAgentName);
+            }
+//                                $("#handlebar_content").html(custom_Mpos_Html(res));
+            //获取全部代理商信息；
+            $.each(res, function (i, n) {
+                if (res[i] == null) {
+                    res[i] = 0;
+                }
+            })
+            //设置全局保存的数值；
+            agent_up = res;
+        }
+    });
+
+
+    var $form=$("#customer-riskMpos-form-review");
+
+
+    //表单验证并提交
+    $("#customer-riskMpos-form-review").formValidation({
+        message : '此值无效', //此值无效
+        icon : {
+            valid: 'glyphicon',
+            invalid: 'glyphicon'
+        },
+        fields : {
+            'advice':{
+                group: '.form-group',
+                validators : {
+                    stringLength : {
+                        min : 0,
+                        max : 200,
+                        message : '请输入200以内的字符！'
+                    }
+                }
+
+            }
+        }
+    }).on('success.form.fv', function(e, data) {
+        e.preventDefault();
+
+        //判断oss是否上传
+        // var lpPhoto = $form.find('input[name="imgs[0].url"]').val();
+        // var lpCardIdProsphoto = $form.find('input[name="imgs[1].url"]').val();
+        // var lpCardIdConsPhoto = $form.find('input[name="imgs[2].url"]').val();
+        // var bankPhoto = $form.find('input[name="imgs[3].url"]').val();
+
+
+        // if( lpPhoto ==null || lpPhoto == '' || lpPhoto == 'undefinde'){
+        //     UTIL.clickDisappearSwal("请上传法人图片", function(){
+        //         $("#customer_fs_confirm_btn").removeClass('disabled').prop("disabled", false);
+        //     });
+        //     return;
+        // }
+        // if( lpCardIdProsphoto ==null || lpCardIdProsphoto == '' || lpCardIdProsphoto == 'undefinde'){
+        //     // swal('请上传法人身份证正面图片');
+        //     UTIL.clickDisappearSwal("请上传法人身份证正面图片", function(){
+        //         $("#customer_fs_confirm_btn").removeClass('disabled').prop("disabled", false);
+        //     });
+        //     return;
+        // }
+        // if( lpCardIdConsPhoto ==null || lpCardIdConsPhoto == '' || lpCardIdConsPhoto == 'undefinde'){
+        //     // swal('请上传法人身份证反面图片');
+        //     UTIL.clickDisappearSwal("请上传法人身份证反面图片", function(){
+        //         $("#customer_fs_confirm_btn").removeClass('disabled').prop("disabled", false);
+        //     });
+
+        //     return;
+        // }
+        // if( bankPhoto ==null || bankPhoto == '' || bankPhoto == 'undefinde'){
+        //     // swal('请上传银行卡照片图片');
+        //     UTIL.clickDisappearSwal("请上传银行卡照片图片", function(){
+        //         $("#customer_fs_confirm_btn").removeClass('disabled').prop("disabled", false);
+        //     });
+        //     return;
+        // }
+        showLoading();
+
+        var reviewResult = "";
+        $(".reviewResult").each(function(){
+            if($(this).prop("checked")){
+                reviewResult = $(this).val();
+            }
+        });
+        $("#current_Id").val(current_taskId);
+        var reviewDate = {
+            "mercNo" : review_mercNo,
+            "advice" : $('#advice').val(),
+            //   "GRAGE" : $('#merchantGradeSelect').val(),
+            "reviewResult" : reviewResult,
+            "taskId" : $("#customer-riskMpos-form-review").find("input[name='taskId']").val().trim()
+        };
+
+
+        $.ajax({
+            type : "POST",
+            dataType : "json",
+            contentType : "application/json",
+            url : "/customer/saveSecondReview.json",
+            data : JSON.stringify(reviewDate),
+            success : function(res) {
+                hideLoading();
+                if(res > 0){
+                    // 刷新待审进件页面列表
+                    if($("#newFileTable")){
+                        $("#newFileTable").bootstrapTable("selectPage", 1);
+                    }
+                    //提示成功添加代理商
+                    UTIL.autoDisappearSwal("操作成功!");
+                    setTimeout(function(){
+                        UTIL.closeCurrentPage({
+                            delUrl : "merchant-riskNormal-apply.html",
+                            toUrl : "bussinss-manage.html"
+                        });
+                    }, 1000)
+                }
+                else{
+                    UTIL.clickDisappearSwal("操作失败!");
+                }
+
+            }
+        });
+    });
+    //取消提交
+
+    $("#M_customer_fs_cancel_btn").click(function () {
+        UTIL.closeCurrentPage({
+            "delUrl": "merchant-riskNormal-apply.html",
+            "toUrl": "bussinss-manage.html"
+        })
+    });
+
+    // 旋转图片
+    $("#M_risk_review-showImg-madal .rotateImg").click(function(){
+        ROTATEIMGFLAG = (++ROTATEIMGFLAG) % 4;
+        $(this).siblings('img').css({'transform': 'rotate(' + ROTATEIMGFLAG*90 + 'deg)'});
+    })
+</script>

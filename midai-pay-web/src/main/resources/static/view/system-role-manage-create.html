@@ -1,0 +1,143 @@
+<div class="widget box role-security-manage">
+    <!-- <div class="panel-body"> -->
+    <div class="widget-header">
+        <div class="col-md-4 no-padding">
+            <h4><i class="icon-form"></i>新建角色
+            </h4>
+        </div>
+    </div>
+    <form class="form-horizontal" role="form" action="" id="modifyRoleForm">
+        <div class="container-fluid clearfix" style="padding-top: 15px;">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-role-list-small"></i>基本信息
+                    </h4>
+                </div>
+                <div class="widget-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-5 control-label">角色名称<span class="required">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="roleName" name="roleName" maxlength="30">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label  class="col-md-5 control-label">角色描述<span class="required">*</span></label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="roleDescription" name="roleDescription" maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label  class="col-md-5 control-label">角色类型<span class="required">*</span></label>
+                                <div class="col-md-7">
+                                    <label  class="radio-inline" style="text-align:left;"><input type="radio"  name="roleType" value="0" checked="checked">用户</label>
+                                    <label  class="radio-inline" style="text-align:left;"><input type="radio"  name="roleType" value="1">系统</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget box" >
+                <div class="widget-header">
+                    <h4><i class="icon-role-list-small"></i>菜单权限
+                    </h4>
+                </div>
+                <div class="panel-body" id="module">
+                    <!--菜单容器-->
+                </div>
+            </div>
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-role-list-small"></i>工作流权限
+                    </h4>
+                </div>
+                <div class="panel-body" id="process_executor_config">
+                    <!--工作流容器-->
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="pull-right">
+                <input  class="btn btn-default" id="close_rolePage" type="button" value="关闭" style="margin-right: 5px;"/>
+                <input  id="modifyRole-submit" class="btn btn-success" type="submit" value="确定"/>
+            </div>
+        </div>
+    </form>
+</div>
+    <script>
+        //新建角色提交
+        $('#modifyRoleForm').formValidation({
+                    message : '此值无效', //此值无效
+                    icon : {
+                        valid: 'glyphicon',
+                        invalid: 'glyphicon'
+                    },
+                    fields : {
+                        //角色名称
+                        'roleName': {
+                            validators: {
+                                notEmpty: {
+                                    message: '输入不能为空！'
+                                }
+                            }
+                        },
+                        //角色描述
+                        'roleDescription': {
+                            validators: {
+                                notEmpty: {
+                                    message: '输入不能为空！'
+                                }
+                            }
+                        }
+                    }
+                })
+                .on(
+                        'success.form.fv',
+                        function(e, data) {
+                            e.preventDefault();
+                            var smvIds = $('#module input:checkbox:checked').map(function(){
+                                return $(this).val()
+                            }).get().join(',');
+                            var specIds = $('#process_executor_config input:checkbox:checked').not('.processNotNeed').map(function(){
+                                return $(this).val()
+                            }).get().join(',');
+                            var orgid = roleValue;
+                            var description = $('#roleDescription').val();
+                            var rolename = $('#roleName').val();
+                            var system = $("input[name='roleType']:checked").val();
+                            var data = {
+                                "description": description,
+                                "orgid": orgid,
+                                "rolename": rolename,
+                                "smvIds": smvIds,
+                                "specIds": specIds,
+                                "system": system,
+    
+                            };
+                            $.ajax({
+                                method:'post',
+                                url:'/system/role/save',
+                                data:JSON.stringify(data)
+                            }).done(function(response){
+                                // swal('新建成功');
+                                UTIL.clickDisappearSwal("新建角色成功");
+
+                                $('#roleHandle').hide();
+                                $('#roleHandleTable').show();
+                                $('#roleTable').bootstrapTable('refresh');
+                                loadRoleZtree();
+                                $(window).scrollTop("0");
+                              //  console.log(response);
+                            }).fail(function(response){
+                             //   console.log('error:'+response);
+                                // swal('新建失败');
+                                UTIL.clickDisappearSwal("新建失败");
+                            });
+                        });
+    </script>

@@ -1,0 +1,486 @@
+<div class="container-fluid" id="Institution-deploy">
+	<form class="form-horizontal row-border" method="post" role="form"
+		id="Institution-deploy-form">
+		<input type="hidden" name="taskId" />
+		<!--商户新建申请-->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="widget box">
+					<div class="widget-header">
+						<h4>
+							<i class="icon-form"></i>配置通道
+						</h4>
+					</div>
+					<div class="widget-content">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">支付商戶号<span
+										class="required">*</span></label>
+									<div class="col-md-8">
+										<input type="text" class="form-control required"
+											name="instCode" id="instCode"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">通道名称<span
+										class="required">*</span></label>
+
+									<div class="col-md-8">
+										<input type="text" name="instName"
+											class="form-control required" maxlength="100" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">交易终端号<span
+										class="required">*</span></label>
+
+									<div class="col-md-8">
+										<input type="text" name="instTerminalNumber"
+											class="form-control required" maxlength="20" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">支持卡类型<span
+										class="required">*</span></label>
+									<div class="col-md-8">
+										<select name="instCardType" id="merType"
+											class="form-control required">
+											<option value="0">全部</option>
+											<option value="1">借记卡</option>
+											<option value="2">贷记卡</option>
+										</select>
+									</div>
+								</div>
+							</div>	
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">支持全通道路由</label>
+											<div class="col-md-8">
+												<label class="radio-inline"><input type="radio"
+													class="uniform" name="instRouteSupport" value="0"
+													checked>是</label> <label class="radio-inline"><input
+													type="radio" class="uniform" name="instRouteSupport"
+													value="1">否</label>
+											</div>
+										</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="widget box">
+							<div class="widget-header">
+								<h4>
+									<i class="icon-form"></i>费率信息
+								</h4>
+							</div>
+							<div class="widget-content">
+								<div class="row">
+								    <div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">平台分润比<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text" name="instPlatformRatio"
+														class="form-control required" maxlength="5" /> <span
+														class="input-group-addon">%</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">借记卡成本费率<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text" name="instFeeRate"
+														class="form-control required" maxlength="5" /> <span
+														class="input-group-addon">%</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">信用卡成本费率<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text" name="instDfreeRate"
+														class="form-control required" maxlength="11" /> <span
+														class="input-group-addon">%</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">最小成本值<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text" name="instMinCost"
+														class="form-control required" maxlength="5" /> <span
+														class="input-group-addon">元</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+								
+								   <div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">有无封顶手续费</label>
+											<div class="col-md-8" id="instFactorageState">
+												<label class="radio-inline"><input type="radio"
+													class="uniform" name="instFactorageState" value="1"
+													checked>有</label> <label class="radio-inline"><input
+													type="radio" class="uniform" name="instFactorageState"
+													value="0">无</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">封顶手续费<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group" >
+													<input type="text" name="instFactorageMax" id="instFactorageMax"
+														class="form-control required" maxlength="5" /> <span
+														class="input-group-addon">元</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">T0手续费<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text" name="instT0Factorage"
+														class="form-control required" maxlength="5" /> <span
+														class="input-group-addon">元</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">D1手续费<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text" name="instD1Factorage"
+														class="form-control required" maxlength="5" /> <span
+														class="input-group-addon">元</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+		                         <div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">通道限额<span
+												class="required">*</span></label>
+		
+											<div class="col-md-8">
+												<input type="text" name="instLimit"
+													class="form-control required" maxlength="100" />
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="col-md-4 control-label">通道状态<span
+												class="required">*</span></label>
+											<div class="col-md-8">
+												<select name="instState" id="instState"
+													class="form-control required">
+													<option value="0">启动</option>
+													<option value="1">暂停</option>
+												</select>
+											</div>
+										</div>
+									</div>	
+								</div>
+								<div class="clearfix"></div>
+								<p class="form-actions">
+									<input type="submit" value="确认"
+										id="inst_confirm_btn"
+										class="btn btn-success pull-right"> <input
+										type="button" value="取消" id="inst_cancel_btn"
+										class="btn btn-default pull-right">
+								</p>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script>
+
+<script>
+	 
+	var $mechantCsForm = $("#Institution-deploy-form"); 
+		$(function() {
+			
+			var cs_args = UTIL.readUrlData({
+				"currentUrl" : "Institution-deploy.html"
+			});
+			var inst_code = cs_args["instCode"];
+			if(inst_code!=null){
+				$
+				.ajax({
+					type : "post",
+					dataType : "json",
+					contentType : "application/json",
+					url : "/inst/selectInstAllById/" + inst_code
+							+ ".json",
+					success : function(res) {
+						$("#Institution-deploy-form").json2form(res);
+						$("#instCode").attr("readonly",true);
+						
+	
+					}
+				});
+				
+			}
+	
+			(function() {
+				
+				$("#inst_cancel_btn").click(function() {
+				 	UTIL.openNewPage({
+                        "targetUrl" : "Institution-list.html"
+                    }); 
+					
+					 UTIL.closeCurrentPage({
+                         delUrl: "Institution-deploy.html",
+                         toUrl: "Institution-list.html"
+                     });
+				})
+			     
+				//设置封顶值
+				$("#instFactorageState input[name='instFactorageState']").change(function(){
+					if($("#instFactorageState input[name='instFactorageState']:checked ").val()=="0"){
+					     $("#instFactorageMax").val("0");
+					     $("#instFactorageMax").attr("readonly",true); 
+					}else{
+						 $("#instFactorageMax").val("");
+						 $("#instFactorageMax").attr("readonly",false); 
+					}
+ 				 });
+				
+				//表单验证并提交
+				$mechantCsForm
+						.formValidation(
+								{
+									fields : {
+									
+										"instCode" : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '支付商户号不能为空！'
+												},
+												regexp: {
+					                                regexp: /^\d{0,12}$/,
+					                                message: '请输入12位以内数字！'
+					                            }
+											}
+										},
+										"instName" : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '通道名称不能为空！'
+												}
+											}
+										},
+										"instTerminalNumber" : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '交易终端号不能为空！'
+												},
+												regexp: {
+					                                regexp: /^\d{0,20}$/,
+					                                message: '请输入20以内数字！'
+					                            }
+											}
+										},
+										'instPlatformRatio' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '平台分润比不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										},
+										'instFeeRate' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										},
+										'instDfreeRate' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										},
+										'instMinCost' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d{0,8}|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										},
+										'instFactorageMax' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp: {
+					                                regexp: /^\d{0,11}$/,
+					                                message: '请输入11位以内数字！'
+					                            }
+											}
+										},
+										'instT0Factorage' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d{0,8}|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										},
+										'instD1Factorage' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d{0,8}|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										},
+										'instLimit' : {
+											group : '.form-group',
+											validators : {
+												notEmpty : {
+													message : '输入不能为空！'
+												},
+												regexp : {
+													regexp : /^([1-9]\d{0,8}|[0-9])(\.\d{1,2})?$/,
+													message : '正确格式12.12或12.3！'
+												}
+											}
+										}
+									}
+								})
+						.on(
+								'success.form.fv',
+								function(e, data) {
+									e.preventDefault();
+									var $mechantCsForm = $("#Institution-deploy-form");	
+									var cs_args = UTIL.readUrlData({
+										"currentUrl" : "Institution-deploy.html"
+									});
+									var inst_code = cs_args["instCode"];
+									var url="";
+									if(inst_code==null){
+										url="/inst/save.json";
+									}else{
+										url="/inst/updateInstAll.json"
+									}
+									UTIL.submitForm({
+												form : "#Institution-deploy-form",
+												url : url,
+												error: function(){
+													alert("失败")
+												},
+												success : function() {
+						                                if ($("#instTable")) {
+						                                    $("#instTable").bootstrapTable("selectPage", 1);
+						                                }
+						                                UTIL.autoDisappearSwal("配置通道成功!", function () {
+						                                	 
+						                                	UTIL.openNewPage({
+						                                        "targetUrl" : "Institution-list.html"
+						                                    }); 
+						                                	UTIL.closeCurrentPage({
+						                                         delUrl: "Institution-deploy.html",
+						                                         toUrl: "Institution-list.html"
+						                                     });
+						                                })
+												}
+											})
+								});
+			})();
+		});
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+</script>

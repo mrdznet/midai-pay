@@ -1,0 +1,327 @@
+<link href="css/system-organization-manage/ztree/css/extendStyle/metro.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="css/system-organization-manage/jquery-multi-select/css/multi-select.css">
+<link rel="stylesheet" href="css/system-organization-manage/system-organization-manage.css">
+<script type="text/tmpl" id="optionTmpl">
+					<option data-code="{{code}}" data-value="{{name}}" value="{{code}}">{{name}}</option>
+
+
+</script>
+<script type="text/tmpl" id="cityTmpl">
+					<option data-code="{{code}}" data-father="{{father}}" value="{{code}}">{{name}}</option>
+
+
+</script>
+
+<div class="row marginTop--18px">
+    <div class="col-md-6 col-lg-4 org-aside">
+        <ul class="ztree" id="treeDemo-org">
+            <!--ztree内容-->
+        </ul>
+    </div>
+    <div class="col-md-6 col-lg-8" id="org-box">
+        <div class="row" id="orgHandleTable" style="padding-right: 20px;padding-left:5px;padding-top:5px">
+            <!--表格展示数据-->
+        </div>
+        <div class="row" id="orgHandle" style="padding-right: 20px;padding-left:5px;padding-top:5px">
+            <!--修改用户信息界面-->
+        </div>
+    </div>
+</div>
+
+<!--新建公司Modal-->
+<div class="modal fade" id="createCompanyModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form" action="" id="createCompanyForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建公司</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 text-right">公司名称<span class="required">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="createCompanyName" name="createCompanyName" maxlength="50"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" col-md-3 control-label text-right">所属地<span class="required">*</span></label>
+
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <select class="form-control " id="createCompanyProvince" name="createCompanyProvince">
+                                </select> <span class="input-group-addon">省/直辖市</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <select class="form-control " id="createCompanyCity" name="createCompanyCity">
+                                </select><span class="input-group-addon">市/区</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer clearfix">
+                    <div class="pull-right">
+                        <input data-dismiss="modal" class="btn btn-defaul" type="button" value="关闭"/>
+                        <input type="submit" id="createCompany-submit" class="btn btn-success" value="确认"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end 新建公司 modal -->
+
+<!--新建部门Modal-->
+<div class="modal fade" id="createPartModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form" action="" id="createPartForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">隶属单位<span class="required">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="createPartParent" name="createPartParent" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">部门名称<span class="required">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="createPartName" name="createPartName" maxlength="50"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class=" col-md-3 control-label">所属地<span class="required">*</span></label>
+
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <select class="form-control" id="createPartProvince" name="createPartProvince">
+                                </select> <span class="input-group-addon">省/直辖市</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <select class="form-control" id="createPartCity" name="createPartCity">
+                                </select> <span class="input-group-addon">市/区</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <div class="pull-right">
+                        <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭"/>
+                        <input type="submit" id="createPart-submit" class="btn btn-success" value="确认"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end 新建部门 modal -->
+
+<!--新建用户 Modal -->
+<div class="modal fade" id="createPersonModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form" action="" id="createUserForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建用户</h4>
+                </div>
+                <div class="modal-body" style="padding:20px  74px 0 74px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" style="padding-left: 0;">隶属单位<span class="required">*</span></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" name="createUserParent" id="createUserParent" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">账号<span class="required">*</span></label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="createUserLoginName" name="createUserLoginName" maxlength="50"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">姓名<span class="required">*</span></label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="createUserUsername" name="createUserUsername" maxlength="20"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label class="control-label col-md-4">邮箱<span class="required">*</span></label>
+                               <div class="col-md-8">
+                                   <input type="text" class="form-control" id="createUserMail" name="createUserMail" maxlength="30"/>
+                               </div>
+                           </div>
+                       </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">手机<span class="required"> *</span></label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="createUserMobile" name="createUserMobile" maxlength="11"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">角色</label>
+                                <div class="col-md-10">
+                                    <select name="createUserRoleMsg" id='createUserRoleMsg' multiple='multiple'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <div class="pull-right">
+                        <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭"/>
+                        <input type="submit" id="createUser-submit" class="btn btn-success" value="确认"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end新建用户modal -->
+
+<!--编辑部门Modal-->
+<div class="modal fade" id="modifyPartModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form" action="" id="modifyPartForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑组织机构</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label class="control-label col-md-3">隶属单位<span class="required">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="modifyPartModalParent" name="modifyPartModalParent" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">部门名称<span class="required">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="modifyPartModalName" name="modifyPartModalName" maxlength="50"/>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class=" col-sm-3 control-label">所属地<span class="required">*</span></label>
+
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <select class="form-control " id="modifyPartModalProvince" name="modifyPartModalProvince">
+                                </select> <span class="input-group-addon">省/直辖市</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <select class="form-control" id="modifyPartModalCity" name="organ.cityCode">
+                                </select> <span class="input-group-addon">市/区</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <div class="pull-right">
+                        <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭"/>
+                        <input type="submit" id="modifyPartModal-submit" class="btn btn-success" value="确定"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end 编辑部门 modal -->
+
+<!--编辑公司Modal-->
+<div class="modal fade" id="modifyCompanyModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form" action="" id="modifyCompanyForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑组织机构</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group last">
+                        <div class="group">
+                            <label class="control-label col-md-3">组织机构名称<span class="required">*</span></label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="modifyCompanyModalName" name="modifyCompanyModalName" maxlength="50"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class=" col-sm-3 control-label">所属地<span class="required">*</span></label>
+
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <select class="form-control " id="modifyCompanyModalProvince" name="modifyCompanyModalProvince">
+                                </select> <span class="input-group-addon">省/直辖市</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <select class="form-control " id="modifyCompanyModalCity" name="modifyCompanyModalCity">
+                                </select> <span class="input-group-addon">市/区</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <div class="pull-right">
+                        <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭"/>
+                        <input type="submit" id="modifyCompanyModal-submit" class="btn btn-success" value="确认"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--end 编辑公司 modal -->
+<script type="text/javascript" src="js/ztree/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="js/ztree/jquery.ztree.excheck.min.js"></script>
+<script type="text/javascript" src="js/ztree/jquery.ztree.exedit.min.js"></script>
+<script type="text/javascript" src="css/system-organization-manage/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="css/system-organization-manage/organization-manage.js"></script>
+
+
+
+

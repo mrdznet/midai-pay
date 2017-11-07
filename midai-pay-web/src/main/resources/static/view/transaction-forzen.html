@@ -1,0 +1,173 @@
+<div class="container-fluid">
+    <!--交易冻结管理 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-check"></i>请选择查询条件</h4>
+                </div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="jydjForm">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户小票号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="mercId" maxlength="50"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">商户名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="mercName" maxlength="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">冻结日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text"  class="form-control required url" name="frozenTimeBegin" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">---
+                                </label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" id="" class="form-control required url" name="frozenTimeEnd" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">解冻日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" id="" class="form-control required url" name="unfrozenTimeBegin" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group"><label class="col-md-4 control-label">---
+                                </label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" id="" class="form-control required url" name="unfrozenTimeEnd" maxlength="20">
+                                            <span class="input-group-addon bg-green">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">流水号</label>
+
+                                    <div class="col-md-8">
+
+                                        <input type="text" class="form-control" name="hostTransssn" maxlength="50"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <button class="btn btn-default pull-right" id="jydjEmptyBtn">清空筛选条件</button>
+                            <button class="btn btn-success pull-right" id="jydjSearchBtn">查询</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding">
+                        <h4><i class="icon-list"></i>查询结果</h4>
+                    </div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding">
+                            <button class="btn btn-warning pull-right jydjgl-pljd-btn" id="unFrozenBtn">批量解冻</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="jydjTable"
+                       class="table table-striped table-hover table-highlight-head" style="border-top: 1px solid #dddddd;"
+                       data-toggle="table" data-query-params="jydjSearch"
+                       data-side-pagination="server" data-method="post"
+                       data-pagination="true" data-url="../tradefrozenreason/list"
+                       data-page-size="10" data-show-pagination-detail="false"
+                       data-pagination-first-text="First" data-pagination-pre-text="上一页"
+                       data-pagination-next-text="下一页" data-pagination-loop="false" data-page-list="[10, 20]"
+                       data-pagination-last-text="Last">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-checkbox="true" data-formatter="forzenTimeStyle"></th>
+                        <th data-field="hostTransssn">流水号</th>
+                        <th data-field="mercId">商户小票号</th>
+                        <th data-field="mercName">商户名称</th>
+                        <th data-field="transAmt">交易金额</th>
+                        <th data-field="transTime">交易时间</th>
+                        <th data-field="transCardNo">交易卡号</th>
+                        <th data-field="frozenTime">冻结日期</th>
+               <!--          <th data-field="frozenReason">冻结原因</th> -->
+                        <th data-field="frozenPerson">冻结操作人</th>
+                        <th data-field="unfrozenPerson">解冻操作人</th>
+                        <th data-field="unfrozenTime">解冻日期</th>
+                    </tr>
+                    <caption align="top" class="clearfix">
+                        <button class="btn btn-success pull-right" id="jydjDownBtn">Excel下载</button>
+                    </caption>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--批量解冻模态框-->
+<div class="modal fade" id="jydjModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title"><i class="icon-list"></i>批量解冻</h4>
+            </div>
+            <div class="modal-body modal-delete-text">
+                <div class="col-md-12 text-left delete-word-wrap">您确认要将流水号为 <span class="transactionForzenIds"></span>的交易解冻吗?</div>
+                <div class="col-md-12 text-left">解冻后的该笔流水金额将可以进行提现功能！</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-success" id="sureUnFrozenBtn">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--交易冻结-->
+<script src="js/transation-audit/transaction-forzen.js"></script>

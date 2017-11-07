@@ -1,0 +1,85 @@
+<!-- 历史绑定商户
+author:黄亚茹
+ -->
+<div class="container-fluid" id="terminal-lsbdsh">
+   <!--商户新建申请-->
+   <script type="javascript/templ" id="history-bdsh">
+   		<div class="row">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header"><h4><i class=".icon-list"></i>历史绑定商户{{destmercId}}</h4></div>
+                    <div class="widget-content">
+                        <form class="form-horizontal row-border" id="searchList"
+                              action="http://envato.stammtec.de/themeforest/melon/form_validation.html#"
+                              novalidate="novalidate">
+                              <div class="row">
+                                 <div class="col-md-3">
+                                    <div class="form-group"><label class="col-md-5 control-label">商户名称</label>
+                                        <div class="col-md-7">
+                                     	  <input type="text" name="mercName" class="form-control" value="{{mercName}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group"><label class="col-md-5 control-label">小票号</label>
+                                        <div class="col-md-7">
+                                     	  <input type="text" name="mercId" class="form-control" value="{{mercId}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-md-3">
+                                    <div class="form-group"><label class="col-md-5 control-label">绑定时间</label>
+                                        <div class="col-md-7">
+                                     	  <input type="text" name="bundingTime" class="form-control" value="{{createTime}}" />
+                                         </div>
+                                    </div>
+                                </div>
+                                 <div class="col-md-3">
+                                    <div class="form-group"><label class="col-md-5 control-label">解绑时间</label>
+                                        <div class="col-md-7">
+                                     	  <input type="text" name="unbundingTime" class="form-control" value="{{updateTime}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </script>
+         
+</div>
+
+
+
+<script type="text/javascript">
+$(function(){
+    var historyBGSH = UTIL.readUrlData({
+        currentUrl:"terminal-history-bdsh.html"
+    });
+    $.ajax({
+        url:"../device/hirstory/bund",
+        type:"get",
+        data:"deviceNo=" + historyBGSH.deviceNo,
+        success:function(res){
+            if(res.length == 0){
+                var str = "<p style='width:100%; text-align:center; '>没有数据！</p>";
+                $("#terminal-lsbdsh").append(str);
+            }
+            else{
+                for(var i = 0; i < res.length; i++){
+                  var updateTime = res[i].updateTime ? res[i].updateTime.substr(0,19) : '--';
+                  var createTime = res[i].createTime ? res[i].createTime.substr(0,19) : '--';
+                    var str = $("#history-bdsh").html().replace(/{{destmercId}}/g,res[i].destmercId || '--').replace(/{{mercId}}/g,res[i].mercId || '--').replace(/{{mercName}}/g,res[i].mercName || '--').replace(/{{createTime}}/g,createTime).replace(/{{updateTime}}/g,updateTime);
+                    $("#terminal-lsbdsh").append(str);
+                }
+            }
+            
+        }
+    })
+})
+
+</script>
+

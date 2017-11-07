@@ -1,0 +1,86 @@
+<div class="widget box">
+   <div class="widget-header">
+       <div class="col-md-4 no-padding">
+           <h4><i class="icon-list"></i>角色列表
+           </h4>
+       </div>
+       <div class="col-md-8 no-padding">
+           <div class="toolbar no-padding">
+               <input class="btn btn-success" id="createNewRole" value="新建角色" type="button" />
+               <input class="btn btn-success" id="delRoleBtn" value="批量删除" type="button" />
+           </div>
+       </div>
+   </div>
+    <table class="table"data-toggle="table" id="roleTable" width="100%">
+        <!--table展示-->
+    </table>
+</div>
+
+<!--删除角色 Modal start-->
+<div class="modal fade" id="delRoleModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="icon-delete"></i>删除角色</h4>
+            </div>
+            <div class="modal-body text-center">
+                <div id="delRoleMsg"></div>
+            </div>
+            <div class="modal-footer clearfix">
+                <div class="pull-right">
+                    <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭" />
+                    <input type="submit" id="sureDelRoleBtn" class="btn btn-success" value="确认" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除角色 Modal end -->
+
+<script type="text/temp" id="delRoleTemp">
+  <a href="javascript:delRole('row.id','row.name')"><img src="../imgs/del-sm.png" alt=""/></a>
+</script>
+
+<script type="text/javascript">
+  //批量删除角色
+  var delRoleIds = [];
+  $("#delRoleBtn").off("click").on("click",function(){
+      delRoleIds = [];
+      $("#delRoleMsg").empty();
+      var delList = $("#roleTable").bootstrapTable("getSelections");
+      if(delList < 1){
+          UTIL.clickDisappearSwal("请先选择要删除的角色");
+      }else{
+          var delRoleName = "";
+          for(var i = 0;i<delList.length;i++){
+              if(i > 0){
+                delRoleName += "," + delList[i].name;
+              }
+              else {
+                delRoleName += delList[i].name;
+              }
+              delRoleIds.push(delList[i].id);
+          }
+          $("#delRoleMsg").append('<div><p>您确定要删除以下角色吗？</p><p>'+delRoleName+'</p></div>');
+          $("#delRoleModal").modal("show");
+      }
+  });
+
+
+  $("#sureDelRoleBtn").click(function(){
+      $.ajax({
+          url : "../system/role/dels/"+delRoleIds,
+          data : JSON.stringify(delRoleIds),
+
+          success : function(){
+              $("#delRoleModal").modal("hide");
+              $("#roleTable").bootstrapTable("selectPage",1)
+              loadRoleZtree();
+              UTIL.clickDisappearSwal("删除成功");
+              delRoleIds = [];
+          }
+      });
+  });
+</script>

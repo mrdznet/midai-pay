@@ -1,0 +1,132 @@
+<!-- by  杨凯凯  -2016.9.22 -->
+<!--厂商管理-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding">
+                        <h4><i class="icon-manage"></i>厂商管理</h4>
+                    </div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding">
+                            <button class="btn btn-default pull-right" id="fasctoryDelete">暂停</button>
+                            <button class="btn btn-success pull-right hide-default csgl-xj-btn" id="fasctoryNew">新建</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="factoryListTable"
+                       class="table table-hover table-striped"
+                       data-toggle="table" data-server-params="factorySearchTable"
+                       data-side-pagination="server" data-method="post"
+                       data-pagination="true" data-url="../factory/list"
+                       data-page-size="10" data-show-pagination-detail="false"
+                       data-pagination-first-text="First" data-pagination-pre-text="上一页"
+                       data-pagination-next-text="下一页" data-pagination-loop="false" data-page-list="[10, 20]"
+                       data-pagination-last-text="Last">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-checkbox="true" data-formatter="stopFactoryStyle"></th>
+                        <th data-field="name" data-align="left">名称</th>
+                        <th data-field="address" data-align="left">地址</th>
+                        <th data-field="state" data-align="left">状态</th>
+                        <th data-field="note" data-align="left">备注</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--新增模态框-->
+<div class="modal fade" id="fasctoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" id="addFactoryCus"
+                  novalidate="novalidate">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><i class="icon-form"></i>新建厂商</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"><label class="col-md-4 control-label">名称<span class="required">*</span></label>
+
+                                <div class="col-md-8"><input type="text" id="factoryName" name="name" class="form-control required" maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"><label class="col-md-4 control-label">地址</label>
+
+                                <div class="col-md-8"><input type="text" id="factoryAddress" name="address"
+                                                             class="form-control required" maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"><label class="col-md-4 control-label">状态<span class="required">*</span></label>
+
+                                <div class="col-md-8">
+                                    <select id="factoryStaus" name="state" class="form-control required">
+                                        <option value="">--请选择--</option>
+                                        <option value="0">废除</option>
+                                        <option value="1">启用</option>
+                                        <option value="2">暂停</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group"><label class="col-md-2 control-label">备注&nbsp;&nbsp;</label>
+
+                                <div class="col-md-10">
+                                    <textarea rows="5" cols="12" name="note" id="factoryNote" class="form-control"
+                                              style="resize: none;" maxlength="200"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-success" id="fasctoryNewSuer">确认</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--删除模态框-->
+<div class="modal fade" id="factoryModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title"><i class="icon-delete"></i>暂停厂商</h4>
+            </div>
+            <div class="modal-body modal-delete-text">
+                <div class="col-md-12 text-left delete-word-wrap">您确认要暂停名称为:<span class="factoryDeleteIds"></span>的厂商吗?</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-success" id="factoryDeleteSure">确认</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript" src="js/zd-manage/terminal-changsgl.js"></script>

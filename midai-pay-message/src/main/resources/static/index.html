@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body >
+   <div id="message">hello websocket  !!!</div>
+   client say:<input  id="client" /> <input type="button"  id="send" value="send"/><br/> 
+   server say:<div id="server"> </div>
+        
+   
+   
+   <script type="text/javascript">
+   		$(function(){
+   		   
+			var path=window.location.host;
+			var uid = 'test';
+			var websocket;
+			if ('WebSocket' in window) {
+				websocket = new WebSocket("ws://" + path
+						+ "/ws?uid=" + uid);
+			} else if ('MozWebSocket' in window) {
+				websocket = new MozWebSocket("ws://" + path
+						+ "/ws?uid=" + uid);
+			} else {
+				websocket = new SockJS("http://" + path
+						+ "/ws/sockjs?uid=" + uid);
+			}
+			websocket.onopen = function(event) {
+				console.log("WebSocket:已连接");
+				console.log(event);
+			};
+			websocket.onmessage = function(event) {
+				var data = JSON.parse(event.data);
+				console.log(data);
+				$("#server").text(data.text);
+				
+			};
+			websocket.onerror = function(event) {
+				console.log("WebSocket:发生错误 ");
+				console.log(event);
+			};
+			websocket.onclose = function(event) {
+				console.log("WebSocket:已关闭");
+				console.log(event);
+			}
+   			
+   			$("#send").click(function(){
+   		         if (websocket != null) {
+   		           var msg={
+   		             from:uid,
+   		             to:uid,
+   		             text:$("#client").val(),
+   		             date:'2016-12-12 12:12:12'
+   		           }      
+                    websocket.send(JSON.stringify(msg));
+                } 
+   		    });
+   			
+   			
+   			
+   		});
+   
+   
+   </script>
+</body>
+</html>

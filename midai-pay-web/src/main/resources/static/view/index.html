@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>米付系统</title>
+		<link rel="icon" href="favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-table.css">
+		
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+		<link rel="stylesheet" type="text/css" href="css/responsive.css" />
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.datetimepicker/bootstrap-datetimepicker.min.css" />
+		<style type="text/css">
+			.jqstooltip {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				visibility: hidden;
+				background: rgb(0, 0, 0) transparent;
+				background-color: rgba(0, 0, 0, 0.6);
+				filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+				-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+				color: white;
+				font: 10px arial, san serif;
+				text-align: left;
+				white-space: nowrap;
+				padding: 5px;
+				border: 1px solid white;
+				z-index: 10000;
+			}
+			.jqsfield {
+				color: white;
+				font: 10px arial, san serif;
+				text-align: left;
+			}
+			input{
+				outline: none;
+			}
+			.message-push-container{
+				display: none;
+			}
+		</style>
+	</head>
+
+<body class="breakpoint-1200">
+		<div class="header navbar navbar-fixed-top" role="banner">
+			<div class="container">
+				<ul class="nav navbar-nav">
+					<li class="nav-toggle"><a href="javascript:void(0);" title=""><i class="glyphicon glyphicon-align-justify"></i></a></li>
+				</ul>
+				<a class="navbar-brand" href="javascript:void(0);" style="cursor: default;"><img style="display: block; margin-top:10px;" src="../imgs/logo.png" /></a>
+				<a href="javascript:void(0);" class="toggle-sidebar bs-tooltip" data-placement="bottom" data-original-title="Toggle navigation"> <i class="glyphicon glyphicon-align-justify"></i> </a>
+				<ul class="nav navbar-nav navbar-right">
+				<!-- 	<li class="hidden-xs hidden-sm" id="no-readed-message">
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <i style="font-style:normal; font-weight:600; font-family:'微软雅黑'">未读消息</i> <span class="badge" id="messageNum">0</span> </a> -->
+					<!-- </li> -->
+					<li class="dropdown user">
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <i class="arrow-right"></i> <span class="username"></span> <i class="glyphicon glyphicon-chevron-down small"></i> </a>
+						<ul class="dropdown-menu">
+							<li id="rePwdBtn"><a href="javascript:void(0);"><i class="arrow-right"></i> 修改密码</a></li>
+							<!-- <li><a href="javascript:void(0);" id="updateUserInfo"><i class="arrow-right"></i> 修改个人资料</a></li> -->
+							<li><a href="/login.html"><i class="arrow-right"></i> 退出</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="project-switcher" class="container project-switcher" style="position: relative; margin-top: 0px; display: none;">
+				<div id="scrollbar">
+					<div class="handle"></div>
+				</div>
+				<div class="slimScrollDiv" style="position: relative; overflow: auto; width: 100%; height: auto;">
+					<div id="frame" style="overflow: hidden; width: 100%; height: auto;">
+						<ul class="project-list" style="width: 2712px;">
+							<li>
+								<a href="javascript:void(0);"> <span class="image"><i class="desktop"></i></span> <span class="title">Lorem ipsum dolor</span> </a>
+							</li>
+						</ul>
+					</div>
+					<div class="slimScrollBar ui-draggable" style="height: 5px; position: absolute; bottom: 1px; opacity: 0.2; display: block; border-radius: 5px; z-index: 99; background: rgb(255, 255, 255);"></div>
+					<div class="slimScrollRail" style="width: 100%; height: 5px; position: absolute; bottom: 1px; display: none; border-radius: 5px; opacity: 0.2; z-index: 90; background: rgb(51, 51, 51);"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="container" class="fixed-header">
+		<!-- 侧边栏开始 -->
+			<div id="sidebar" class="sidebar-fixed">
+				<div class="slimScrollDiv" style="position: relative; width: auto; height: 100%;">
+					<div id="sidebar-content" style="width: auto; height: 100%;">
+						<ul id="nav">
+							<li class="has-sub home-menu current hide-default" id="menu-cygn">
+								<a href="javascript:void(0);"> <i class=""></i> 常用功能<i class="arrow"></i> </a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" id="to-do-link" class="onePageList hide-default" data-url="bussinss-manage.html" data-page="待办事项" data-title="待办事项" > <i class="arrow-right"></i> 待办事项 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-xtgl">
+								<a href="javascript:void(0);"> <i class=""></i>系统管理<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="system-organization-manage.html" data-title="组织机构管理" > <i class="arrow-right"></i> 组织机构管理 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="system-role-manage.html" data-title="角色权限管理"> <i class="arrow-right"></i> 角色权限管理 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-jycxgl">
+								<a href="javascript:void(0);"> <i class=""></i> 交易查询管理 <i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="query-pos.html" data-title="pos交易查询"> <i class="arrow-right"></i>pos交易查询</a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-pos.html" data-title="代理商pos交易查询"> <i class="arrow-right"></i>代理商pos交易查询</a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="query-online.html" data-title="线上交易查询"> <i class="arrow-right"></i>线上交易查询</a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-online.html" data-title="代理商线上交易查询"> <i class="arrow-right"></i>代理商线上交易查询</a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-dlsgl">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>代理商管理<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-query.html" data-title="代理商查询"> <i class="arrow-right"></i> 代理商查询 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-own-query.html" data-title="代理商隶属查询"> <i class="arrow-right"></i> 代理商隶属查询 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-fee.html" data-title="代理商扣率模板"> <i class="arrow-right"></i> 代理商扣率模板 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-shgl">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>商户管理<i class="arrow"></i></a>
+								<ul class="sub-menu">
+
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="merchant-query.html" data-title="商户查询"> <i class="arrow-right"></i> 商户查询 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-merchant-search.html" data-title="代理商商户查询"> <i class="arrow-right"></i> 代理商商户查询 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="merchant-level.html" data-title="商户等级"> <i class="arrow-right"></i> 商户等级 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="merchant-deduction-rate.html" data-title="商户扣率模板"> <i class="arrow-right"></i> 商户扣率模板 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-zdgl">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>终端管理<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="terminal-sbcx.html" data-title="终端查询"> <i class="arrow-right"></i> 终端查询 </a>
+									</li>
+									
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="terminal-crk-detail.html" data-title="出入库明细查询"> <i class="arrow-right"></i> 出入库明细查询 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="terminal-changsgl.html" data-title="厂商管理"> <i class="arrow-right"></i> 厂商管理 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="terminal-equipment-type.html" data-title="终端类型管理"> <i class="arrow-right"></i> 终端类型管理 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="terminal-equip-model.html" data-title="终端型号管理"> <i class="arrow-right"></i> 终端型号管理 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="terminal-mygl.html" data-title="密钥生成"> <i class="arrow-right"></i> 密钥生成 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-jyshgl">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>交易审核管理<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="transaction-audit.html" data-title="交易审核"> <i class="arrow-right"></i> 交易审核 </a>
+									</li>
+								
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="transaction-channel-ticket.html" data-title="通道商户小票生成"> <i class="arrow-right"></i> 通道商户小票生成 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="transaction-merchant-frozen.html" data-title="商户冻结管理"> <i class="arrow-right"></i> 商户冻结管理 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="transaction-forzen.html" data-title="交易冻结管理"> <i class="arrow-right"></i> 交易冻结管理 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="transaction-settlement.html" data-title="交易结算"> <i class="arrow-right"></i> 交易结算 </a>
+									</li>
+								</ul>
+							</li>
+							<li class="has-sub hide-default" id="menu-qsgl">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>清算管理<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="settlement-clear.html" data-title="清分清算"> <i class="arrow-right"></i> 清分清算 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-profit-statistics.html" data-title="代理商分润统计"> <i class="arrow-right"></i> 代理商分润统计 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="agent-profit-list.html" data-title="代理商分润明细"> <i class="arrow-right"></i> 代理商分润明细 </a>
+									</li>
+									<!-- <li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="settlement-payment-file.html" data-title="生成代付文件"> <i class="arrow-right"></i> 生成代付文件 </a>
+									</li> -->
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="settlement-auto-pay.html" data-title="自动打款"> <i class="arrow-right"></i> 自动打款 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="settlement-pay-search.html" data-title="打款结果查询"> <i class="arrow-right"></i> 打款结果查询 </a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="settlement-pay-error-query.html" data-title="打款失败查询"> <i class="arrow-right"></i> 打款失败查询 </a>
+									</li>
+								</ul>
+							</li>
+<!-- 							<li class="has-sub" id="menu-hbmd">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>黑白名单<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="black-white-list.html" data-title="卡黑白单查询"> <i class="arrow-right"></i>卡黑白单查询 </a>
+									</li>			
+								</ul>
+							</li> -->
+							
+							
+							<li class="has-sub hide-default" id="menu-inst">
+								<a href="javascript:void(0);"> <i class="bar-chart"></i>通道路由<i class="arrow"></i></a>
+								<ul class="sub-menu">
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="Institution-deploy.html" data-title="配置通道"> <i class="arrow-right"></i> 配置通道</a>
+									</li>
+								
+									<li>
+										<a href="javascript:void(0);" class="onePageList hide-default" data-url="Institution-list.html" data-title="通道列表"> <i class="arrow-right"></i> 通道列表 </a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div id="divider" class="resizeable"></div>
+				</div>
+			</div>
+			<!-- 侧边栏结束 -->
+			<div id="content">
+				<div class="container">
+					<div class="container-header">
+						<div class="container-block"></div>
+					</div>
+					<div class="header-wheel hide-default">
+						<span class="wheel-left">
+							<img src="../imgs/left.png" />
+						</span>
+						<span class="wheel-right">
+							<img src="../imgs/right.png" />
+						</span>
+					</div>
+					<div class="container-main"></div>
+				</div>
+			</div>
+			<div id="all-modal"></div>
+				
+		</div>
+		<img src="../imgs/upload-bg.gif" id="imgTest" style="display:none;" />
+<!-- 消息推送 -->
+	<div class="message-push-container" id="message-push-container">
+		<div class="message-header">
+			<h4><span class="icon-voice"></span>系统消息<span class="close" id="close-message" aria-hidden="true">&times;</span></h4>
+		</div>
+		<div class="message-content" id="message-push-content"></div>
+	</div>
+	<script type="text/templ" id="messageContentTemplate">
+		<p class="new-message-list message-of-{{index}}" data-title="{{page}}" data-refresh-table="{{refreshTable}}"><span class="message-push-title">[{{title}}]</span><span class="message-push-content">{{content}}</span></p>
+	</script>
+
+<!--模态框-修改密码 start-->
+    <div class="modal fade " id="rePwdModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            	<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <form class="form-horizontal" role="form" id="rePwdForm" action="" autocomplete="off">
+                	<div class="modal-body">
+						<input name="id" type="hidden" value="" /> <br /> <br />
+						<div class="form-group">
+							<div class="group">
+								<label class="control-label col-sm-4 ">原密码</label>
+								<div class="col-sm-6 ">
+									<input type="text" onfocus="this.type='password'" id="password" class="form-control"
+										name="password" autocomplete="off"/>
+								</div>
+							</div>
+						</div>
+						<br />
+						<div class="form-group">
+							<div class="group">
+								<label class="control-label col-sm-4">新密码</label>
+								<div class="col-sm-6">
+									<input type="text" onfocus="this.type='password'" id="newpassword" class="form-control"
+										name="newpassword" />
+								</div>
+							</div>
+						</div>
+						<br />
+						<div class="form-group">
+							<div class="group">
+								<label class="control-label col-sm-4">确认密码</label>
+								<div class="col-sm-6">
+									<input type="text" onfocus="this.type='password'" id="repassword" class="form-control" name="repassword" />
+								</div>
+							</div>
+						</div>
+						<br />
+					</div>
+					<div class="modal-footer">
+						<input type="button" value="返回" class="btn btn-default" data-dismiss="modal"/>
+						<input type="submit" value="提交" class="btn btn-success" id="sureRePwdBtn"/>
+		            </div>
+				</form>
+					
+            </div>
+	            
+        </div>
+    </div>
+    <div class="loading" id="loading">
+    	<div id="floatingBarsG">
+			<div class="blockG" id="rotateG_01"></div>
+			<div class="blockG" id="rotateG_02"></div>
+			<div class="blockG" id="rotateG_03"></div>
+			<div class="blockG" id="rotateG_04"></div>
+			<div class="blockG" id="rotateG_05"></div>
+			<div class="blockG" id="rotateG_06"></div>
+			<div class="blockG" id="rotateG_07"></div>
+			<div class="blockG" id="rotateG_08"></div>
+		</div>
+
+    </div>
+<!--模态框-修改密码 end-->
+
+	<!-- 单页面模板 -->
+	<script type="javascript/templ" id="page-header">
+		<div data-page="{{pageUrl}}" id="{{pageUrl}}" class="urlBlock">
+		<span class="urlTitle"> {{title}} </span>
+		<span class="closePage" style="">x
+		</span>
+		</div>
+	</script>
+
+<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-table.js"></script>
+<script type="text/javascript" src="js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="js/respond.min.js"></script>
+    <!-- formValidation -->
+<script type="text/javascript" src="js/formValidator/formValidation.min.js"></script>
+<script type="text/javascript" src="js/formValidator/formValidation.bootstrap.min.js"></script>
+		<!--bootatrap  datatimpicker-->
+<script type="text/javascript" src="js/official_bootstrap_datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/official_bootstrap_datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="js/sweetalert.min.js"></script>
+<script type="text/javascript" src="js/midai-namespace.js"></script>
+<script type="text/javascript" src="js/default.js"></script>
+<script type="text/javascript" src="js/midai-data.js"></script>
+<script type="text/javascript" src="js/jquery-extend.js"></script>
+<script type="text/javascript" src="js/oss/plupload.full.min.js"></script>
+<script type="text/javascript" src="js/oss/video.js"></script>
+<script type="text/javascript" src="js/handlebars.js"></script>
+<!-- <script type="text/javascript" src="js/updateUserInfo.js"></script> -->
+<script type="text/javascript">
+var USERNAME = "";
+var USEROLES = [];
+var USERALLINFO = "";
+//修改密码处代码
+$("#rePwdBtn").on('click',function(){
+	$("#rePwdModal").modal('show');
+})
+
+$("#rePwdModal").on('hide.bs.modal',function(){
+	document.getElementById("rePwdForm").reset();
+	$("#rePwdForm").data('formValidation').resetForm();//清空验证
+});
+//解析资源
+var RESOURCE = {};
+var RESOURCEDETAIL = {};
+// var RESOURCE = {
+// 	"menu-cygn" : ["bussinss-manage.html"] ,
+// 	"menu-zdgl" : ["terminal-sbcx.html"],
+// 	"menu-shgl" : ["merchant-query.html"]
+// };
+// var RESOURCEDETAIL = {
+// 	"terminal-sbcx.html" : ["zdcx-bg-btn"]
+// };
+var OSSHOST = "";
+var OSSHOSTIMG = "";
+var ROTATEIMGFLAG = 0;
+var messagePullInfo = {
+	"dbsx" : {
+		"title" : "待办事项",
+		"content" : "您有新的待办事项",
+		"page" : "bussinss-manage.html",
+		"refreshTable" : "newFileTable"
+	},
+	"qfqs" : {
+		"title" : "清分清算",
+		"content" : "您有新的清分清算",
+		"page" : "settlement-clear.html",
+		"refreshTable" : "qfqsTable"
+	},
+	"jysh" : {
+		"title" : "结算审核",
+		"content" : "您有新的结算审核",
+		"page" : "transaction-audit.html",
+		"refreshTable" : "jyshTable"
+	},
+	"jyjs" : {
+		"title" : "交易结算",
+		"content" : "您有新的交易结算",
+		"page" : "transaction-settlement.html",
+		"refreshTable" : "tranSettleListTable"
+	},
+	"zddk" : {
+		"title" : "自动打款",
+		"content" : "您有新的自动打款",
+		"page" : "settlement-auto-pay.html",
+		"refreshTable" : "zddkTable"
+	}
+}
+// 获取当前用户名
+$.ajax({
+	url:"../system/user/getusername",
+	type:"get",
+	async: false,
+	success: function(res){
+		if(res){
+			USERALLINFO = res;
+			RESOURCE = res.firResource;
+			RESOURCEDETAIL = res.secResource;
+			OSSHOST = res.host;
+			OSSHOSTIMG = res.hostImg;
+			var arr = [];
+			$(".user .username").text(res.name);
+			// 修改个人资料点击事件
+			$("#updateUserInfo").click(function(){
+				UTIL.openNewPage({
+					targetUrl : "updateUserInfo.html"
+				});
+				
+			})
+			// 解析资源分配的json
+			
+
+			$(".has-sub").each(function(){
+				var selfResource = $(this).attr("id");
+				if(RESOURCE[selfResource]){
+					$(this).removeClass('hide-default');
+					$("#" + selfResource).find(".sub-menu a").each(function(){
+						var urlResource = $(this).data('url');
+						for(var i = 0; i < RESOURCE[selfResource].length; i++){
+							if(urlResource === RESOURCE[selfResource][i]){
+								$(this).removeClass('hide-default');
+							}
+						}
+						if($(this).hasClass('hide-default')){
+							$(this).remove();
+						}
+					})
+					
+				}
+				else{
+					$(this).remove();
+				}
+			})
+				
+
+
+			// socket
+			var path=USERALLINFO.midaiPayMessage;
+			var uid = USERALLINFO.name;
+			var websocket;
+			if ('WebSocket' in window) {
+				websocket = new WebSocket("ws://" + path
+						+ "/ws?uid=" + uid);
+			} else if ('MozWebSocket' in window) {
+				websocket = new MozWebSocket("ws://" + path
+						+ "/ws?uid=" + uid);
+			} else {
+				websocket = new SockJS("http://" + path
+						+ "/ws/sockjs?uid=" + uid);
+			}
+			websocket.onopen = function(event) {
+				console.log("WebSocket:已连接");
+				setInterval(function(){
+					var msg={
+   		             from:uid,
+   		             to:'system',
+   		             text:'hello',
+   		             date:'2016-12-12 12:12:12'
+   		           }      
+                    websocket.send(JSON.stringify(msg));
+				}, 30000)
+                     
+				// console.log(event);
+			};
+			websocket.onmessage = function(event) {
+				var data = JSON.parse(event.data);
+				// var text = $("#meessageCount").text();
+				// if (!text || text == null || text == "") {
+				// 	$("#meessageCount").text("1");
+				// } else {
+				// 	text = +text + 1;
+				// 	$("#meessageCount").text(text);
+				// 	console.log(text);
+				// }
+				// 右下角的弹出框
+				if(data && data.text){
+					$("#message-push-container").show();
+					if($(".message-of-"+data.text).length === 0){
+						for(var index in messagePullInfo){
+							if(index == data.text){
+								var messageTempl = $("#messageContentTemplate").html().replace("{{title}}",messagePullInfo[index].title).replace("{{content}}",messagePullInfo[index].content).replace("{{refreshTable}}",messagePullInfo[index].refreshTable).replace("{{page}}",messagePullInfo[index].page).replace("{{index}}",index);
+								$("#message-push-content").append(messageTempl);
+								$("#message-push-content .new-message-list").last().click(function(){
+									var tableId = "#" + $(this).data("refreshTable");
+									var refreshPage = $(this).data("title");
+									if($(tableId)){
+										$(tableId).bootstrapTable("selectPage", 1);
+									}
+									UTIL.openNewPage({
+										"targetUrl" : refreshPage
+									});
+									$(this).remove();
+									if($("#message-push-content p").length === 0){
+										$("#message-push-container").hide();
+									}
+								});
+							}
+						}
+					}	
+				}
+			};
+			websocket.onerror = function(event) {
+				console.log("WebSocket:发生错误 ");
+				// console.log(event);
+			};
+			websocket.onclose = function(event) {
+				console.log("WebSocket:已关闭");
+				// console.log(event);
+			}
+			if(!res.roleName){
+				return;
+			}
+			arr = res.roleName.split(",");
+			for(var i = 0; i < arr.length; i++){
+				USEROLES.push(arr[i]);
+			}			
+		}
+	}
+});
+
+// 推送消息
+$("#close-message").on("click", function(){
+	$("#message-push-container").hide();
+});
+// $("#no-readed-message").on("click", function(){
+// 	if($("#newFileTable")){
+// 		$("#newFileTable").bootstrapTable("refresh");
+// 	}
+// 	$("#to-do-link").click();
+// 	$("#message-push-container").hide();
+// })
+
+          
+//提交更改密码
+$('#rePwdForm')
+			.formValidation({
+				message : '这个字段还没验证',
+				icon : {
+					valid : 'glyphicon glyphicon-ok',
+					validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					'password' : {
+						group : '.group',
+						validators : {
+							notEmpty : {
+								message : '请输入原密码'
+							},
+							stringLength : {
+								min : 1,
+								max : 20,
+								message : '请输入20个以内的字符'
+							}
+						}
+					},
+					'newpassword' : {
+						group : '.group',
+						validators : {
+							notEmpty : {
+								message : '请输入新密码'
+							},
+							stringLength : {
+								min : 1,
+								max : 20,
+								message : '请输入20个以内的字符'
+							}
+						}
+					},
+					'repassword' : {
+						group : '.group',
+						validators : {
+							notEmpty : {
+								message : '请输入确认新密码'
+							},
+							stringLength : {
+								min : 1,
+								max : 20,
+								message : '请输入20个以内的字符'
+							}
+						}
+					}
+				}
+			})
+			.on(
+					'success.form.fv',
+					function(e, data) {
+						e.preventDefault();
+
+						if ($('#newpassword').val() == $('#password').val()) {
+							UTIL.clickDisappearSwal("新旧密码两次输入一样 !");
+							return false;
+						}
+						if ($('#newpassword').val() != $('#repassword').val()) {
+							UTIL.clickDisappearSwal("新密码两次输入不一样 !");
+							return false;
+						}
+
+						var opwd=$('#password').val();
+						var pwd=$('#newpassword').val();
+
+					//	$("#rePwdModal").modal('hide');
+
+						$.ajax({
+							url : "../system/user/updatepwd/"+pwd+"/"+opwd,
+							success : function(){
+								$("#rePwdModal").modal('hide');
+								UTIL.clickDisappearSwal("密码修改成功 !", function(){
+									window.location.href = "/login.html"
+								});
+							},
+							error : function(res){
+								if(res.responseText.length < 100){
+									var msg = JSON.parse(res.responseText);
+									UTIL.clickDisappearSwal(msg.errorMsg);
+								}
+								else{
+									UTIL.clickDisappearSwal("密码修改失败");
+								}
+							}
+						})
+
+					});
+
+
+
+        //   $("#all-modal").load("modal-dialog.html");
+		window.onresize = function(){
+			var curWidth = $(window).width();
+			if(curWidth >=320 && curWidth < 480){
+				$("body").attr("class","breakpoint-320");
+			}
+			else if(curWidth >=480 && curWidth < 768){
+				$("body").attr("class","breakpoint-480");
+			}
+			else if(curWidth >=768 && curWidth < 979){
+				$("body").attr("class","breakpoint-768");
+			}
+			else if(curWidth >=979 && curWidth < 1200){
+				$("body").attr("class","breakpoint-979");
+			}
+			else if(curWidth >=1200){
+				$("body").attr("class","breakpoint-1200");
+			}
+		
+		};
+			$(".toggle-sidebar").click(function(){
+				$("#container").toggleClass('sidebar-closed');
+			});
+			$(".nav-toggle").click(function(){
+				$("body").toggleClass('nav-open');
+			});
+// table中获取年月日 时分秒的方法
+function FormatDateTime(value, row, inde) {
+	if(value){
+		var value = value.substr(0,19);
+	}
+    
+    return value;
+}
+
+// D页面路由
+function isInArray(value,arr,match){
+	for(var i = 0; i < arr.length; i++){
+		if(match === false){
+			if(arr[i].match(value)){
+				return true;
+			}
+		}
+		else{
+			if(value == arr[i]){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+// 单页面路由头部左右移动事件
+function headerAnimationEvent(){
+	var $directionLeft = $("#content>.container>.header-wheel>.wheel-left");
+	var $directionRight = $("#content>.container>.header-wheel>.wheel-right");
+	var $currentHeader = $("#content>.container>.container-header>.container-block");
+	
+	$directionLeft.on("click", function(){
+		var headerWidth =  $("#content>.container").width();
+		var currentWidth =  $currentHeader.width();
+		var currentPositon =  $currentHeader.position().left;
+		if(currentWidth > headerWidth && currentPositon < 0){
+			$currentHeader.animate({"left":currentPositon+121 > 0 ? 0 :currentPositon+121});
+		}
+	});
+	$directionRight.on("click", function(){
+		var headerWidth =  $("#content>.container").width();
+		var currentWidth =  $currentHeader.width();
+		var currentPositon =  $currentHeader.position().left;
+		if(currentWidth > headerWidth && currentPositon > (-(currentWidth - headerWidth)-121) ){
+			$currentHeader.animate({"left":currentPositon-121});
+		}
+	});
+}
+headerAnimationEvent();
+
+// 未读消息数
+/*(function(){
+	$.ajax({
+		url:"/system/user/counttasks",
+		type:"get",
+		success: function(res){
+			$("#messageNum").text(res);
+		}
+	})
+})();*/
+
+// 设置默认的sweetalert
+swal.setDefaults({
+ 	confirmButtonColor: '#51a351',
+	html : true
+});
+// oss当前输入框中的删除按钮
+var ossCurrentUpDelBtn = null;
+$("#imgTest").error(function(){
+	$(this).attr("src" , "../imgs/sunhuai-bg.gif");
+	UTIL.clickDisappearSwal("文件上传失败", function(){
+		if(ossCurrentUpDelBtn){
+			$(ossCurrentUpDelBtn).click();
+		}
+	})
+})
+
+function showLoading(){
+	$("#loading").show();
+}
+function hideLoading(){
+	$("#loading").hide();
+}
+
+
+</script>
+<script type="text/javascript" src="js/page-route.js"></script>
+	</body>
+</html>

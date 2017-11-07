@@ -1,0 +1,67 @@
+  
+  <div class="container-fluid" id="updateUserInfoPage">
+     <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-edit"></i>个人信息</h4>
+                </div>
+                 <div class="widget-content">
+                         <form class="form-horizontal row-border" id="updateInfoForm" novalidate="novalidate">
+                            <input type="hidden" name="id" />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label  class="col-md-3 control-label" >账号</label>
+                                        <div class="col-md-9">
+                                            <input type="text" readonly class=" form-control" name="loginname"  maxlength="20">
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label  class="col-md-3 control-label">姓名<span class="required">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="username"  maxlength="20">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                     <div class="form-group">
+                                        <label  class="col-md-3 control-label">邮箱<span class="required">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="mail"  maxlength="30">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <div class="form-group">
+                                        <label class="col-md-3 control-label">手机<span class="required">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="mobile"  maxlength="11">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                     <div class="form-group">
+                                        <label class="col-md-3 control-label">隶属单位</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="userInfoModifyOrg" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success pull-right" id="update-info-submit-btn">确认</button>
+                                <input type="button" class="btn btn-default pull-right" id="update-info-cancel-btn" value="取消" />
+                            </div>
+                        </form>
+                </div>                            
+            </div>
+        </div>           
+    </div>  
+</div>
+<script type="text/javascript" src="js/updateUserInfo.js"></script>

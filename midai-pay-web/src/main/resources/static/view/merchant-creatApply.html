@@ -1,0 +1,2111 @@
+<div class="container-fluid" id="terminal-creatMpos">
+    <div id="handlebar_content">
+
+    </div>
+    <!--弹出底部手机商户设备表新增模态框-->
+    <!--手机商户设备表新增模态框-->
+    <div class="modal fade" id="device-edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">过滤条件</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">机身号</label>
+
+                                    <div class="col-md-6">
+                                        <input type="text" name="bodyNoStart" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-success btn-query pull-right">查询</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table data-toggle="table" id="cusEditDeviceAddTable"
+                           class="table table-striped table-checkable table-hover table-bordered"
+                           data-query-params="deviceQuery"
+                           data-url="/device/storage/unbind/list.json" data-pagination="true"
+                           data-side-pagination="server" data-page-size="5"
+                           data-pagination-first-text="First"
+                           data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                           data-pagination-loop="false" data-page-list=[5]
+                           data-pagination-last-text="Last" data-method="post">
+
+                        <thead>
+                        <tr>
+                            <th data-field="" data-radio="true"></th>
+                            <th data-field="deviceNo">机身号</th>
+                            <th data-field="typeName">设备类型</th>
+                            <th data-field="modeName">设备名称</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-horizontal">
+                        <div class="row hide-default">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">是否是首选项 </label>
+
+                                    <div class="col-md-6">
+                                        <select id="isFirst" name="isFirst" class="form-control">
+                                            <option value="0">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- 新增模态框结束 -->
+
+    <!--设置所属代理商-->
+    <!--模态框-查询父代理商 start-->
+    <div class="modal fade" id="fagent_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">查询父代理商</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="addFactoryCus"
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">父代理商</label>
+                                    <div class="col-md-8"><input type="text" id="fagent" class="form-control" maxlength="50"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <button  class="btn btn-success pull-right" id="fagentQuery">查询</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+
+                    <table class="table table-striped table-hover table-bordered" id="fagentTable"
+                           data-toggle="table" data-query-params="agentAddParams"
+                           data-url="../agent/queryNoAndNameList" data-pagination="true"
+                           data-side-pagination="server" data-page-size="5"
+                           data-pagination-first-text="First" data-page-list="[5]"
+                           data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+                           data-pagination-loop="false"
+                           data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                        <tr>
+                            <th data-field="" data-radio="true"></th>
+                            <th data-field="agentNo" data-align="left">代理商编号</th>
+                            <th data-field="name" data-align="left">代理商名称</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="closeFagent">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success" id="sureFagent">确&nbsp;&nbsp;定</button>
+                </div>
+            </div>
+        </div>
+    </div><!--模态框-查询父代理商 end-->
+
+    <!--弹出银行模态框-->
+    <div class="modal fade" id="bank-apply-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">查询支行信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="sbbg-query" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group"><label class="col-md-4 control-label">支行编号</label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="branchbankcode" class="form-control"  maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group"><label class="col-md-4 control-label">支行名称</label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="branchbankname" class="form-control"  maxlength="50"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button class="btn btn-success bank-btn-query pull-right">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table data-toggle="table" id="applybandTable"
+                           class="table table-striped table-checkable table-hover table-bordered"
+                           data-query-params="merchantNewBankBean"
+                           data-url="/system/bank/bankBranchList.json" data-pagination="true"
+                           data-side-pagination="server" data-page-size="5"
+                           data-pagination-first-text="First" data-page-list=[5]
+                           data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                           data-pagination-loop="false"
+                           data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                        <tr>
+                            <th data-field="" data-radio="true"></th>
+                            <th data-field="branchbankcode">支行编码</th>
+                            <th data-field="branchbankname">支行名称</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success btn-confirm">确&nbsp;&nbsp;定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+
+
+<!--handlebars 模板1-->
+<!--<script id="custom_Mpos" type="text/x-handlebars-template">-->
+<form class="form-horizontal row-border fv-form fv-form-bootstrap" id="customer-Mpos-form" novalidate="novalidate">
+
+    <!--{{!第一个widget box 商户基本信息，注：此类为handlebars特有注释，勿动}}-->
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-role-list-small"></i>
+                商户基本信息
+            </h4>
+        </div>
+
+        <div class="widget-content">
+            <div class="row">
+
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">所属代理商<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="parentAgentName" name="boCustomer.agentName" readonly>
+                                <input type="hidden" class="form-control" id="parentAgentId" name="boCustomer.agentId" readonly>
+                                    <span class="input-group-addon btn bg-green" id="searchFagent">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">商户名称<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="boCustomer.mercName" placeholder="已验证">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">商户简称<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="boCustomer.mercNameShort" placeholder="已验证">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--{{!第二个widget box 商户附加信息}}-->
+
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-role-list-small"></i>
+                商户附加信息
+            </h4>
+        </div>
+        <div class="widget-content" style="padding-top:15px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">商户所属行业<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <select name="boCustomer.industry" id="custom_TypeTop" class="form-control required">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">商户类别(MCC)<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <select name="boCustomer.mcc" id="custom_TypeSecond" class="form-control required">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">商户类别所属地址<span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <input type="text" name="boCustomer.address" class="form-control" placeholder="不须验证">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">商户营业执照号<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <input type="text" name="boCustomer.businessLicense" class="form-control" placeholder="已验证">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">法人姓名<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <input type="text" name="boCustomer.legalName" class="form-control" maxlength="20" placeholder="已验证">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">法人手机号<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <input type="text" name="boCustomer.mobile" class="form-control" placeholder="已验证">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">身份证号码<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <input type="text" name="boCustomer.idCard" class="form-control" placeholder="已验证">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">商户经营地址<span
+                            class="required">*</span></label>
+                        <div class="col-md-8">
+                            <select name="boCustomer.peovinceId" id="register-province" class="form-control required">
+                                <option value="0">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-1 control-label"></label>
+                        <div class="col-md-11">
+                            <select name="boCustomer.cityId" id="register-city" class="form-control required">
+                                <option value="0">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-1 control-label"></label>
+                        <div class="col-md-11">
+                            <select name="boCustomer.areaCode" id="register-area" class="form-control required">
+                                <option value="0">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-1 control-label"></label>
+                        <div class="col-md-11">
+                            <input type="text" name="boCustomer.businessAddress" class="form-control" placeholder="不须验证">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+         <!--       <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">结算开户行名称<span
+                            class="required">*</span></label>
+                        <div class="col-md-8">
+                            <select name="boCustomer.bankId" id="merchantNewBankId" class="form-control required"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group"><label class="col-md-2 control-label">开户行名称<span
+                            class="required">*</span></label>
+                        <div class="col-md-10">
+                            <input type="text" name="boCustomer.bankCode" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">开户行行号
+                            <span class="required">*</span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" name="custom.kaihuhao" class="form-control">
+                        </div>
+                    </div>
+                </div>-->
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">结算开户行名称<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <select id="merchantNewBankId" class="form-control required"></select>
+                            <input type="text" name="boCustomer.bankName" id="bankName" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">开户支行名称<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="text" id="merchantNewBranchbankName" name="boCustomer.bankBranchName"
+                                       class="form-control required" readonly="readonly"/>
+                                <input type="hidden" id="merchantNewBranchbankId" name="boCustomer.branchbankName"
+                                       class="form-control"/>
+                                                    <span class="input-group-addon bg-green btn" data-toggle="modal"
+                                                          id="bank-apply-modal-show"><span
+                                                            class="glyphicon glyphicon-search"></span></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">结算账户名称<span
+                            class="required">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" name="boCustomer.accountName" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">结算账户账号<span
+                            class="required">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" name="boCustomer.accountNo" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    商户资质附件
+                </div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a id="" class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" id="" class="file image-input">
+                            <input type="button" id="" class="showbtu" value="上传">
+                            <input type="button" id="" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[0].type" value="1">
+                            <input type="hidden" name="imgList[0].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">营业执照</span>
+                    </div>
+
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" class="file image-input">
+                            <input type="button" id="new-acc-upload-2" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-2" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[1].type" value="2">
+                            <input type="hidden" name="imgList[1].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">税务登记证</span>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" class="file image-input">
+                            <input type="button" id="new-acc-upload-3" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-3" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[2].type" value="3">
+                            <input type="hidden" name="imgList[2].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">银行卡正面</span>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="new-acc-del-4" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a id="new-acc-show-4" class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" class="file image-input">
+                            <input type="button" id="new-acc-upload-4" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-4" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[3].type" value="4">
+                            <input type="hidden" name="imgList[3].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">组织机构代码证</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="new-acc-del-1" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a id="new-acc-show-1" class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" id="new-upload-file-1" class="file image-input">
+                            <input type="button" id="new-acc-upload-1" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-1" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[0].type" value="1">
+                            <input type="hidden" name="imgList[0].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">法人证件正面照</span>
+                    </div>
+
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="new-acc-del-2" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a id="new-acc-show-2" class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" id="new-upload-file-2" class="file image-input">
+                            <input type="button" id="new-acc-upload-2" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-2" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[1].type" value="2">
+                            <input type="hidden" name="imgList[1].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">法人证件背面照</span>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="new-acc-del-3" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a id="new-acc-show-3" class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" id="new-upload-file-3" class="file image-input">
+                            <input type="button" id="new-acc-upload-3" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-3" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[2].type" value="3">
+                            <input type="hidden" name="imgList[2].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">法人手持照片或场地照片</span>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <div class="upImgs">
+                        <div class="main-div">
+                            <a id="new-acc-del-4" class="del-btu del-normal" href="javascript:void(0);"></a>
+                            <a id="new-acc-show-4" class="show-btu show-normal" href="javascript:void(0);"
+                               style="display: none;"></a>
+
+                            <div>
+                                <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image"
+                                     style="height: 154px !important;">
+                            </div>
+                            <input type="file" id="new-upload-file-4" class="file image-input">
+                            <input type="button" id="new-acc-upload-4" class="showbtu" value="上传">
+                            <input type="button" id="new-acc-download-4" class="downloadbtn" value="下载"
+                                   style="display: none;">
+                            <input type="hidden" name="imgList[3].type" value="4">
+                            <input type="hidden" name="imgList[3].url" class="fileUrl" value="">
+
+                            <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="certificate-picture">协议</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--{{!第三个widget box 刷卡成本信息}}-->
+
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-role-list-small"></i>
+                刷卡成本信息
+            </h4>
+        </div>
+
+        <div class="widget-content">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">借记卡封顶手续费<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--{{#if swingCardLimit}}
+                                <input type="text" class="form-control" name="boCustomer.swingCardLimit"
+                                       placeholder="{{swingCardLimit}}">
+                                {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.swingCardLimit">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">借记卡手续费<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--{{#if swingCardDebitRate}}
+                                <input type="text" class="form-control" name="boCustomer.swingCardDebitRate"
+                                       placeholder="{{swingCardDebitRate}}">
+                                {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.swingCardDebitRate">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">贷记卡手续费<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!-- {{#if swingCardCreditRate}}
+                                 <input type="text" class="form-control" name="boCustomer.swingCardCreditRate"
+                                        placeholder="{{swingCardCreditRate}}">
+                                 {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.swingCardCreditRate">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!-- {{#if swingCardSettleFee}}
+                                 <input type="text" class="form-control" name="boCustomer.swingCardSettleFee"
+                                        placeholder="{{swingCardSettleFee}}">
+                                 {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.swingCardSettleFee">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--{{!第四个widget box 无卡成本信息（借贷记一致）}}-->
+
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-role-list-small"></i>
+                无卡成本信息（借贷记一致）
+            </h4>
+        </div>
+
+        <div class="widget-content">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">无卡手续费<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--{{#if nonCardCreditRate}}
+                                <input type="text" class="form-control noCard_One" name="boCustomer.nonCardCreditRate" placeholder="{{nonCardCreditRate}}">
+                                {{else}}-->
+                                <input type="text" class="form-control noCard_One" name="boCustomer.nonCardCreditRate">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--{{!第二个无卡手续费，已被隐藏}}-->
+                <div class="col-md-3 hide">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">无卡手续费2<span class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--{{#if nonCardDebitRate}}
+                                <input type="text" class="form-control noCard_Copy" name="boCustomer.nonCardDebitRate"
+                                       placeholder="{{nonCardDebitRate}}">
+                                {{else}}-->
+                                <input type="text" class="form-control noCard_Copy" name="boCustomer.nonCardDebitRate">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--{{!第五个widget box 传统POS成本信息（借记卡封顶费率及成本与手刷相同）}}-->
+
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-role-list-small"></i>
+                传统POS成本信息（借记卡封顶费率及成本与手刷相同）
+            </h4>
+        </div>
+
+        <div class="widget-content">
+            <div class="row">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">借记卡封顶手续费<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--  {{#if posDebitLimit}}
+                                  <input type="text" name="boCustomer.posDebitLimit" class="form-control"
+                                         placeholder="{{posDebitLimit}}">
+                                  {{else}}-->
+                                <input type="text" name="boCustomer.posDebitLimit" class="form-control">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">元</span></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--  {{#if posDebitRate}}
+                                  <input type="text" name="boCustomer.posDebitRate" class="form-control"
+                                         placeholder="{{posDebitRate}}">
+                                  {{else}}-->
+                                <input type="text" name="boCustomer.posDebitRate" class="form-control">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!-- {{#if posCreditRate}}
+                                 <input type="text" class="form-control" name="boCustomer.posCreditRate"
+                                        placeholder="{{posCreditRate}}">
+                                 {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.posCreditRate">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+                            class="required">*</span></label>
+
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--{{#if posSettleFee}}
+                                <input type="text" class="form-control" name="boCustomer.posSettleFee"
+                                       placeholder="{{posSettleFee}}">
+                                {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.posSettleFee">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--{{!第六个widget box 扫码成本信息（借贷记一致）}}-->
+
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-role-list-small"></i>
+                扫码成本信息（借贷记一致）
+            </h4>
+        </div>
+
+        <div class="widget-content">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">微信手续费<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!--{{#if scanCodeWxRate}}-->
+                                <!--<input type="text" name="boCustomer.scanCodeWxRate" class="form-control"-->
+                                <!--placeholder="{{scanCodeWxRate}}">-->
+                                <!--{{else}}-->
+                                <input type="text" name="boCustomer.scanCodeWxRate" class="form-control">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">支付宝手续费<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!-- {{#if scanCodeZfbRate}}
+                                 <input type="text" name="boCustomer.scanCodeZfbRate" class="form-control"
+                                        placeholder="{{scanCodeZfbRate}}">
+                                 {{else}}-->
+                                <input type="text" name="boCustomer.scanCodeZfbRate" class="form-control">
+                                <!--{{/if}}-->
+
+                                <span class="input-group-addon">%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">银联扫码手续费<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <!-- {{#if scanCodeYlRate}}
+                                 <input type="text" class="form-control" name="boCustomer.scanCodeYlRate"
+                                        placeholder="{{scanCodeYlRate}}">
+
+                                 {{else}}-->
+                                <input type="text" class="form-control" name="boCustomer.scanCodeYlRate">
+                                <!--{{/if}}-->
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--{{!最后一个weideg box table表格 不做表单验证}}-->
+
+<!--
+    <div class="widget box">
+        <div class="widget-header">
+            <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>手机商户设备表</h4></div>
+            <div class="col-md-8 no-padding">
+                <div class="toolbar no-padding">
+                    <input type="button" class="btn btn-default pull-right save-device-btn sh_btn"
+                           value="保&nbsp;&nbsp;存" style="background:#f80302;color:white;">
+                    <input type="button" class="btn btn-default pull-right del-device-btn sh_btn"
+                           value="删&nbsp;&nbsp;除" style="background:#1e6cb4;color:white;">
+                    <input type="button" class="btn btn-success pull-right add-device-btn sh_btn"
+                           data-toggle="modal" id="device-edit-modal-show" value="增&nbsp;&nbsp;加"
+                           style="background:#00a4de;color:white;">
+                </div>
+            </div>
+        </div>
+        <div class="widget-content no-padding">
+            <table data-toggle="table" id="edit-device-list" data-query-params="deviceListQuery">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" data-toggle="checkbox" class="uniform"></th>
+
+                    <th data-field="typeName" data-align="left">设备类型</th>
+                    <th data-field="modeName" data-align="left">设备名称</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>-->
+
+
+    <!-- {{!底部的提交按钮}}-->
+    <div class="row">
+        <ul class="pager">
+            <li>
+                <input type="button" id="" class="btn btn-primary sh_btn" value="取消">
+                <input type="submit" id="" class="btn btn-primary sh_btn" value="确认">
+            </li>
+        </ul>
+    </div>
+</form>
+
+<!--//</script>handlebars 模板1结尾-->
+
+
+<!-- 新增模态框结束 -->
+<script type="text/tmpl" id="optionTmpl">
+    <option data-value="{{id}}">{{name}}</option>
+</script>
+
+<script type="text/tmpl" id="cityTmpl">
+	<option data-value="{{id}}" >{{name}}</option>
+</script>
+
+<script type="text/tmpl" id="bankTmpl">
+	<option data-code="{{bankcode}}" data-shortcode="{{shortcode}}" data-value="{{showname}}" value="{{bankcode}}">{{showname}}</option>
+</script>
+
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script>
+
+
+
+<script>
+    var up_args = UTIL.readUrlData({"currentUrl": "merchant-creatApply.html"});
+
+    var up_mercNo = up_args["mercNo"];
+    var up_agentId = up_args["agentId"];
+    //手机商户设备表  ---首选项
+    function firstSelectUpdate(index, row) {
+        var firstSelectList = row.isFirst;
+        if (firstSelectList == "0") {
+            return "否"
+        } else {
+            return "首选"
+        }
+    };
+
+    function agentAddParams(argms){
+        argms.agentNo = $("#fagent").val();
+        return argms;
+    };
+    // 手机商户设备新增列表参数
+    function deviceQuery(argms) {
+
+        argms.agentNo = up_agentId || "";
+        argms.bodyNoStart = $("#device-edit-modal input[name='bodyNoStart']").val().trim() || "";
+        return argms;
+    };
+
+    //银行支行模态窗口初始化数据
+    function merchantNewBankBean(argms) {
+        argms.bankcode = $("#merchantNewBankId  option:selected").data('shortcode');
+        argms.branchbankcode = $("#bank-apply-modal input[name='branchbankcode']").val().trim() || "";
+        argms.branchbankname = $("#bank-apply-modal input[name='branchbankname']").val().trim() || "";
+        return argms;
+    };
+    $(function(){
+        (function(){
+
+//            var custom_Mpos_Html = Handlebars.compile($("#custom_Mpos").html());
+
+
+            /*   $.ajax({ //其他方法放后面
+             url: HOST + "/agent/getInsertInfo",
+             type: "get",
+             async:false,
+             dataType: "json",
+             success: function (data) {
+
+             $("#handlebar_content").html(custom_Mpos_Html(data));
+             },
+             error: function (error) {
+             console.log(error);
+             }
+             });*/
+            //此处定义全局的变量把控之后的限制
+            var agent_up = null;
+            //新增代理商身份识别
+            $.ajax({
+                url: "/agent/getInsertInfo",
+                method: 'get',
+                async: false,
+                success: function (res) {
+                    if (res.parentAgentName == null) {
+                        $('#searchFagent').show();
+                    } else {
+                        $('#searchFagent').hide();
+                        $('#parentAgentName').val(res.parentAgentName);
+                    }
+//                                $("#handlebar_content").html(custom_Mpos_Html(res));
+                    //获取全部代理商信息；
+                    $.each(res, function (i, n) {
+                        if (res[i] == null) {
+                            res[i] = 0;
+                        }
+                    })
+                    //设置全局保存的数值；
+                    agent_up = res;
+                }
+            });
+
+            //银行选中
+
+            function changeBank($that, success) {
+                var shortcodeCode = $('option:selected', $that).data('shortcode').toString();
+
+                $('#merchantNewBranchbankName').val('');
+                $('#merchantNewBranchbankId').val('');
+            }
+
+
+
+            //弹出所属代理商模态框
+            var $form=$("#customer-Mpos-form");
+
+            $('[data-toggle="table"]').bootstrapTable();
+
+            var $dlsxzTableData =  $("#fagentTable").bootstrapTable("getData");
+
+            $('#searchFagent').on('click', function () {
+                $("#fagent_modal").modal("show");
+            });
+
+            //父代理商查询事件
+            $("#fagentQuery").on('click',function(e){
+                e.preventDefault();
+
+                if($dlsxzTableData.length === 0 ){
+                    var randomNum = parseInt(Math.random()*99999);
+                    var dlsxzTableRefreshUrl =  $("#fagentTable").data("url") + "?" + randomNum;
+                    $("#fagentTable").bootstrapTable("refresh", {
+                        url:dlsxzTableRefreshUrl
+                    });
+                    $dlsxzTableData =   $("#fagentTable").bootstrapTable("getData");
+                }
+                else{
+                    $("#fagentTable").bootstrapTable("selectPage", 1);
+                }
+
+
+            });
+            //父代理商确定事件
+                $("#sureFagent").on('click',function(){
+                var tempAgent = $("#fagentTable").bootstrapTable('getSelections');
+                if(tempAgent.length > 0){
+
+                    tempAgent = tempAgent[0];
+                   /* $("#parentAgentName").find("input[name='parentAgentName']").val(tempAgent.name).focus();
+                    $("#parentAgentId").find("input[name='parentAgentId']").val(tempAgent.agentNo);*/
+
+                    $("#parentAgentName").val(tempAgent.name).focus();
+                    $("#parentAgentId").val(tempAgent.agentNo);
+                }
+                $("#fagent_modal").modal("hide");
+            })
+
+            // 父代理商模态框中查询数据清空
+            $("#fagent_modal").on('hide.bs.modal', function() {
+                $("#fagent").val("");
+                $("#fagentTable").bootstrapTable("selectPage", 1);//清空选中项
+            })
+
+            //父代理商模态框关闭按钮
+            $("#closeFagent").on('click',function(){
+                $("#fagent_modal").modal("hide");
+            });
+
+            //商户所属行业二级联动
+            //获取当前页面的参数
+
+
+
+            $("#edit-device-list").bootstrapTable({
+
+                url: HOST + "/customer/loadCustomerDevice.json",
+                classes: "table table-striped table-checkable table-hover table-bordered",
+                method: 'post',
+                dataType: "json",
+                toggle: "table",
+                pageSize: 12,
+                pagination: true,
+                striped: true,
+                sidePagination: "server",
+                paginationLoop: "false",
+                pageList: [12, 24, 36],
+                paginationPreText: "上一页",//指定分页条中上一页按钮的图标或文字
+                paginationNextText: "下一页",
+                paginationFirstText: "First",
+                queryParams: function (argms) {
+                    argms.mercNo = up_mercNo || "";
+
+                    return argms;
+                },
+
+                columns: [
+
+                    {
+                        field: "",
+                        checkbox: "true",
+                        align: "center",
+                        formatter: function (value, row, index) {
+
+                        }
+                    }, {
+                        field: "deviceNo",
+                        title: "机身号",
+                        align: "left"
+                    }, {
+                        field: "createTime",
+                        title: "创建时间",
+                        align: "left"
+                    }, {
+                        field: "isFirst",
+                        title: "首选项",
+                        align: "left",
+                        formatter:function( value, row, index){
+
+                        }
+                    }, {
+                        field: "typeName",
+                        title: "设备类型",
+                        align: "left"
+
+                    }, {
+                        field: "modeName",
+                        title: "设备名称",
+                        align: "left"
+
+                    }]
+            });
+//           var custom_Hangye2 = Handlebars.compile($("#handlebars_customHangyeTop").html());
+////          var custom_Hangye3 = Handlebars.compile($("#handlebars_customHangyeSecond").html());
+//            $.ajax({
+//                url: HOST + "/system/mcc/loadData/0",
+//                dataType: "json",
+//                type: "get",
+//                success: function (data) {
+//
+//                    var cusTop=$("#custom_TypeTop");
+//                    cusTop.html(custom_Hangye2(data));
+//                    cusTop.change(function(){
+//                        var valData=cusTop.find("option:select").val();
+//                        $.ajax({
+//                            url: HOST + "/system/mcc/loadData/"+valData,
+//                            dataType: "json",
+//                            type: "get",
+//                            success:function(data){
+//                                $("custom_TypeSecond").html(custom_Hangye3(data));
+//                            }
+//                        })
+
+//                    })
+//
+//                },
+//                error: function () {
+//
+//                }
+//            });
+
+
+
+
+            //底部弹出增加手机商户设备表
+            $('#device-edit-modal-show').on('click', function() {
+
+                $("#device-edit-modal").modal("show");
+            });
+
+            $("#device-edit-modal .confirm-btn").on("click", function () {
+                var manufacturer = $("#cusEditDeviceAddTable").bootstrapTable('getSelections');
+                if (manufacturer.length > 0) {
+                    manufacturer = manufacturer[0];
+
+                    var deviceNo = manufacturer.deviceNo;
+                    var isFirst = $("#device-edit-modal #isFirst").val();
+                    var typeName = manufacturer.typeName;
+                    var modeName = manufacturer.modeName;
+
+                    //发送新增设备请求
+                    var deviceBean = {
+                        "customerId": up_mercNo,
+                        "deviceNo": deviceNo,
+                        "typeName": typeName,
+                        "modeName": modeName,
+                        "isFirst": isFirst
+
+                    };
+
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: "application/json",
+                        url: HOST+"/customer/insert.json",
+                        data: JSON.stringify(deviceBean),
+                        success: function (res) {
+                            if (res != null) {
+                                //页面手机商户设备表刷新table
+                                $('#edit-device-list').bootstrapTable('refresh', {silent: true});
+                                $("#cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+                                // UTIL.clickDisappearSwal("新增成功！");
+                            } else {
+                                UTIL.clickDisappearSwal("新增失败！");
+                            }
+                        }
+                    });
+                }
+                $("#device-edit-modal").modal("hide");
+            });
+            //手机设备新增模态窗事件
+
+            $("#device-edit-modal .btn-query").on("click", function (e) {//增加弹框，查询按钮
+                e.preventDefault();
+                $("#cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+            });
+
+            $("#device-edit-modal").on('hide.bs.modal', function () {
+                $("#device-edit-modal input[name='bodyNoStart']").val("");
+                $("#cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+            });
+
+            $("#device-edit-modal .confirm-btn").on("click", function () { //确认按钮
+//                console.log("no name");
+                var manufacturer = $("#cusEditDeviceAddTable").bootstrapTable('getSelections');
+                if (manufacturer.length > 0) {
+                    manufacturer = manufacturer[0];
+
+                    var deviceNo = manufacturer.deviceNo;
+                    var isFirst = $("#device-edit-modal #isFirst").val();
+                    var typeName = manufacturer.typeName;
+                    var modeName = manufacturer.modeName;
+
+                    //发送新增设备请求
+                    var deviceBean = {
+                        "customerId": up_mercNo,
+                        "deviceNo": deviceNo,
+                        "typeName": typeName,
+                        "modeName": modeName,
+                        "isFirst": isFirst
+
+                    };
+
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: "application/json",
+                        url: HOST+"/customer/insert.json",
+                        data: JSON.stringify(deviceBean),
+                        success: function (res) {
+                            console.log("请求成功"+res);
+                            if (res != null) {
+                                //页面手机商户设备表刷新table
+                                $('#edit-device-list').bootstrapTable('refresh', {silent: true});
+                                $("#cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+                                // UTIL.clickDisappearSwal("新增成功！");
+                            } else {
+                                UTIL.clickDisappearSwal("新增失败！");
+                            }
+                        },
+                        error:function(error){
+                            console.log(error);
+                        }
+                    });
+                }
+                $("#device-edit-modal").modal("hide");
+            });
+
+            //无卡手续费第二个跟第一个值一样
+            $(".noCard_One").blur(function(){
+                console.log("失去焦点");
+                $(".noCard_Copy").val($(".noCard_One").val());
+            });
+            //上传图片
+            $("#customer-Mpos-form .upImgs").each(function () {
+                $(this).uploadPreview();
+            });
+            //初始化商户所属行业
+            $.ajax({
+                url: HOST + "/system/mcc/loadData/0",
+                dataType: "json",
+                method: 'get',
+                success: function (res) {
+
+                    var $selectList = $form.find('#custom_TypeTop');
+                    $selectList.empty();
+
+                    $selectList.each(function (index) {
+                        for (var i = 0; i < res.length; i++) {
+                            var str = $("#optionTmpl").html();
+                            $(this).append(str.replace(/\{\{id\}\}/g, res[i].id).replace(/\{\{name\}\}/g, res[i].name));
+                        }
+                        changeCusHangye($(this));
+                        $(this).change(function () {
+                            var $that = $(this);
+                            changeCusHangye($that);
+                        })
+                    });
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(error);
+                }
+            });
+
+            function changeCusHangye($that, success) {
+
+                var provinceCode = $('option:selected', $that).data('value');
+
+//                console.log(provinceCode);
+                $.ajax({
+                    url: HOST + "/system/mcc/loadData/"+provinceCode,
+                    dataType: "json",
+                    type: 'get',
+                    success: function (res) {
+                        $("#custom_TypeSecond").empty();
+                        for (var i = 0; i < res.length; i++) {
+                            var cityStr = $('#cityTmpl').html();
+                            var cityName = cityStr.replace(/\{\{id\}\}/g, res[i].id).replace(/\{\{name\}\}/g, res[i].name);
+                            $("#custom_TypeSecond").append(cityName);
+                        }
+
+                        if (success && typeof success === 'function') {
+                            success();
+                        }
+
+                    }
+                })
+            };
+
+            //初始化省市区数据联动
+
+            //三级联动start
+            $.ajax({
+                url: "/system/address/loadAllData/0/0",
+                method: 'post',
+                data:"{'type':0,'code':0}",
+                success: function (res) {
+                    var op='';
+                    $.each(res,function (i,n){
+                        op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                    })
+                    $('#register-province').append(op);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+            function change_city(e,n) {
+                $('#register-city option:gt(0)').remove();
+                $.ajax({
+                    url: '/system/address/loadAllData/'+e+'/'+n,
+                    method: 'post',
+                    success: function (res) {
+
+                        var op='';
+                        $.each(res,function (i,n){
+                            op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                        })
+                        $('#register-city').append(op);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+            }
+            function change_area(e,n) {
+                $('#register-area option:gt(0)').remove();
+                $.ajax({
+                    url: '/system/address/loadAllData/'+e+'/'+n,
+                    method: 'post',
+                    success: function (res) {
+
+                        var op='';
+                        $.each(res,function (i,n){
+                            op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+                        })
+                        $('#register-area').append(op);
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+            }
+            change_city(1,1000)
+            change_area(2,1000)
+            $("#register-province").change(function (){
+                var city=$(this).find("option:selected").attr("value");
+                var area=$("#register-city").find("option:selected").attr("value");
+                change_city(1,city)
+                change_area(2,area)
+            })
+            $("#register-city").change(function (){
+                var area=$(this).find("option:selected").attr("value")
+                change_area(2,area)
+            })
+
+
+            //初始化省市区数据联动结束---------------------------
+
+
+            //银行
+
+
+            //初始化开户总行名称列表
+            $.ajax({
+                url: "/system/bank/loadAllBank",
+                method: 'post',
+                success: function (res) {
+                    var $selectBankList = $form.find('select').filter(
+                            function () {
+                                return ($(this).attr('id') || '').toLowerCase()
+                                                .indexOf('bankid') >= 0;
+                            });
+                    $selectBankList.empty();
+                    $selectBankList.each(function (index) {
+                        for (var i = 0; i < res.length; i++) {
+                            var str = $("#bankTmpl").html();
+                            $(this)
+                                    .append(
+                                            //bankcode shortcode showname
+                                            str.replace(/\{\{code\}\}/g,
+                                                    res[i].bankcode).replace(/\{\{bankcode\}\}/g, res[i].bankcode).replace(/\{\{shortcode\}\}/g, res[i].shortcode)
+                                                    .replace(/\{\{showname\}\}/g, res[i].showname));
+                        }
+                        changeBank($(this));
+                        $(this).change(function () {
+                            var $that = $(this);
+                            changeBank($that);
+                        });
+                    });
+                },
+                error: function (xhr, textStatus,
+                                 errorThrown) {
+                    alert("亲，初始化开户总行名称列表出错，请联系管理员！");
+                }
+            });
+
+            function changeBank($that, success) {
+                var shortcodeCode = $('option:selected', $that).data('shortcode')
+                        .toString();
+
+                $('#merchantNewBranchbankName').val('');
+                $('#merchantNewBranchbankId').val('');
+            }
+
+// 初始化table
+            $('[data-toggle="table"]').bootstrapTable();
+
+// 开户行模态框消失时校验状态更新
+            $("#bank-apply-modal").on('hide.bs.modal', function () {
+            $form.data('formValidation').updateStatus('boCustomer.branchbankName', 'NOT_VALIDATED', null);
+        });
+
+
+//弹出模态框
+        $('#bank-apply-modal-show').on('click', function () {
+            $("#bank-apply-modal").modal("show");
+        });
+
+//银行支行模态窗
+// 银行支行模态框中的数据清空-初始化
+
+        $("#bank-apply-modal").on('show.bs.modal', function () {
+        //在银行支行显示的时候给予银行名字赋值；
+        var bankName=$("#merchantNewBankId  option:selected").text();
+        $("#bankName").val(bankName);
+        function merchantNewBankBean(argms) {
+            argms.bankcode = $("#merchantNewBankId  option:selected").data('shortcode');
+            argms.branchbankcode = $("#bank-apply-modal input[name='branchbankcode']").val().trim() || "";
+            argms.branchbankname = $("#bank-apply-modal input[name='branchbankname']").val().trim() || "";
+            return argms;
+        };
+        $("#applybandTable").bootstrapTable("selectPage", 1);
+    });
+
+
+    $("#bank-apply-modal").on('hide.bs.modal', function () {
+    $("#bank-apply-modal input[name='branchbankId']").val("");
+    $("#bank-apply-modal input[name='branchbankName']").val("");
+    $("#applybandTable").bootstrapTable("selectPage", 1);
+    });
+
+    // 银行支行查询按钮点击事件
+    var $sqdlsbhTableData =  $("#applybandTable").bootstrapTable("getData");
+    $("#bank-apply-modal .bank-btn-query").on("click", function (e) {
+        e.preventDefault();
+        if($sqdlsbhTableData.length === 0 ){
+            var randomNum = parseInt(Math.random()*99999);
+            var sqdlsbhTableRefreshUrl =  $("#applybandTable").data("url") + "?" + randomNum;
+            $("#applybandTable").bootstrapTable("refresh", {
+                url:sqdlsbhTableRefreshUrl
+            });
+            $sqdlsbhTableData =  $("#applybandTable").bootstrapTable("getData");
+        }
+        else{
+            $("#applybandTable").bootstrapTable("selectPage", 1);
+        }
+
+    });
+
+    //银行支行模态框中查询数据清空
+    $("#bank-apply-modal").on('hide.bs.modal', function () {
+    $("#bank-apply-modal input[name='branchbankcode']").val("");
+    $("#bank-apply-modal input[name='branchbankname']").val("");
+    $("#bank-apply-modal").bootstrapTable("selectPage", 1);
+    });
+    // 银行支行确认按钮点击事件
+    $("#bank-apply-modal .btn-confirm").on("click", function () {
+        var manufacturer = $("#applybandTable").bootstrapTable('getSelections');
+        if (manufacturer.length > 0) {
+            manufacturer = manufacturer[0];
+            $form.find("input[id='merchantNewBranchbankId']").val(manufacturer.branchbankcode);
+            $form.find("input[id='merchantNewBranchbankName']").val(manufacturer.branchbankname);
+        }
+        $("#bank-apply-modal").modal("hide");
+    });
+
+    //----------------------银行结束
+
+
+
+
+            $form.formValidation({ //开始表单验证
+                message: '此值无效', //此值无效
+                excluded: ["#paramsYybName", "#directorUserName", "#ywzgName", ":disabled"],
+                icon: {
+                    valid: 'glyphicon',
+                    invalid: 'glyphicon'
+                },
+                fields: {
+
+                    "boCustomer.agentName": {//商户代码
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户代码不能为空！'
+                            }
+                        }
+                    },
+                    "boCustomer.mercNameShort": { //商户简称
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户简称不能为空！'
+                            }
+                        }
+                    },
+
+                    "boCustomer.mercName": { //商户名称
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户名称不能为空！'
+                            }
+                        }
+                    },
+                    //商户附加信息
+                    "boCustomer.industry": { //商户所属行业
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户所属行业不能为空！'
+                            }
+                        }
+                    },
+                    "boCustomer.mcc": { //商户类别(MCC)
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户类别(MCC)不能为空！'
+                            }
+                        }
+                    },
+                    "boCustomer.address": { //商户类别所属地址
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户类别所属地址不能为空！'
+                            }
+                        }
+                    },
+                    "boCustomer.businessLicense": { //商户营业执照号
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '商户营业执照号不能为空！'
+                            }
+                        }
+                    },
+
+                    'boCustomer.mobile': { //法人手机号
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '法人手机号不能为空！'
+                            },
+                            regexp: {
+                                regexp: /^1[34578]\d{9}$/,
+                                message: '请填写11位正确的手机号码！'
+                            },
+                            callback: {
+                                message: '法人手机号已存在！',
+                                callback: function (value, validator) {
+                                    // console.log(validator);
+                                    var reg = /^1[34578]\d{9}$/;
+                                    var flag = 0;
+                                    if (reg.test(value)) {
+                                        $.ajax({
+                                            url: "/customer/selectbymobile/" + value,
+                                            type: "get",
+                                            async: false,
+                                            success: function (res) {
+                                                flag = res;
+                                            }
+                                        })
+                                        if (flag == 0) {
+                                            return true;
+                                        }
+                                        else {
+                                            return false;
+                                        }
+                                    }
+                                    else {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    //法人姓名
+                    'boCustomer.legalName': {
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '法人姓名不能为空！'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 20,
+                                message: "请输入20以内的字符！"
+
+                            } ,
+                            callback: {
+                                callback: function (value, validator) {
+                                    $("#regaccountName").val(value);
+                                    return true;
+                                }
+                            }
+                        }
+                    },
+
+                    'boCustomer.idCard': { //法人身份证号码
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '身份证号码不能为空！'
+                            },
+                            regexp: {
+                                regexp: /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/,
+                                message: '请输入15或18位正确的身份证号码！'
+                            }
+                        }
+                    },
+                    //验证经营地址
+                    'boCustomer.peovinceId': { //商户经营地址，省
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '请选择省份！'
+                            },
+                            between: {
+                                min:1,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.cityId': { //商户经营地址，省
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '请选择市或区！'
+                            },
+                            between: {
+                                min:1,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.areaCode': { //商户经营地址，省
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '请选择区或县！'
+                            },
+                            between: {
+                                min:1,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+
+                    'boCustomer.branchbankName': { //开户支行名称
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '开户支行名称不能为空！'
+                            }
+                        }
+                    },
+                    'boCustomer.accountName': { //结算账户账号,bankCode
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '结算账户名称不能为空！'
+                            }
+                        }
+                    },
+
+
+                    'accountName': { //结算账号名称
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '结算账号名称不能为空！'
+                            }
+                        }
+                    },
+
+                    'boCustomer.accountNo': { //结算账号
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]*$/,
+                                message: '请填写0~9的数字！'
+                            }
+                        }
+                    },
+                    'boCustomer.swingCardLimit': { //刷卡成本信息-借记卡封顶手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.swingCardLimit,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.swingCardDebitRate': { //刷卡成本信息-借记卡手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.swingCardDebitRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.swingCardCreditRate': { //刷卡成本信息-贷记卡手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.swingCardCreditRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.swingCardSettleFee': { //刷卡成本信息-交易结算手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.swingCardSettleFee ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+
+                    //无卡成本信息（借贷记一致）,两个始终一致
+                    'boCustomer.nonCardCreditRate': { //第1个
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.nonCardCreditRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.nonCardDebitRate': { //第2个
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.nonCardDebitRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+
+                    //传统POS成本信息（借记卡封顶费率及成本与手刷相同）
+
+                    'boCustomer.posDebitLimit': { //传统POS成本信息-借记卡封顶手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.posDebitLimit ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    //
+                    'boCustomer.posDebitRate': {//传统POS成本信息-借记卡手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.posDebitLimit ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    //
+                    'boCustomer.posCreditRate': {//传统POS成本信息-贷记卡手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.posCreditRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.posSettleFee': { //传统POS成本信息-交易结算手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.posSettleFee ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    //扫码成本信息（借贷记一致）
+                    'boCustomer.scanCodeWxRate': { //扫码成本信息-微信手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.scanCodeWxRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.scanCodeZfbRate': { //扫码成本信息-支付宝手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.scanCodeZfbRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                    'boCustomer.scanCodeYlRate': { //扫码成本信息-银联扫码手续费
+                        group: '.form-group',
+                        validators: {
+                            notEmpty: {
+                                message: '输入不能为空！'
+                            },
+                            between: {
+                                min:agent_up.scanCodeYlRate ,
+                                max: 100000000000000,
+                                message: '请输入正确的数值'
+                            }
+                        }
+                    },
+                }
+            }) .on('success.form.fv',
+                    function (e, data) {
+                        e.preventDefault();
+
+                        $form.find('[type="submit"]').addClass('disabled').prop("disabled", true);
+                        //判断oss是否上传
+                        // var lpPhoto = $form.find('input[name="imgList[0].url"]').val();
+                        // var lpCardIdProsphoto = $form.find('input[name="imgList[1].url"]').val();
+                        // var lpCardIdConsPhoto = $form.find('input[name="imgList[2].url"]').val();
+                        // var bankPhoto = $form.find('input[name="imgList[3].url"]').val();
+
+
+                        //上传图片文件
+
+                        // if (lpPhoto == null || lpPhoto == '' || lpPhoto == 'undefined') {
+                        //     UTIL.clickDisappearSwal("请上传法人图片", function () {
+                        //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                        //     });
+
+                        //     return;
+                        // }
+                        // if (lpCardIdProsphoto == null || lpCardIdProsphoto == '' || lpCardIdProsphoto == 'undefined') {
+                        //     UTIL.clickDisappearSwal("请上传法人身份证正面图片", function () {
+                        //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                        //     });
+                        //     return;
+                        // }
+                        // if (lpCardIdConsPhoto == null || lpCardIdConsPhoto == '' || lpCardIdConsPhoto == 'undefined') {
+                        //     UTIL.clickDisappearSwal("请上传法人身份证反面图片", function () {
+                        //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                        //     });
+                        //     return;
+                        // }
+                        // if (bankPhoto == null || bankPhoto == '' || bankPhoto == 'undefined') {
+                        //     UTIL.clickDisappearSwal("请上传银行卡照片图片", function () {
+                        //         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+                        //     });
+                        //     return;
+                        // }
+
+                        showLoading();
+                        UTIL.submitForm({
+                            form: "#customer-Mpos-form",
+                            url: HOST+"/customer/save.json",
+                            success: function () {
+                                console.log("张留清---表单已提交");
+                                hideLoading();
+                                // 新建成功之后刷新商户查询table
+                                if ($("#custom-list")) {
+                                    $("#custom-list").bootstrapTable("selectPage", 1);
+                                }
+                                UTIL.autoDisappearSwal("商户申请成功!", function () {
+                                    UTIL.closeCurrentPage({
+                                        delUrl: "merchant-creatApply.html",
+                                        toUrl: "merchant-query.html"
+                                    });
+                                })
+                            }
+                        })
+                    });//表单提交结束
+        })();
+
+    });
+
+</script>

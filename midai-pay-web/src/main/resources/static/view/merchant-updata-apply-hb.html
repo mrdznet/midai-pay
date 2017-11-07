@@ -1,0 +1,655 @@
+
+<!-- 商户信息修改 -->
+<script type="text/tmpl" id="optionTmplHb">
+					<option data-code="{{code}}" data-value="{{name}}" value="{{code}}">{{name}}</option>
+</script>
+<script type="text/tmpl" id="cityTmplHb">
+					<option data-code="{{code}}" data-father="{{father}}" value="{{code}}">{{name}}</option>
+</script>
+
+<script type="text/tmpl" id="bankTmplHb">
+    <option data-code="{{bankcode}}" data-shortcode="{{shortcode}}" data-value="{{showname}}" value="{{bankcode}}">{{showname}}</option>
+</script>
+
+<div class="container-fluid" id="merchant-update-Hb">
+    <!--商户新建申请-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-form"></i>商户修改</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" method="post" role="form" id="customer-update-form-hb">
+                        <input type="hidden" name="customer.state"/>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户编号<span class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercNo" class="form-control" readonly="readonly"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户名称<span class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercName" class="form-control" readonly="readonly"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group"><label class="col-md-4 control-label">商户手机号<span
+                                        class="required">*</span></label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" name="mobile" class="form-control required email" readonly="readonly" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix" style="padding-top: 15px;">
+                            <div class="widget box">
+                                <div class="widget-header">
+                                    <h4><i class="icon-role-list-small"></i>入账信息
+                                    </h4>
+                                </div>
+                                <div class="widget-content" style="padding-top:15px;">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-4 control-label">省<span
+                                                    class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <select name="provinceId" id="hb-register-province" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-4 control-label">市<span
+                                                    class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <select name="cityId" id="hb-register-city" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-4 control-label">开户名<span
+                                                    class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <input type="text" name="accountName" class="form-control required url" maxlength="20">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">开户账号<span class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <input type="text" name="accountNo" class="form-control" maxlength="19"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group"><label class="col-md-4 control-label">开户总行名称<span class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <select name="bankId" id="bankIdHb" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">开户支行名称<span class="required">*</span></label>
+
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <input type="text" id="branchBankNameHb" name="branchBankName" class="form-control" readonly="readonly"/>
+                                                        <input type="hidden" id="branchbankIdHb" name="branchBankId" class="form-control" value="140500"/>
+                                                <span class="input-group-addon bg-green btn" data-toggle="modal" id="bank-edit-modal-show-hb"><span
+                                                        class="glyphicon glyphicon-search"></span></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix" style="padding-top: 15px;">
+                            <div class="widget box">
+                                <div class="widget-header">
+                                    <h4><i class="icon-role-list-small"></i>商户资质附件
+                                    </h4>
+                                </div>
+                                <div class="widget-content" style="padding-top:15px;">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-2">
+                                            <div class="upImgs" data-showmodal="up-showImg-madal-hb">
+                                                <div class="main-div">
+                                                    <a id="up-acc-del-4" class="del-btu del-normal" href="javascript:void(0);"></a>
+                                                    <a id="up-acc-show-4" class="show-btu show-normal" href="javascript:void(0);"></a>
+
+                                                    <div>
+                                                        <img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;">
+                                                    </div>
+                                                    <input type="file" id="cshb-upload-file-4" class="file image-input">
+                                                    <input type="button" id="cshb-acc-upload-4" class="showbtu" value="上传">
+                                                    <input type="button" id="cshb-acc-download-4" class="downloadbtn" value="下载">
+                                                    <input type="hidden" name="imgs[3].type" value="4">
+                                                    <input type="hidden" name="imgs[3].url" class="fileUrl" value="" id="hb-picPath">
+
+                                                    <div style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width: 0%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="certificate-picture">银行卡照片</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">备注</label>
+
+                                    <div class="col-md-11">
+                                        <textarea name="note" class="form-control required url" rows="6" style="resize: none;" maxlength="200"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <button class="btn btn-success pull-right" id="changeHbSearch">确认</button>
+                            <input type="button"  class="btn btn-default pull-right" value="取消" id="emptyhHbsearch">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--支行信息模态框-->
+<div class="modal fade" id="bank-edit-modal-hb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">查询支行信息</h4>
+            </div>
+            <div class="modal-body">
+                <div id="" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-4 control-label">支行编号</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="branchbankcode" class="form-control"  maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group"><label class="col-md-4 control-label">支行名称</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="branchbankname" class="form-control"  maxlength="50"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button id="btn-query-hb" class="btn btn-success pull-right">查询</button>
+                        </div>
+                    </div>
+                </div>
+                <table data-toggle="table" id="editbandTableHb"
+                       class="table table-striped table-checkable table-hover table-bordered"
+                       data-query-params="bankBeanHb"
+                       data-url="/system/bank/bankBranchList.json" data-pagination="true"
+                       data-side-pagination="server" data-page-size="5"
+                       data-pagination-first-text="First"
+                       data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                       data-pagination-loop="false" data-page-list=[5]
+                       data-pagination-last-text="Last" data-method="post">
+                    <thead>
+                    <tr>
+                        <th data-field="" data-radio="true"></th>
+                        <th data-field="branchbankcode">支行编码</th>
+                        <th data-field="branchbankname">支行名称</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                <button type="button" class="btn btn-success btn-shxg-sure-hb">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- 图片预览模态框 -->
+<div class="modal fade" id="up-showImg-madal-hb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center imgTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-pic-review">
+                    <img src="" width="100%" height="100%" style="width: 500px;height: 500px;">
+                    <input type="button" class="rotateImg" placeholder="顺时针旋转90°" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script>
+<script>
+
+    // 初始化table
+    $('[data-toggle="table"]').bootstrapTable();
+
+    //银行支行模态窗口初始化数据
+    function bankBeanHb(argms) {
+        argms.bankcode = $("#customer-update-form-hb #bankIdHb  option:selected").data('shortcode');
+        argms.branchbankcode = $("#bank-edit-modal-hb input[name='branchbankcode']").val().trim() || "";
+        argms.branchbankname = $("#bank-edit-modal-hb input[name='branchbankname']").val().trim() || "";
+        return argms;
+    };
+    $(function () {
+        var $sbrkFormHb = $('#customer-update-form-hb');  //表单选择
+        var cityIdHb;
+        //获取当前页面的参数
+        var up_args = UTIL.readUrlData({"currentUrl": "merchant-updata-apply-hb.html"});
+        var up_mercNo_hb = up_args["mercNo"];
+        var up_mercId_Hb = up_args["mercId"];
+        //初始化开户总行名称列表
+        $.ajax({
+            url: "/system/bank/loadAllBank",
+            method: 'post',
+            async : false,
+            success: function (res) {
+                var $selectBankList = $('select').filter(
+                    function () {
+                        return ($(this).attr('id') || '').toLowerCase().indexOf('bankidhb') >= 0;
+                    });
+                $selectBankList.empty();
+                $selectBankList.each(function (index) {
+                    for (var i = 0; i < res.length; i++) {
+                        var str = $("#bankTmplHb").html();
+                        $(this).append(str.replace(/\{\{code\}\}/g,
+                                res[i].bankcode).replace(/\{\{bankcode\}\}/g,
+                                res[i].bankcode).replace(/\{\{shortcode\}\}/g,
+                                res[i].shortcode).replace(/\{\{showname\}\}/g, res[i].showname));
+                    }
+                    $(this).change(function () {
+                        var $that = $(this);
+                        changeBank($that);
+                    });
+                });
+            }
+        });
+
+
+        function changeBank($that, success) {
+            $('#customer-update-form-hb #branchBankNameHb').val('');
+            $('#customer-update-form-hb #branchbankIdHb').val('');
+        }
+
+        //开户支行名称
+        $("#bank-edit-modal-show-hb").click(function () {
+            $("#bank-edit-modal-hb").modal();
+        });
+
+        // 银行支行模态框中的数据清空-初始化
+
+        $("#bank-edit-modal-hb").on('show.bs.modal', function () {
+            function bankBeanHb(argms) {
+                argms.bankcode = $("#customer-update-form-hb #bankIdHb  option:selected").data('shortcode');
+                argms.branchbankcode = $("#bank-edit-modal-hb input[name='branchbankcode']").val().trim() || "";
+                argms.branchbankname = $("#bank-edit-modal-hb input[name='branchbankname']").val().trim() || "";
+                return argms;
+            };
+
+            $("#editbandTableHb").bootstrapTable("selectPage", 1);
+        });
+
+        //银行模态窗口
+        $("#bank-edit-modal-hb").on('hide.bs.modal', function() {
+            $("#bank-edit-modal-hb input[name='branchbankcode']").val("");
+            $("#bank-edit-modal-hb input[name='branchbankname']").val("");
+            $("#editbandTableHb").bootstrapTable("selectPage", 1);
+        });
+        //银行支行模态框中查询数据清空
+        $("#bank-edit-modal-hb").on('hide.bs.modal', function() {
+            $("#bank-edit-modal-hb input[name='branchbankcode']").val("");
+            $("#bank-edit-modal-hb input[name='branchbankname']").val("");
+            $("#bank-edit-modal").bootstrapTable("selectPage", 1);
+        });
+
+        // 银行支行查询按钮点击事件
+        $("#btn-query-hb").click(function(e){
+            e.preventDefault();
+            $("#editbandTableHb").bootstrapTable("selectPage", 1);
+        });
+
+
+        // 银行支行确认按钮点击事件
+        $("#bank-edit-modal-hb .btn-shxg-sure-hb").on("click",function(){
+            var manufacturer = $("#editbandTableHb").bootstrapTable('getSelections');
+            if(manufacturer.length > 0){
+                manufacturer = manufacturer[0];
+                $sbrkFormHb.find("input[id='branchbankIdHb']").val(manufacturer.branchbankcode);
+                $sbrkFormHb.find("input[id='branchBankNameHb']").val(manufacturer.branchbankname);
+            }
+            $("#bank-edit-modal-hb").modal("hide");
+        });
+
+        // 旋转图片
+        $("#up-showImg-madal-hb .rotateImg").click(function(){
+            ROTATEIMGFLAG = (++ROTATEIMGFLAG) % 4;
+            $(this).siblings('img').css({'transform': 'rotate(' + ROTATEIMGFLAG*90 + 'deg)'});
+        })
+        //初始化省市联动
+        $.ajax({
+            url : "/system/address/loadprovince.json",
+            method : 'post',
+            success : function(res) {
+                var $selectList = $('#customer-update-form-hb select').filter(
+                        function() {
+                            return ($(this).attr('id') || '').toLowerCase()
+                                            .indexOf('province') >= 0;
+                        });
+                $selectList.empty();
+                $selectList.each(function(index) {
+                    for (var i = 0; i < res.length; i++) {
+                        var str = $("#optionTmplHb").html();
+                        $(this)
+                                .append(
+                                str.replace(/\{\{code\}\}/g,
+                                        res[i].code).replace(
+                                        /\{\{id\}\}/g, res[i].code)
+                                        .replace(/\{\{name\}\}/g,
+                                        res[i].name));
+                    }
+//                    changeProvince($(this));
+                    $(this).change(function() {
+                        var $that = $(this);
+                        changeProvince($that);
+                    });
+
+                    //加载修改页面
+                    $.ajax({
+                        type: "get",
+                        dataType: "json",
+                        contentType: "application/json",
+                        url: "/haibei/customer/load/" + up_mercNo_hb,
+                        success: function (res) {
+                            $("#customer-update-form-hb").json2form(res);
+                            $("#customer-update-form-hb #hb-register-province").change();
+                            cityIdHb = res.cityId;
+
+                            $("#hb-picPath").val(res.picPath);
+                            $("#customer-update-form-hb .upImgs").each(function () {
+                                $(this).uploadPreview();
+                            });
+                        }
+                    });
+                });
+            }
+        })
+        // 省市区的数据联动
+        function changeProvince($that, success) {
+            var nameStr = $that.attr("id").toLowerCase().replace("province",
+                    "city");
+            var provinceCode = $('option:selected', $that).data('code')
+                    .toString();
+            var provsValue = $that.find("option:selected").data("value");
+            var provincialCityFlag = "";
+            if (provsValue.substr(provsValue.length - 1, 1) == "市") {
+                provincialCityFlag = "area";
+                provinceCode = provinceCode.substr(0, provinceCode.length - 3)
+                        + "100";
+            } else {
+                provincialCityFlag = "city";
+            }
+
+            // 找到和身份对应的城市
+            var $selectCity = $('#customer-update-form-hb select').filter(function() {
+                return ($(this).attr('id') || '').toLowerCase() == nameStr;
+            });
+            $.ajax({
+                url : "/system/address/loadcity/"
+                + provinceCode + "/" + provincialCityFlag + ".json",
+                method : 'post',
+                success : function(res) {
+                    $selectCity.empty();
+                    for (var i = 0; i < res.length; i++) {
+                        var cityStr = $('#cityTmplHb').html();
+
+                        var cityName = cityStr.replace(/\{\{code\}\}/g,
+                                res[i].code).replace(/\{\{name\}\}/g,
+                                res[i].name).replace(/\{\{father\}\}/g,
+                                provinceCode);
+                        $selectCity.append(cityName);
+                    }
+
+                   if(cityIdHb){
+                       $("#customer-update-form-hb #hb-register-city").val(cityIdHb);
+                       cityIdHb="";
+                   }
+
+                    if (success && typeof success === 'function') {
+                        success();
+                    }
+
+                }
+            })
+        };
+
+
+
+
+        //表单验证并提交
+        $("#customer-update-form-hb").formValidation({
+            message : '此值无效', //此值无效        
+            icon : {
+                valid: 'glyphicon',
+                invalid: 'glyphicon'
+            },
+            fields : {
+                //代理编号
+                "agentId" : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '代理商编号不能为空！'
+                        }
+                    }
+                },
+                //代理商名称
+                "agentName" : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '代理商名称不能为空！'
+                        }
+                    }
+                },
+                //商户名称
+                "mercName" : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '商户名称不能为空！'
+                        },
+                        stringLength : {
+                            min : 1,
+                            max : 20,
+                            message : '请输入20以内的字符！'
+                        }
+                    }
+                },
+                //商户手机
+                'mobile' : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '商户手机号不能为空！'
+                        },
+                        regexp: {
+                            regexp: /^1[34578]\d{9}$/,
+                            message: '请填写11位正确的手机号码！'
+                        }
+                    }
+                },
+                //开户名
+                'accountName' : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '开户名不能为空！'
+                        },
+                        regexp: {
+                            regexp: /^[\u4E00-\u9FFF]{1,20}$/,
+                            message: '请填写1-20位汉字'
+                        }
+                    }
+                },
+                //开户主账号
+                'accountNo' : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '开户主账号不能为空！'
+                        },
+                        regexp: {
+                            regexp: /^\d{16,19}$/,
+                            message: '请输入为16至19位数字'
+                        }
+                    }
+                },
+                //开户总行名称
+                'bankId' : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '开户总行名称不能为空！'
+                        }
+                    }
+                },
+                //开户支行名称
+                'branchbankName' : {
+                    group: '.form-group',
+                    validators : {
+                        notEmpty : {
+                            message : '开户支行名称不能为空！'
+                        }
+                    }
+                },
+                'note':{
+                	 group: '.form-group',
+                     validators : {
+                    	 stringLength : {
+                             min : 0,
+                             max : 200,
+                             message : '请输入200以内的字符！'
+                         }
+                     }
+                
+                }
+            }
+        }).on('success.form.fv', function(e, data) {
+            e.preventDefault();
+            var $mechantCsForm = $("#customer-update-form-hb");
+            //判断oss是否上传
+            // var bankPhoto = $mechantCsForm.find('input[name="imgs[3].url"]').val();
+            // if( bankPhoto ==null || bankPhoto == '' || bankPhoto == 'undefined'){
+            //     UTIL.clickDisappearSwal('请上传银行卡照片图片', function(){
+            //         $("#customer_firstReview_confirm_btn").removeClass('disabled').prop("disabled", false);
+            //     });
+            //     return;
+
+
+            // }else{
+                showLoading();
+                var boCustomerTemp = {
+                    mercNo :$("#customer-update-form-hb input[name='mercNo']").val().trim(),
+                    mercName:$("#customer-update-form-hb input[name='mercName']").val().trim(),
+                    mercId:up_mercId_Hb,
+                    mobile :$("#customer-update-form-hb input[name='mobile']").val().trim(),
+                    accountName:$("#customer-update-form-hb input[name='accountName']").val().trim(),
+                    accountNo :$("#customer-update-form-hb input[name='accountNo']").val().trim(),
+                    bankId :$("#customer-update-form-hb select[name='bankId']").val().trim(),
+                    branchBankId:$("#customer-update-form-hb input[name='branchBankId']").val().trim(),
+                    branchBankName :$("#customer-update-form-hb input[name='branchBankName']").val().trim(),
+                    picPath :$("#customer-update-form-hb input[name='imgs[3].url']").val().trim(),
+                    note:$("#customer-update-form-hb textarea[name='note']").val().trim(),
+                    cityId :$("#customer-update-form-hb select[name='cityId']").val().trim(),
+                    provinceId :$("#customer-update-form-hb select[name='provinceId']").val().trim()
+                };
+                $.ajax({
+                    type: "post",
+                    dataType: "text",
+                    contentType: "application/json",
+                    url: "/haibei/customer/apply",
+                    data : JSON.stringify(boCustomerTemp),
+                    success: function (res) {
+                        hideLoading();
+                        if(res=="success"){
+                            UTIL.autoDisappearSwal('信息修改成功', function(){
+                                UTIL.closeCurrentPage({
+                                    "delUrl": "merchant-updata-apply-hb.html",
+                                    "toUrl": "merchant-query.html"
+                                });
+                                if($("#newFileTable")){
+                                    $("#newFileTable").bootstrapTable("selectPage",1)
+                                }
+                                if($("#custom-list")){
+                                    $("#custom-list").bootstrapTable("selectPage",1)
+                                }
+                                //bootstrap
+                                $('[data-toggle="table"]')
+                                        .bootstrapTable();
+                            });
+                        }else{
+                            UTIL.clickDisappearSwal(res)
+                        }
+                    }
+                });
+            // }
+
+        });
+        $("#emptyhHbsearch").click(function(){
+            UTIL.closeCurrentPage({
+                "delUrl": "merchant-updata-apply-hb.html",
+                "toUrl": "merchant-query.html"
+            });
+        });
+
+    })
+</script>

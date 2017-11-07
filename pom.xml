@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.midai</groupId>
+  <artifactId>midai-pay-parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+		<dubbo.version>2.8.4</dubbo.version>
+		<zkclient.version>0.9</zkclient.version>
+		<mybatis.version>3.3.0</mybatis.version>
+		<mybatis.spring.version>1.2.3</mybatis.spring.version>
+		<pagehelper.version>4.1.1</pagehelper.version>
+		<druid.version>1.0.12</druid.version>
+		<mapper.version>3.3.4</mapper.version>
+		<kryo.version>2.24.0</kryo.version>
+		<kryo.serializers.version>0.26</kryo.serializers.version>
+		<activiti.version>5.21.0</activiti.version>
+		
+	</properties>
+  
+  
+  <modules>
+  	<module>midai-pay-common</module>
+	<module>midai-pay-channel-service</module>
+  	<module>midai-pay-posw-api</module>
+  	<module>midai-pay-posp-api</module>
+  	<module>midai-pay-job-api</module>
+  	<module>midai-pay-posw-service</module>	
+  	<module>midai-pay-posp-service</module>
+  	<module>midai-pay-job-service</module>
+  	<module>midai-pay-app</module>
+  	<module>midai-pay-web</module>
+  	<module>midai-pay-changjie-api</module>
+  	<module>midai-pay-changjie-service</module>
+  	<module>midai-pay-message</module>
+
+  </modules>
+
+
+
+
+  
+
+  
+</project>

@@ -1,0 +1,536 @@
+<div class="container-fluid">
+    <!--商户列表 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>查询条件录入</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="search-agcondition" action="" novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercName" id="merc-name" class="form-control"
+                                               maxlength="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户编号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercNo" id="mercNo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">手机号码</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mobile" id="mobile" class="form-control"
+                                               maxlength="11"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-3">
+                                 <div class="form-group">
+                                     <label class="col-md-4 control-label">小票号</label>
+                                     <div class="col-md-8">
+                                         <input type="text" name="mercId" id="mercId" class="form-control" maxlength="50"/>
+                                     </div>
+                                 </div>
+                             </div>-->
+                            <!-- <div class="col-md-3">
+                                 <div class="form-group">
+                                     <label class="col-md-4 control-label">手机号码</label>
+                                     <div class="col-md-8">
+                                         <input type="text" name="mobile" id="mobile" class="form-control" maxlength="11"/>
+                                     </div>
+                                 </div>
+                             </div>-->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="agentName" id="agentName" class="form-control" maxlength="20"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户状态</label>
+                                    <div class="col-md-8">
+                                        <select name="state" id="state" class="form-control">
+                                            <option value="-1">请选择</option>
+                                            <option value="1">初审中</option>
+                                            <option value="2">复审中</option>
+                                            <option value="3">未通过</option>
+                                            <option value="4">审核通过</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户等级</label>
+                                    <div class="col-md-8">
+                                        <select name="level" id="custom_Leavel" class="form-control">
+                                            <option value="0">所有商户</option>
+                                            <option value="1">子商户</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  <div class="row">
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label class="col-md-4 control-label">代理商编号</label>
+                                      <div class="col-md-8">
+                                          <input type="text" name="agentId" id="agentId" class="form-control">
+                                      </div>
+                                  </div>
+                              </div>
+                           <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label class="col-md-4 control-label">商户状态</label>
+                                      <div class="col-md-8">
+                                          <select name="state" id="state" class="form-control">
+                                              <option value="-1">请选择</option>
+                                              <option value="1">初审中</option>
+                                              <option value="2">复审中</option>
+                                              <option value="3">未通过</option>
+                                              <option value="4">审核通过</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label class="col-md-4 control-label">开户名</label>
+                                      <div class="col-md-8">
+                                          <input type="text" name="accountName" id="accountNameList" class="form-control" maxlength="20"/>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-3"></div>
+                          </div>-->
+
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" id="reset_search_key" value="清空筛选条件"
+                                   class="btn btn-default pull-right">
+                            <input type="button" id="search_key" value="查询" class="btn btn-success pull-right">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>商户信息查询</h4></div>
+                    <div class="col-md-8 no-padding">
+
+                        <div class="toolbar no-padding">
+                            <button id="img_codes" class="btn btn-success pull-right hide-default shcx-xj-btn">批量下载二维码
+                            </button>
+                        </div>
+                        <div class="toolbar no-padding">
+                            <button id="createCustom" class="btn btn-success pull-right hide-default shcx-xj-btn">
+                                新建标准商户
+                            </button>
+                        </div>
+                        <div class="toolbar no-padding">
+                            <button id="createMpos_Custom"
+                                    class="btn btn-success pull-right hide-default shmpos-xj-btn">新建MPOS商户
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table id="custom-list" class="table table-striped table-checkable table-highlight-head table-hover"
+                       data-toggle="table" data-query-params="merchantQuerySearchData"
+                       style="border-top: 1px solid #dddddd;"
+                       data-side-pagination="server" data-method="post"
+                       data-pagination="true" data-url="/customer/list.json"
+                       data-page-size="10" data-show-pagination-detail="false"
+                       data-pagination-first-text="First" data-pagination-pre-text="上一页"
+                       data-pagination-next-text="下一页" data-pagination-loop="false"
+                       data-pagination-last-text="Last">
+                    <caption align="top" class="clearfix">
+                        <button class="btn btn-success pull-right" id="excelDownload">Excel下载</button>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th data-field="" data-checkbox="true"></th>
+                        <!--   <th data-field="mercNo" data-align="left">商户编号</th>-->
+                        <th data-field="mercName" data-align="left">商户名称</th>
+                        <th data-field="mercNo" data-align="left">商户编号</th>
+                        <th data-field="mobile" data-align="left">手机号</th>
+                        <th data-field="createTime" data-align="left">首次业务时间</th>
+                        <th data-field="accountName" data-align="left">开户名</th>
+                        <th data-field="accountNo" data-align="left">开户账号</th>
+                        <th data-field="branchBankName" data-align="left">开户行</th>
+                        <th data-field="merType" data-align="left" data-formatter="merTypeFormatter">商户类型</th>
+                        <th data-field="agentName" data-align="left">代理商名称</th>
+                        <th data-field="state" data-align="left" data-formatter="stateFormatter">状态</th>
+                        <th data-field="firstInstancePerson" data-align="left">初审人员</th>
+                        <th data-field="windControlPerson" data-align="left">风控人员</th>
+                        <th data-field="" data-align="left" data-formatter="merchantUpdataDetail">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--商户列表 end-->
+</div>
+<!-- 商户信息和入账信息修改 -->
+<script type="text/temp" id="merchantDetailUpdata">
+    <a href="javascript:UTIL.openNewPage({'targetUrl':'pageurl','data':'mercNo=row.mercNo&agentId=row.agentId&mercId=row.mercId'})" title="商户信息变更"><img src="../imgs/edit-sign.png" alt=""/></a>
+
+</script>
+<script type="text/temp" id="merchantDetailUpdataHb">
+    <a style="margin-left:10px;" title="银行卡信息变更" href="javascript:UTIL.openNewPage({'targetUrl':'pageurl','data':'mercNo=row.mercNo&agentId=row.agentId&mercId=row.mercId'})"><img src="../imgs/xghb.png" alt=""/></a>
+
+</script>
+<!--<a style="cursor:not-allowed" href="javascript:void(0)" title="商户信息变更"><img src="../imgs/unEdit-sign.png" alt=""/></a>-->
+<script type="text/temp" id="unMerchantDetailUpdata">
+    <a style="cursor:not-allowed" href="javascript:void(0)" title="商户信息变更"><img src="../imgs/unEdit-sign.png" alt=""/></a>
+
+</script>
+<script type="text/temp" id="unMerchantDetailUpdataHb">
+    <a style="cursor:not-allowed;margin-left:10px;" title="银行卡信息变更" href="javascript:void(0)"><img src="../imgs/unXghb.png" alt=""/></a>
+
+</script>
+<!-- 商户信息查看 -->
+<script type="text/temp" id="unMerchantDetailCan">
+    <a style="margin-left:10px;" href="javascript:UTIL.openNewPage({'targetUrl':'pageurl','data':'mercNo=row.mercNo&agentId=row.agentId&mercId=row.mercId'})" title="商户信息查看"><img src="../imgs/search-info.png" alt=""/></a>
+
+</script>
+<!--二维码模态框-->
+<div class="modal fade" id="img_uplod_updown" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                <h4 class="modal-title align-center">二维码下载</h4>
+            </div>
+
+            <div class="modal-body">
+                <!--<img src="" alt="" style="width: 207px;height: 207px;" id="mer_imgcode">-->
+                <div class="row" id="mer_imgcode" style="height:300px; overflow-y:scroll;margin:0 auto;">
+                    <!--<input type="text" id="file_img_box" style="display: none">;-->
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-success confirm-btn" id="agent_profit_btn">下&nbsp;&nbsp;载</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    //商户信息修改点击
+    function merchantUpdataDetail(index, row) {
+        var merchantTemp;
+        var agentNameHb = row.inscode;
+        var tarURl = null;
+        var viewTarURl = null;
+        if (row.merAuto == 0) { //Mpos商户
+            merchantTemp = [];
+            tarURl = "merchant-Mposinfo-update.html";//其实是标准商户
+            viewTarURl = "merchant-mposinfo-review.html";
+        } else {
+            if (row.qrCodeFlag == 1){
+                merchantTemp = ['<a href="javascript:void(0)" style="margin-left: 10px;"title="二维码查看" onclick="modal_show_imgcode(\'' + row.mercNo + "," + row.qrCodeFlag + '\')">',
+                    '<img src="../imgs/img_code.png"  alt="" />',
+                    '</a>']
+                tarURl = "merchant-Normalinfo-update.html";
+                viewTarURl = "merchant-normalinfo-review.html";
+            }else{
+                merchantTemp = [];
+                tarURl = "merchant-Normalinfo-update.html";
+                viewTarURl = "merchant-normalinfo-review.html";
+            }
+
+        }
+        if (row.state == 4) {  //判断审核的状态
+            if (row.markId == 1) {
+                merchantTemp = [$("#merchantDetailUpdata").html().replace("pageurl", tarURl).replace("row.mercNo", row.mercNo).replace("row.agentId", row.agentId),
+                        $("#unMerchantDetailCan").html().replace("pageurl", viewTarURl).replace("row.mercNo", row.mercNo).replace("row.agentId", row.agentId)
+                    ].concat(merchantTemp).join("");
+            } else {
+                merchantTemp = [$("#merchantDetailUpdata").html().replace("pageurl", tarURl).replace("row.mercNo", row.mercNo).replace("row.agentId", row.agentId),
+                        $("#unMerchantDetailCan").html().replace("pageurl", viewTarURl).replace("row.mercNo", row.mercNo).replace("row.agentId", row.agentId)
+                    ].concat(merchantTemp).join("");
+            }
+            return merchantTemp;
+        } else {
+            if (agentNameHb == "101003" || "") {
+                merchantTemp = [$("#unMerchantDetailUpdata").html(),
+                        $("#unMerchantDetailCan").html().replace("pageurl", viewTarURl).replace("row.mercNo", row.mercNo).replace("row.agentId", row.agentId)
+                    ].concat(merchantTemp).join("");
+            } else {
+                merchantTemp = [$("#unMerchantDetailUpdata").html(),
+                        $("#unMerchantDetailCan").html().replace("pageurl", viewTarURl).replace("row.mercNo", row.mercNo).replace("row.agentId", row.agentId)
+                    ].concat(merchantTemp).join("");
+            }
+            return merchantTemp;
+        }
+
+    }
+
+    //商户类别
+    function merTypeFormatter(value, row, index) {
+        if (row.merAuto == 1) {
+            return "标准商户";
+        } else if (row.merAuto == 0) {
+            return "MPOS商户";
+        }
+    }
+   var  th_box=[];
+    //    二维码模态框
+    function modal_show_imgcode(rp) {
+        showLoading();
+        var arry_box = rp.split(",");
+        var data_rp = arry_box[0];
+        var data_code = arry_box[1]
+        var merco={'mercNo':data_rp}
+        if (data_code == 0) {
+            hideLoading();
+            UTIL.clickDisappearSwal("没有报备的通道，请联系管理员");
+        } else {
+            $.ajax({
+                url: "/qrcode/customer/query",
+                type: 'POST',
+                data:JSON.stringify(merco),
+                success: function (res) {
+//                    先清空一次th_box
+                    th_box=[];
+                    $("#mer_imgcode").html('');
+                    $.each(res,function (i,v) {
+                        th_box.push(v.qrcodePath);
+                        v.qrcodePath=OSSHOST+(v.qrcodePath);
+                        var ig="<div class='col-md-4'><img src="+v.qrcodePath+" alt='图片' style='width: 150px;height: 150px;'/ ></div>";
+                        $("#mer_imgcode").append(ig);
+                    })
+                    hideLoading();
+                    $("#img_uplod_updown").modal('show')
+                },
+                error: function (res) {
+                    hideLoading();
+                    UTIL.clickDisappearSwal("获取二维码失败，请联系管理员");
+                }
+            });
+        }
+    }
+    //下载
+    $("#agent_profit_btn").click(function () {
+            if (th_box.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    contentType: "application/json",
+                    url: "/auth/oss-zip-file?key=" + th_box,
+                    success: function (res) {
+                        var zipPaths = JSON.parse(res).zipPath;
+                        if (res) {
+                            window.location = OSSHOST + zipPaths;
+                        } else {
+                            UTIL.clickDisappearSwal("文件下载失败");
+                        }
+                    }
+                });
+            } else {
+                UTIL.clickDisappearSwal("选中的商户还没有二维码");
+            }
+    });
+    $("#img_codes").on('click', function () {
+        var box_row = $("#custom-list").bootstrapTable("getSelections");
+        var all_box_row = [];
+        if (box_row.length > 0) {
+            $.each(box_row, function (i, v) {
+                if (v.qrCodeFlag==1&&v.state==4) {
+                    all_box_row.push(v.mercNo);
+                }
+            })
+            if (all_box_row.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    contentType: "application/json",
+                    url:"/customer/qr-oss-zip-file",
+                    data:JSON.stringify(all_box_row),
+                    success: function (res) {
+                        var zipPaths = JSON.parse(res).zipPath;
+                        if (res) {
+                            window.location = OSSHOST + zipPaths;
+                        } else {
+                            UTIL.clickDisappearSwal("文件下载失败");
+                        }
+                    }
+                });
+            } else {
+                UTIL.clickDisappearSwal("选中的商户还没有二维码");
+            }
+
+        } else {
+            UTIL.clickDisappearSwal("请选择商户");
+        }
+
+    })
+    //审核状态类型格式化
+    function stateFormatter(value, row, index) {
+        if (value == 0) {
+            // 注册但未进行商户申请的状态 （手机APP）
+            return "未认证";
+
+        } else if (value == 1) {
+            // 商户提交申请 还未进行审核
+            return "初审中";
+
+        }
+        else if (value == 2) {
+            // 商户提交申请，初审已通过，进入风控审核
+            return "复审中";
+
+        } else if (value == 3) {
+            // 商户提交申请，初审拒绝
+            return "初审未通过";
+        } else if (value == 4) {
+            // 商户申请，风控审核已经通过
+            // 银行卡信息修改，审核通过
+            return "审核通过";
+        }
+        else if (value == 5) {
+            // 海贝银行卡信息更新信息已提交
+            return "更新已提交";
+        }
+        else if (value == 6) {
+            // 海贝银行卡信息更新信息已提交，提交信息正在进行审核
+            return "更新审核中";
+        }
+        else if (value == 7) {
+            // 海贝银行卡信息更新审核未通过
+            return "更新审核未通过";
+        }
+    }
+
+    $(function () {
+        //新建标准商户页面跳转
+        $('#createCustom').click(function () {
+            UTIL.openNewPage({
+                "targetUrl": "merchant-creatApply_Hand.html"
+//                "targetUrl" : "merchant-deduction-rate.html"
+            });
+        });
+        //新建MPOS（手刷）商户页面跳转
+        $('#createMpos_Custom').click(function () {
+            UTIL.openNewPage({
+                "targetUrl": "merchant-creatApply_NoHand.html"
+            });
+        });
+        // 初始化table
+        $('[data-toggle="table"]').bootstrapTable();
+        var shcxTableData = $("#custom-list").bootstrapTable("getData");
+
+
+        // 点击查询
+        $("#search_key").click(function (e) {
+
+            e.preventDefault();
+            if (shcxTableData.length === 0) {
+                var randomNum = parseInt(Math.random() * 99999);
+                var shcxTableRefreshUrl = $("#custom-list").data("url") + "?" + randomNum;
+                $("#custom-list").bootstrapTable("refresh", {
+                    url: shcxTableRefreshUrl
+                });
+                shcxTableData = $("#custom-list").bootstrapTable("getData");
+            }
+            else {
+                $("#custom-list").bootstrapTable("selectPage", 1);
+            }
+            return false;
+        });
+
+        // 重置搜索框
+        $("#reset_search_key").click(function (e) {
+            e.preventDefault();
+            document.getElementById("search-agcondition").reset();
+            $("#custom-list").bootstrapTable("selectPage", 1);
+            return false;
+
+        });
+
+        //excel下载
+        $("#excelDownload").click(function () {
+
+            var mercId_val = $("#merc-name").val().trim();
+
+            var agentName_val = $("#mercNo").val().trim();
+            var mobile = $("#mobile").val().trim();
+            var state_val = $("#state").val();
+            var accountName_val = $("#custom_Leavel").val();
+            var NagentName = $("#agentName").val().trim();
+
+
+            var searchDate = {
+
+                "mercName": mercId_val,
+                "mercNo": agentName_val,
+                "mobile": mobile,
+                "state": state_val,
+                "level": accountName_val,
+                "agentName":NagentName
+            };
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: "/customer/businessStatisticsCount.json",
+                data: JSON.stringify(searchDate),
+                success: function (res) {
+                    var tableData = $("#custom-list").bootstrapTable("getData");
+                    if (tableData.length > 0) {
+                        window.location = "/customer/excelExport.json?mercName=" + mercId_val
+                            + "&mercNo=" + agentName_val + "&state=" + state_val
+                            + "&level=" + accountName_val + "&mobile=" + mobile+"&agentName="+NagentName;
+                    }
+                    else {
+                        // swal("暂无数据下载！");
+                        UTIL.clickDisappearSwal("暂无数据下载！");
+                    }
+
+
+                }
+            });
+        });
+    });
+
+
+    function merchantQuerySearchData(args) {
+        args.mercName = $("#search-agcondition input[name='mercName']").val().trim();
+        args.mercNo = $("#mercNo").val().trim();
+//        args.mercId = $("#mercId").val();
+        args.mobile = $("#mobile").val().trim();
+        args.agentName = $("#agentName").val().trim();
+        //  args.agentId = $("#agentId").val();
+        args.state = $("#state").val().trim();
+//        args.accountName  = $("#accountNameList").val();
+
+        args.level = $("#custom_Leavel").val().trim();
+        return args;
+    }
+</script>

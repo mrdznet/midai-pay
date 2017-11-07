@@ -1,0 +1,169 @@
+<!-- 自动打款页面 -->
+<div class="container-fluid">
+   <!--清算管理-自动打款 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>财务划款界面</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="zddkForm"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户小票号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercId" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="mercName" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">开户名</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="accountName" class="form-control" maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">开户账号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="accountNo" class="form-control" maxlength="19">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">提现日期</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="tixianDatetimeStart" class="form-control" maxlength="20">
+                                                <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">---</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date my_date">
+                                            <input type="text" name="tixianDatetimeEnd" class="form-control" maxlength="20">
+                                                <span class="input-group-addon bg-green">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="zddkEmptyBtn"> 
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="zddkSearchBtn"> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>查询结果</h4></div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding col-md-2">
+                            <button class="btn btn-success pull-right" id="allZddkBtn">批量自动打款</button>
+                        </div>
+                        <div class="col-md-5 col-lg-5 toolbar no-padding">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" style="padding-top:8px;text-align:right">打款通道</label>
+                                <div class="col-md-6">
+                                    <select name="payChannel" class="form-control" id="dkPath">
+                                        <option value="">请选择</option>
+                                        <!-- <option value="1">民生代付</option> -->
+                                        <option value="500302">矩真代付</option>
+                                        <!-- <option value="3">米刷代付</option> -->
+                                        <option value="G10002">畅捷代付</option>
+                                        <option value="MISHUA">米刷代付</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-hover" id="zddkTable"
+                        data-toggle="table"
+                        data-url="/autopay/list1" data-query-params="zddkSearch" data-pagination="true"
+                        data-side-pagination="server" data-page-size="10"
+                        data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                        data-pagination-loop="false" data-row-style="changeSettltmentPayStyle"
+                        data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                            <tr>
+                                <th data-field="" data-checkbox="true" data-formatter="FormatDisabledPayAuto"></th>
+                                <th data-field="tixianDatetime" data-formatter="FormatDateTime" data-align="left">提现日期</th>
+                                <th data-field="mercId" data-align="left">商户小票号</th>
+                                <th data-field="mercName" data-align="left">商户名称</th>
+                                <th data-field="payMoney" data-align="left">结算总金额</th>
+                                <th data-field="accountName" data-align="left">开户名</th>
+                                <th data-field="accountNo" data-align="left">开户账号</th>
+                                <th data-field="bankName" data-align="left">开户行名称</th>
+                                <th  data-formatter="zddkNote" data-align="left">备注</th>
+                                <th data-field="" data-align="left" data-formatter="zddkHandle">操作</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--清算管理-自动打款 end-->
+</div>
+
+<!--模态框-确认打款 start-->
+    <div class="modal fade" id="qrdkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span></button>
+                    <h4 class="modal-title align-center">确认打款</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="modal-delete-text">
+                         确定将<span class="zddkCont"></span>进行自动打款
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+                    <button type="button" class="btn btn-success confirm-btn" id="qrdkBtn">确&nbsp;&nbsp;定</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--模态框-确认打款 end-->
+
+<script type="text/templ" id="setAutoPayTempl">
+    <a class="zddkBtn" style="color:#3968c6;text-decoration:none;cursor:pointer" href="javascript:zddkEvent('row.tixiLogno','row.mercId')">自动打款</a>
+</script>
+ <script type="text/javascript" src="js/zd-manage/settlement-auto-pay.js"></script>

@@ -1,0 +1,240 @@
+<div class="widget box">
+    <!-- <div class="panel-body"> -->
+        <div class="widget-header">
+            <div class="col-md-1 no-padding">
+                <h4><i class="icon-list"></i>列表</h4>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" style="padding-top: 8px;">
+                    <label id="handle" class="col-md-3 control-label text-right" style="padding-bottom: 0;font-size: 14px;">操作</label>
+                    <div class="col-md-6">
+                        <select id="selectHandle" class="form-control">
+                            <option value="">批量处理</option>
+                            <option value="0">批量删除部门</option>
+                            <!-- <option value="1">批量注销用户</option>
+                            <option value="2">批量激活用户</option> -->
+                            <option value="3">批量删除用户</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 no-padding">
+                <div class="toolbar no-padding">
+                    <input class="btn btn-success"  id="create-company" type="button" value="新建公司" data-toggle="modal" data-target="#createCompanyModal" />
+                    <input class="btn btn-success"  id="delete-company" type="button" value="批量删除" data-toggle="modal" />
+                    <input class="btn btn-success" style="margin-left:8px;"  id="create-part" type="button" value="新建部门"  data-toggle="modal" data-target="#createPartModal"/>
+                    <input class="btn btn-success" style="margin-left:8px;"  id="create-person" type="button" value="新建用户" data-toggle="modal" data-target="#createPersonModal" />
+                </div>
+            </div>
+        </div>
+        <table  class="table table-striped table-checkable table-hover" data-toggle="table" id="org-table" style="width: 100%">
+            <!--table展示-->
+        </table>
+    <!-- </div> -->
+</div>
+<!--删除确定 Modal -->
+<div class="modal fade" id="delAllModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="icon-delete"></i><span>确认删除信息</span></h4>
+            </div>
+            <div class="modal-body text-center">
+                <div id="delAllMsg"></div>
+            </div>
+            <div class="modal-footer clearfix">
+                <div class="pull-right">
+                    <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭" />
+                    <input type="submit" id="delAll-submit" class="btn btn-success" value="确认" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end新建用户modal -->
+<!--删除公司 Modal start-->
+<div class="modal fade" id="delCompanyModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="icon-delete"></i>删除公司</h4>
+            </div>
+            <div class="modal-body text-center">
+                <div id="delCompanyMsg"></div>
+            </div>
+            <div class="modal-footer clearfix">
+                <div class="pull-right">
+                    <input data-dismiss="modal" class="btn btn-default" type="button" value="关闭" />
+                    <input type="submit" id="sureDelCompanyBtn" class="btn btn-success" value="确认" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除公司 Modal end -->
+<script type="text/temp" id="delCompanyTemp">
+  <a href="javascript:delCompany('row.id','row.name')"><img src="../imgs/del-sm.png" alt=""/></a>
+</script>
+<script>
+    //批量操作
+    $('#selectHandle').on('change',function(){
+        var optionChecked = $('#selectHandle').val();
+        if(optionChecked != ''){
+            var selectList = $('#org-table').bootstrapTable('getSelections');
+            var selectListNum = selectList.length;
+            // console.log( selectList);
+            // console.log(selectList instanceof Array);
+            if(selectListNum ==0){
+                UTIL.clickDisappearSwal("请选择要操作的数据",function(){
+                    $('#selectHandle').val('');
+                });
+               
+            }else{
+                var partIds = [];
+                var userIds = [];
+                $.each(selectList,function(k,v){
+                    if(v.id.charAt(0) == 'u'){//取出用户部分的id数值
+                        userIds.push(v.id.split('_')[1])
+                    }else{
+                        partIds.push(v.id)
+                    }
+                });
+                var userIdsNum = userIds.length;
+                var partIdsNum = partIds.length;
+                switch (optionChecked){
+                    //批量删除部门
+                    case '0':
+                        if(userIdsNum > 0 ){
+                            UTIL.clickDisappearSwal("不能选择用户",function(){
+                                $('#selectHandle').val('');
+                            });
+                        }else{
+                            $('#delAllMsg').empty();
+                            var delPartName = "";
+                            $.each(selectList,function(k,v){
+                                if(k === 0){
+                                    delPartName += v.name;
+                                }
+                                else {
+                                    delPartName += "," + v.name;
+                                }                                
+                            });
+                            $('#delAllMsg').append('<div><p>您确定要删除以下部门吗？</p><p>'+delPartName+'</p></div>');
+                            $('#delAllModal').find(".modal-title").find("span").text("删除部门");
+                            $('#delAllModal').modal();
+                            $('#delAll-submit').on('click',function(){
+
+                                var idStr = partIds.join(',');
+                                $.ajax({
+                                    method:'post',
+                                    url:'/system/org/batchdel/'+idStr
+                                }).done(function(){
+                                    $('#selectHandle').val('');
+                                    $('#delAllModal').modal('hide');
+                                    $('#delAllMsg').html(''); //----------------------初始化删除信息展示
+                                    $('#org-table').bootstrapTable('selectPage',1);
+                                    loadZtree();
+                                    UTIL.clickDisappearSwal("删除成功");
+                                });
+                            });
+                        }
+                        break;
+                    case '1':break;
+                    case '2':break;
+                    case '3':
+                        if(partIdsNum > 0 ){
+                            UTIL.clickDisappearSwal("不能选择部门",function(){
+                                $('#selectHandle').val('');
+                            });
+                        }else{
+                            $('#delAllMsg').empty();
+                            // $.each(selectList,function(k,v){
+                            //     var html = '<div>'+ v.name+'</div>';
+                            //     $('#delAllMsg').append(html);
+                            // });
+                            var delUserName = "";
+                            $.each(selectList,function(k,v){
+                                if(k === 0){
+                                    delUserName += v.name;
+                                }
+                                else {
+                                    delUserName += "," + v.name;
+                                }                                
+                            });
+                            $('#delAllMsg').append('<div><p>您确定要删除以下部门吗？</p><p>'+delUserName+'</p></div>');
+                            $('#delAllModal').find(".modal-title").find("span").text("删除用户");
+                            $('#delAllModal').modal();
+                            $('#delAll-submit').on('click',function(){
+                                var idStr = userIds.join(',');
+                                $.ajax({
+                                    method:'post',
+                                    url:'/system/user/batchdel/'+idStr
+                                }).done(function(){
+                                    $('#selectHandle').val('');
+                                    $('#delAllModal').modal('hide');
+                                    $('#delAllMsg').html(''); //----------------------初始化删除信息展示
+                                    $('#org-table').bootstrapTable('selectPage',1);
+                                    loadZtree();
+                                    UTIL.clickDisappearSwal("删除成功!");
+                                });
+                            });
+                        }
+                        break;
+                }
+            }
+
+        }
+
+        $(this).blur();
+
+    }).focus(function(){
+        $(this)[0].selectedIndex = 0; //再次点击一样的选项的时候可再次触发
+    });
+
+
+//批量删除公司
+
+
+    var delCompanyIds;
+    $("#delete-company").off("click").on("click",function(){
+        $('#delCompanyMsg').empty();
+        delCompanyIds = [];
+        var delList = $("#org-table").bootstrapTable("getSelections");
+        if(delList < 1){
+            UTIL.clickDisappearSwal("请先选择要删除的公司");
+        }else{
+            var html = "";
+            for(var i = 0;i<delList.length;i++){
+                // var html = '<div>'+ delList[i].name+'</div>';
+                if(i == 0){
+                    html += delList[i].name;
+                }
+                else {
+                    html += "," + delList[i].name;
+                }
+                delCompanyIds.push(delList[i].id);
+            }
+            $('#delCompanyMsg').append('<div><p>您确定要删除以下公司吗？</p><p>' + html + '</p></div>');
+            $("#delCompanyModal").modal("show");
+        }
+    });
+
+
+    $("#sureDelCompanyBtn").click(function(){
+        $.ajax({
+            url : "../system/org/batchdel/"+delCompanyIds,
+            success : function(){
+                $("#delCompanyModal").modal("hide");
+                $("#org-table").bootstrapTable("selectPage",1)
+                loadZtree();
+                UTIL.clickDisappearSwal("删除成功");
+            }
+        });
+    });
+    
+
+</script>

@@ -1,0 +1,94 @@
+<!-- 通道列表页面 -->
+<div class="container-fluid">
+   <!--通道列表 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>查询条件录入</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="instForm"
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">通道号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="instCode" class="form-control" maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">通道名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="instName" class="form-control" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">通道状态</label>
+                                    <div class="col-md-8">
+                                        <select name="instState" id="instState" class="form-control">
+                                            <option value="-1">全部</option>
+                                            <option value="1">暂停</option>
+                                            <option value="0">启动</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right" id="instEmptyBtn">
+                            <input type="button" value="查询" class="btn btn-success pull-right" id="instSearchBtn"> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-list"></i>机构商户信息查询</h4></div>
+                    <div class="col-md-8 no-padding">
+                        <div class="toolbar no-padding">
+                            <button class="btn btn-success pull-right  qfqs-tg-btn" id="instStartBtn">批量启动</button>
+                            <button class="btn btn-success pull-right  qfqs-tg-btn" id="instStopBtn">批量暂停</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-hover table-borderd" id="instTable"
+                        data-toggle="table" 
+                        data-url="../inst/instAllList" data-query-params="instSearch" data-pagination="true"
+                        data-side-pagination="server" data-page-size="10"
+                        data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                        data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                            <tr>
+                                <th data-field="" data-checkbox="true"></th>
+                                <th data-field="instCode" data-align="left" >通道号</th>
+                                <th data-field="instName" data-align="left">通道名称</th>
+                                <th data-field="instFeeRate" data-align="left">借记卡成本扣率</th>
+                                <th data-field="instDfreeRate" data-align="left">贷记卡成本扣率</th>
+                                <th data-field="instLimit" data-align="left">通道限额(元)</th>
+                                <th data-field="instState" data-align="left" data-formatter="instStatus">通道状态</th>
+                                <th data-field="" data-align="left" data-formatter="instEdit">操作</th>
+                                
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--通道列表 end-->
+</div>
+<script type="text/templ" id="instTempl">
+    <a class="zddkBtn" style="color:#3968c6;text-decoration:none;cursor:pointer" href="javascript:zddkEvent('row.instCode')">编辑</a>
+</script>
+ <script type="text/javascript" src="js/zd-manage/institution-list.js"></script>

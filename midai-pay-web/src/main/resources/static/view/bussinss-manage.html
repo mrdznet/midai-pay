@@ -1,0 +1,144 @@
+<!-- 待办事项页面 -->
+<div class="container-fluid">
+   <!--待办事项 start-->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>查询条件录入</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id=""
+                          action=""
+                          novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="" id="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">代理商编号</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="" id="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            <input type="button" value="清空筛选条件" class="btn btn-default pull-right">
+                            <input type="button" value="查询" class="btn btn-success pull-right"> 
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding"><h4><i class="icon-form"></i>新建进件</h4></div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table  
+                    class="table table-striped table-hover" id="newFileTable"
+                        data-toggle="table"
+                        data-url="../customer/dolist" data-query-params="willDealAudit" data-pagination="true"
+                        data-side-pagination="server" data-page-size="10"
+                        data-pagination-first-text="First"
+                        data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+                        data-pagination-loop="false"
+                        data-pagination-last-text="Last" data-method="post">
+                        <thead>
+                            <tr>
+                                <th data-field="mercId" data-align="left">小票号</th>
+                                <th data-field="mercName" data-align="left">商户名称</th>
+                                <th data-field="createTime" data-align="left" data-formatter="FormatDateTime">时间</th>
+                                <th data-field="state" data-align="left" data-formatter="verifyState">状态</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--待办事项 end-->
+</div>
+
+<script type="text/temp" id="newListState">
+    <a style="color:#3968c6;text-decoration:none" href="javascript:UTIL.openNewPage({'targetUrl':'pageurl','data':'mercNo=row.mercNo&agentId=row.agentId&mercId=row.mercId&taskId=row.taskId'})">str</a>
+</script>
+
+
+<script type="text/javascript">
+    $('[data-toggle="table"]').bootstrapTable();
+    $('#newFileTable').bootstrapTable("refresh");
+    function willDealAudit(args){
+        return args;
+    }
+    function verifyState(value,row,index){
+
+        var str = "";
+        var temp = "";
+
+        if(value == 1){
+            if(row.merAuto==0){//Mpos商户
+                str = "初审中";
+                temp = $("#newListState").html().replace("pageurl","merchant-csMpos-apply.html").replace("row.mercNo",row.mercNo).replace("row.agentId",row.agentId).replace("row.taskId",row.taskId).replace("str",str);
+                return temp;
+            }else{
+                str = "初审中";
+                temp = $("#newListState").html().replace("pageurl","merchant-csNormal-apply.html").replace("row.mercNo",row.mercNo).replace("row.agentId",row.agentId).replace("row.taskId",row.taskId).replace("str",str);
+                return temp;
+            }
+        }else if(value == 2){
+            if(row.merAuto==0){
+                str = "风控审";
+                temp = $("#newListState").html().replace("pageurl","merchant-riskMpos-apply.html").replace("row.mercNo",row.mercNo).replace("row.agentId",row.agentId).replace("row.taskId",row.taskId).replace("str",str);
+                return temp;
+            }else{
+                str = "风控审";
+                temp = $("#newListState").html().replace("pageurl","merchant-riskNormal-apply.html").replace("row.mercNo",row.mercNo).replace("row.agentId",row.agentId).replace("row.taskId",row.taskId).replace("str",str);
+                return temp;
+            }
+
+
+        }else if(value == 9){
+            str = "审核中";
+            temp = $("#newListState").html().replace("pageurl","merchant-cs-apply-hb.html").replace("row.mercNo",row.mercNo).replace("row.mercId",row.mercId).replace("row.taskId",row.taskId).replace("str",str);
+            return temp;
+        }
+        else if(value == 3){
+            return "审核不通过";
+        }
+
+        // else if(value == 0){
+
+        //     str = "初审未通过";
+        //     temp = $("#newListState").html().replace("pageurl","merchant-update-apply.html").replace("row.mercNo",row.mercNo).replace("row.agentId",row.agentId).replace("str",str); 
+        //     return temp;
+
+        // }else if(value == 3){
+
+        //     str = "风控未通过";
+        //     temp = $("#newListState").html().replace("pageurl","merchant-cs-apply.html").replace("row.mercNo",row.mercNo).replace("row.agentId",row.agentId).replace("str",str); 
+        //     return temp;
+
+        // }else if(value == 4){
+
+        //     str = "审核通过";
+        //     return str;
+
+        // }
+
+        //直接使用转义
+        // temp = '<a style="color:#1f9ebd;text-decoration:none;" target="_blank" href="javascript:UTIL.openNewPage({'+"'targetUrl':'merchant-cs-apply.html',"+"'data':'mercNo="+row.mercNo+"&agentId="+row.agentId+"'"+'})">'
+        //         + str
+        //         + '</a>';
+
+    }
+
+</script>
+

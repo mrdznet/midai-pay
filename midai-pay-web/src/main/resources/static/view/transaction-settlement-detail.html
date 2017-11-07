@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交易结算详情</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="css/default.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/respond.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="text-center"><h4>交易结算详情</h4></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <div class="col-md-4 no-padding">
+                        <h4><i class="icon-list"></i>一周的交易记录详情</h4>
+                    </div>
+                </div>
+                <table id="detailListTable"
+                       class="table table-striped table-bordered table-checkable table-highlight-head table-no-inner-border table-hover"
+                       data-toggle="table"
+                       data-method="post"
+                       data-url="../device/agent/list">
+                    <thead>
+                    <tr>
+                        <th data-field="transTime">交易日期</th>
+                        <th data-field="mchntCodeIn">商户小票号</th>
+                        <th data-field="mchntName">商户名称</th>
+                        <!--   <th data-field="typeName">商户类型</th>-->
+                        <th data-field="deviceNoIn">终端号</th>
+                        <th data-field="transCodeName">交易类型</th>
+                        <th data-field="transStatus" data-formatter="detailtransStatusStyle">交易状态</th>
+                        <th data-field="respCdLoc">返回码</th>
+                        <th data-field="transAmt">交易金额</th>
+                        <th data-field="cardKind">卡类型</th>
+                        <th data-field="transCardNo">交易卡号</th>
+                        <th data-field="state" data-formatter="detailStatusStyle">交易审核状态</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $('[data-toggle="table"]').bootstrapTable();
+    function detailtransStatusStyle(index,row){
+        var detailtransStatus =  row.transStatus;
+        if(detailtransStatus=="0"){
+             return "成功"
+        }else if(detailtransStatus=="1"){
+             return "已上传"
+        }else if(detailtransStatus=="5"){
+            return "失败"
+        }
+    }
+    function detailStatusStyle(index,row){
+        var detailStatus =  row.state;
+        if(detailStatus=="0"){
+            return "待审核"
+        }else if(detailStatus=="1"){
+            return "通过"
+        }else if(detailStatus=="2"){
+            return "拒绝"
+        }else{
+            return "--"
+        }
+    }
+
+    var detailLocationHref = window.location.href.split("?mercId=")[1];
+    detailLocationHref = "\"" + detailLocationHref + "\"";
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        url: "../trade/settle/select/" + decodeURI(detailLocationHref),
+        success: function (res) {
+            $("#detailListTable").bootstrapTable("load", res)
+        }
+    })
+</script>
+</html>

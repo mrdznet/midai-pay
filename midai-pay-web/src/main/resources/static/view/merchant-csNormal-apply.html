@@ -1,0 +1,2156 @@
+
+
+<script type="text/tmpl" id="optionTmplReview">
+					<option data-code="{{id}}" data-value="{{name}}">{{name}}</option>
+</script>
+<script type="text/tmpl" id="cityTmplReview">
+					<option data-code="{{code}}" data-father="{{father}}" >{{name}}</option>
+</script>
+<script type="text/tmpl" id="bankTmpl">
+	<option data-code="{{bankcode}}" data-shortcode="{{shortcode}}" data-value="{{showname}}" value="{{bankcode}}">{{showname}}</option>
+</script>
+
+<script type="text/temp" id="firstReviewTempReview">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group"><label class="col-md-1 control-label">审核意见</label>
+                <div class="col-md-11">
+                    <textarea type="text"  name="firstRreviewList[curIndex].advice" style="resize: none" rows="5" class="form-control required url"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<div class="container-fluid">
+	<form class="form-horizontal row-border" method="post" role="form" id="customer-csMpos-form-update">
+		<input type="hidden" name="customer.merAuto" value="1">
+		<input type="hidden" name="taskId" id="current_Id">
+		<!--{{!第一个widget box 商户基本信息，注：此类为handlebars特有注释，勿动}}-->
+		<div class="widget box">
+			<div class="widget-header">
+				<h4><i class="icon-role-list-small"></i>
+					商户基本信息
+				</h4>
+			</div>
+
+			<div class="widget-content">
+				<div class="row">
+
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">所属代理商<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<input type="text" class="form-control" id="M_CS_parentAgentName" name="customer.agentName" readonly>
+									<input type="hidden" class="form-control" id="M_CS_parentAgentId" name="customer.agentId">
+                                   <!-- <span class="input-group-addon btn bg-green" id="M_cs_SearchAgent">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </span>-->
+									<span class="input-group-addon btn bg-green" style="cursor: not-allowed;">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </span>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">商户名称<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="customer.mercName">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">商户简称<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="customer.mercNameShort">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--{{!第二个widget box 商户附加信息}}-->
+
+		<div class="widget box">
+			<div class="widget-header">
+				<h4><i class="icon-role-list-small"></i>
+					商户附加信息
+				</h4>
+			</div>
+			<div class="widget-content" style="padding-top:15px;">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">商户所属行业<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<select name="customer.industry" id="csMpos_Custom_TypeTop" class="form-control required">
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">商户类别(MCC)<span class="required">*</span></label>
+							<div class="col-md-8">
+								<select name="customer.mcc" id="csMpos_Custom_TypeSecond" class="form-control required">
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="col-md-2 control-label">商户所属地址<span class="required">*</span></label>
+							<div class="col-md-10">
+								<input type="text" name="customer.address" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">商户营业执照号<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<input type="text" name="customer.businessLicense" class="form-control">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">法人姓名<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<input type="text" name="customer.legalName" class="form-control" maxlength="20">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">法人手机号<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<input type="text" name="customer.mobile" class="form-control">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">身份证号码<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<input type="text" name="customer.idCard" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row hideLoop">
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">商户经营地址<span
+								class="required">*</span></label>
+							<div class="col-md-8">
+								<select name="customer.peovinceId" id="M_cs_province" class="form-control required">
+
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-1 control-label"></label>
+							<div class="col-md-11">
+								<select name="customer.cityId" id="M_cs_city" class="form-control required">
+									<option value="0">--请选择--</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-1 control-label"></label>
+							<div class="col-md-11">
+								<select name="customer.areaCode" id="M_cs_area" class="form-control required">
+									<option value="0">--请选择--</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-1 control-label"></label>
+							<div class="col-md-11">
+								<input type="text" name="customer.businessAddress" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">结算开户行名称<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<select id="M_cs_BankidTop" class="form-control required" name="customer.bankId"></select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">开户支行名称<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<input type="text" id="M_CS_branchBank_content" name="customer.branchbankName"
+										   class="form-control required" readonly/>
+									<input type="hidden" id="merchantNewBranchbankId" name="customer.branchbankId"
+										   class="form-control"/>
+                                                    <span class="input-group-addon bg-green btn" data-toggle="modal"
+														  id="bank-apply-modal-show"><span
+															class="glyphicon glyphicon-search"></span></span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">结算账户名称<span
+								class="required">*</span></label>
+							<div class="col-md-8">
+								<input type="text" name="customer.accountName" class="form-control">
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">结算账户账号<span
+								class="required">*</span></label>
+							<div class="col-md-8">
+								<input type="text" name="customer.accountNo" class="form-control">
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-1">
+						商户资质附件
+					</div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-1" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-1" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-1"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-1" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-1" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[0].type" value="1">
+								<input type="hidden" name="imgs[0].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+
+							<span class="certificate-picture">营业执照</span>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-2" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-2" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-2"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-2" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-2" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[1].type" value="2">
+								<input type="hidden" name="imgs[1].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">税务登记证</span>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-3" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-3" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-3"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-3" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-3" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[2].type" value="3">
+								<input type="hidden" name="imgs[2].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">银行卡正面</span>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-4" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-4" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-4"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-4" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-4" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[3].type" value="4">
+								<input type="hidden" name="imgs[3].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">组织机构代码证</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-5" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-5" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-5"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-5" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-5" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[4].type" value="5">
+								<input type="hidden" name="imgs[4].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">法人证件正面照</span>
+						</div>
+
+
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal" data-readonly="true">
+							<div class="main-div">
+								<a id="NCS-acc-del-6" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-6" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-6"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-6" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-6" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[5].type" value="6">
+								<input type="hidden" name="imgs[5].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">法人证件背面照</span>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-7" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-7" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-7"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-7" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-7" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[6].type" value="7">
+								<input type="hidden" name="imgs[6].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">法人手持照片或场地照片</span>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="upImgs" data-showmodal="M_CS_review-showImg-madal">
+							<div class="main-div">
+								<a id="NCS-acc-del-8" class="del-btu del-normal" href="javascript:void(0);"></a>
+								<a id="NCS-acc-show-8" class="show-btu show-normal" href="javascript:void(0);"></a>
+								<div>
+									<img src="../imgs/upload-bg.gif" width="180" height="156" class="ImgPr image" style="height: 154px !important;" />
+								</div>
+								<input type="file" id="NCS-upload-file-8"  class="file image-input">
+								<input type="button" id="NCS-acc-upload-8" class="showbtu" value="上传">
+								<input type="button" id="NCS-acc-download-8" class="downloadbtn" value="下载">
+								<input type="hidden" name="imgs[7].type" value="8">
+								<input type="hidden" name="imgs[7].url" class="fileUrl" value="">
+								<div  style=" width:100%;height: 6px; position: absolute;bottom: 29px; display: none;" >
+									<div class="progress">
+										<div class="progress-bar" style="width: 0%"></div>
+									</div>
+								</div>
+							</div>
+							<span class="certificate-picture">协议</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--{{!第三个widget box 刷卡成本信息}}-->
+
+		<div class="widget box">
+			<div class="widget-header">
+				<h4><i class="icon-role-list-small"></i>
+					刷卡成本信息
+				</h4>
+			</div>
+
+			<div class="widget-content">
+				<div class="row">
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">借记卡手续费<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<!--{{#if swingCardDebitRate}}
+                                    <input type="text" class="form-control" name="customer.swingCardDebitRate"
+                                           placeholder="{{swingCardDebitRate}}">
+                                    {{else}}-->
+									<input type="text" class="form-control" name="customer.swingCardDebitRate">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">贷记卡手续费<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<!-- {{#if swingCardCreditRate}}
+                                     <input type="text" class="form-control" name="customer.swingCardCreditRate"
+                                            placeholder="{{swingCardCreditRate}}">
+                                     {{else}}-->
+									<input type="text" class="form-control" name="customer.swingCardCreditRate">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<!-- {{#if swingCardSettleFee}}
+                                     <input type="text" class="form-control" name="customer.swingCardSettleFee"
+                                            placeholder="{{swingCardSettleFee}}">
+                                     {{else}}-->
+									<input type="text" class="form-control" name="customer.swingCardSettleFee">
+									<!--{{/if}}-->
+									<span class="input-group-addon">元</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+		<!--{{!第四个widget box 无卡成本信息（借贷记一致）}}-->
+
+		<div class="widget box">
+			<div class="widget-header">
+				<h4><i class="icon-role-list-small"></i>
+					无卡成本信息（借贷记一致）
+				</h4>
+			</div>
+
+			<div class="widget-content">
+				<div class="row">
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">无卡手续费<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<!--{{#if nonCardCreditRate}}
+                                    <input type="text" class="form-control noCard_One" name="customer.nonCardCreditRate" placeholder="{{nonCardCreditRate}}">
+                                    {{else}}-->
+									<input type="text" class="form-control noCard_One" name="customer.nonCardCreditRate">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--{{!第二个无卡手续费，已被隐藏}}-->
+				<!--	<div class="col-md-3 hide">
+						<div class="form-group">
+							<label class="col-md-4 control-label">无卡手续费2<span class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+
+									<input type="text" class="form-control noCard_Copy" name="customer.nonCardDebitRate">
+									&lt;!&ndash;{{/if}}&ndash;&gt;
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</div>-->
+				</div>
+			</div>
+		</div>
+
+		<!--{{!第五个widget box 传统POS成本信息（借记卡封顶费率及成本与手刷相同）}}-->
+
+		<div class="widget box">
+			<div class="widget-header">
+				<h4><i class="icon-role-list-small"></i>
+					传统POS成本信息
+				</h4>
+			</div>
+
+			<div class="widget-content">
+				<div class="row">
+
+
+					<div class="col-md-6 col-lg-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">借记卡手续费<span class="required">*</span></label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<!--  {{#if posDebitRate}}
+                                      <input type="text" name="customer.posDebitRate" class="form-control"
+                                             placeholder="{{posDebitRate}}">
+                                      {{else}}-->
+									<input type="text" name="customer.posDebitRate" class="form-control">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-lg-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">贷记卡手续费<span class="required">*</span></label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<!-- {{#if posCreditRate}}
+                                     <input type="text" class="form-control" name="customer.posCreditRate"
+                                            placeholder="{{posCreditRate}}">
+                                     {{else}}-->
+									<input type="text" class="form-control" name="customer.posCreditRate">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group"><label class="col-md-4 control-label">交易结算手续费<span
+								class="required">*</span></label>
+
+							<div class="col-md-8">
+								<div class="input-group">
+									<!--{{#if posSettleFee}}
+                                    <input type="text" class="form-control" name="customer.posSettleFee"
+                                           placeholder="{{posSettleFee}}">
+                                    {{else}}-->
+									<input type="text" class="form-control" name="customer.posSettleFee">
+									<!--{{/if}}-->
+									<span class="input-group-addon">元</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--{{!第六个widget box 扫码成本信息（借贷记一致）}}-->
+
+		<div class="widget box">
+			<div class="widget-header">
+				<h4><i class="icon-role-list-small"></i>
+					扫码成本信息（借贷记一致）
+				</h4>
+			</div>
+
+			<div class="widget-content">
+				<div class="row">
+					<div class="col-md-6 col-lg-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">微信手续费<span class="required">*</span></label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<!--{{#if scanCodeWxRate}}-->
+									<!--<input type="text" name="customer.scanCodeWxRate" class="form-control"-->
+									<!--placeholder="{{scanCodeWxRate}}">-->
+									<!--{{else}}-->
+									<input type="text" name="customer.scanCodeWxRate" class="form-control">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">支付宝手续费<span class="required">*</span></label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<!-- {{#if scanCodeZfbRate}}
+                                     <input type="text" name="customer.scanCodeZfbRate" class="form-control"
+                                            placeholder="{{scanCodeZfbRate}}">
+                                     {{else}}-->
+									<input type="text" name="customer.scanCodeZfbRate" class="form-control">
+									<!--{{/if}}-->
+
+									<span class="input-group-addon">%</span></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-lg-3">
+						<div class="form-group">
+							<label class="col-md-4 control-label">银联扫码手续费<span class="required">*</span></label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<!-- {{#if scanCodeYlRate}}
+                                     <input type="text" class="form-control" name="customer.scanCodeYlRate"
+                                            placeholder="{{scanCodeYlRate}}">
+
+                                     {{else}}-->
+									<input type="text" class="form-control" name="customer.scanCodeYlRate">
+									<!--{{/if}}-->
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--{{!最后一个weideg box table表格 不做表单验证}}-->
+
+
+		<div class="widget box">
+			<div class="widget-header">
+				<div class="col-md-4 no-padding"><h4><i class="icon-list"></i>手机商户设备表</h4></div>
+				<div class="col-md-8 no-padding">
+					<div class="toolbar no-padding">
+						<input type="button" class="btn btn-default pull-right Nor-cs-delPhone sh_btn"
+							   value="删&nbsp;&nbsp;除" style="background:#1e6cb4;color:white;">
+						<input type="button" class="btn btn-success pull-right add-device-btn sh_btn"
+							   data-toggle="modal" id="M_cs_AddPhone_Btn" value="增&nbsp;&nbsp;加"
+							   style="background:#00a4de;color:white;">
+					</div>
+				</div>
+			</div>
+			<div class="widget-content no-padding">
+
+				<table data-toggle="table" id="M_CS_edit-device-list"
+					   class="table table-striped table-checkable table-hover table-bordered"
+					   data-query-params="deviceListQuery"
+					   data-url="/customer/loadCustomerDevice.json"
+					   data-method="post">
+
+					<thead>
+					<tr>
+						<th data-field="" data-align="center"
+							data-checkbox="true"><input type="checkbox"
+														data-toggle="checkbox" class="uniform"/>
+						</th>
+						<th data-field="deviceNo" data-align="left">机身号</th>
+						<th data-field="createTime" data-align="left">创建时间</th>
+						<th data-field="isFirst" data-align="left" data-formatter="firstSelectUpdate">首选项</th>
+						<th data-field="typeName" data-align="left">设备类型</th>
+						<th data-field="modeName" data-align="left">设备名称</th>
+					</tr>
+					</thead>
+				</table>
+
+			</div>
+		</div>
+
+
+		<!--初审的审核意见-->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="widget box">
+					<div class="widget-header">
+						<h4>
+							<i class="icon-form"></i>审核意见
+						</h4>
+					</div>
+					<div class="widget-content">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">审核结果</label>
+									<div class="col-md-8">
+										<label class="radio-inline"><input type="radio" class="uniform" name="review.reviewResult" value="1" checked>同意</label>
+										<label class="radio-inline"><input type="radio" class="uniform" name="review.reviewResult" value="0">退回</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">商户状态<span
+											class="required">*</span>
+									</label>
+									<div class="col-md-8">
+										<select name="customer.opstate" class="form-control">
+											<option value="1">开通</option>
+											<option value="0">关闭</option>
+											<option value="2">冻结</option>
+											<option value="3">黑名单</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-md-4 control-label">商户渠道<span
+											class="required">*</span>
+									</label>
+									<div class="col-md-8">
+										<select name="customer.channel" class="form-control" id="check_Way">
+											<option value="1">大pos</option>
+											<option value="2">M-pos</option>
+											<option value="0">无卡</option>
+
+											<option value="3">智能-pos</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="col-md-1 control-label">商户通道</label>
+									<input type="hidden" name="instCode" id="checkBoxVal">
+									<div class="col-md-11" id="N_cs_tongdao">
+										<!--<label class="radio-inline"><input type="checkbox" class="uniform" name="" value="1" checked>全通道</label>-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<input type="hidden" name="customer.opstate" value="1" />
+							<!--                                     <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">商户状态<span class="required">*</span> </label>
+                                    <div class="col-md-8">
+                                        <select name="customer.opstate" class="form-control">
+                                            <option value="1">开通</option>
+                                            <option value="0">关闭</option>
+                                            <option value="2">冻结</option>
+                                            <option value="3">黑名单</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="col-md-1 control-label">审核意见</label>
+									<div class="col-md-11">
+										<input type="hidden" id="reviewMercNo" name="customer.mercNo" class="form-control required url">
+												<textarea class="form-control required url"
+														  name="review.advice" rows="6" style="resize: none;"
+														  maxlength="200"></textarea>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="clearfix"></div>
+
+						<div class="form-actions">
+							<input type="submit" value="确认" class="btn btn-success pull-right">
+							<input type="button" value="取消" class="btn btn-default pull-right" id="Mpos_customer_cancel_btn">
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+	<!--	<div class="row">
+			<ul class="pager">
+				<li>
+					<input type="button" class="btn btn-primary sh_btn" value="取消">
+					<input type="submit" class="btn btn-primary sh_btn" value="确认">
+				</li>
+			</ul>
+		</div>-->
+	</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 图片预览模态框 -->
+<div class="modal fade" id="M_CS_review-showImg-madal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title align-center imgTitle"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="modal-pic-review">
+					<img src="" width="100%" height="100%" style="width: 500px;height: 500px;">
+					<input type="button" class="rotateImg" placeholder="顺时针旋转90°" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="M_cs_PhoneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">过滤条件</h4>
+			</div>
+			<div class="modal-body">
+				<div id="" class="form-horizontal">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label class="col-md-2 control-label">机身号</label>
+
+								<div class="col-md-6">
+									<input type="text" name="bodyNoStart" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<button class="btn btn-success btn-query pull-right">查询</button>
+						</div>
+					</div>
+				</div>
+
+				<table data-toggle="table" id="M_CS_cusEditDeviceAddTable"
+					   class="table table-striped table-checkable table-hover table-bordered"
+					   data-query-params="deviceQuery"
+					   data-url="/device/storage/unbind/list.json" data-pagination="true"
+					   data-side-pagination="server" data-page-size="5"
+					   data-pagination-first-text="First"
+					   data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+					   data-pagination-loop="false" data-page-list=[5]
+					   data-pagination-last-text="Last" data-method="post">
+
+					<thead>
+					<tr>
+						<th data-field="" data-radio="true"></th>
+						<th data-field="deviceNo">机身号</th>
+						<th data-field="typeName">设备类型</th>
+						<th data-field="modeName">设备名称</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<div class="form-horizontal">
+					<div class="row hide-default">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label class="col-md-3 control-label">是否是首选项 </label>
+
+								<div class="col-md-6">
+									<select id="isFirst" name="isFirst" class="form-control">
+										<option value="0">否</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+				<button type="button" class="btn btn-success confirm-btn">确&nbsp;&nbsp;定</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 新增模态框结束 -->
+
+<!-- 删除手机商户设备表模态框 -->
+<div class="modal fade" id="Nor-csDel-phoneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">手机商户设备表</h4>
+			</div>
+			<div class="modal-body">
+				<p class="align-center">
+					确定删除选中的设备吗？
+				</p>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+				<button type="button" id="Nor-csDel-confirm" class="btn btn-success">确&nbsp;&nbsp;定</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+<!--设置所属代理商-->
+<!--模态框-查询父代理商 start-->
+<div class="modal fade" id="M_cs_AgentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+						class="sr-only">Close</span></button>
+				<h4 class="modal-title">查询父代理商</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="addFactoryCus"
+					  novalidate="novalidate">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="col-md-4 control-label">父代理商</label>
+								<div class="col-md-8"><input type="text" id="fagent" class="form-control" maxlength="50"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<!--<button  class="btn btn-success pull-right" id="fagentQuery">查询</button>-->
+
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</form>
+
+				<table class="table table-striped table-hover table-bordered" id="fagentTable"
+					   data-toggle="table" data-query-params="agentAddParams"
+					   data-url="../agent/queryNoAndNameList" data-pagination="true"
+					   data-side-pagination="server" data-page-size="5"
+					   data-pagination-first-text="First" data-page-list="[5]"
+					   data-pagination-pre-text="上一页" data-pagination-next-text="下一页" data-pagination-loop="false"
+					   data-pagination-loop="false"
+					   data-pagination-last-text="Last" data-method="post">
+					<thead>
+					<tr>
+						<th data-field="" data-radio="true"></th>
+						<th data-field="agentNo" data-align="left">代理商编号</th>
+						<th data-field="name" data-align="left">代理商名称</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" id="closeFagent">关&nbsp;&nbsp;闭</button>
+				<button type="button" class="btn btn-success" id="M_CS_sureFagent">确&nbsp;&nbsp;定</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框-查询父代理商 end-->
+
+<!--弹出银行支行模态框-->
+<div class="modal fade" id="bank-apply-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+						class="sr-only">Close</span></button>
+				<h4 class="modal-title">查询支行信息</h4>
+			</div>
+			<div class="modal-body">
+				<div id="sbbg-query" class="form-horizontal">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="form-group"><label class="col-md-4 control-label">支行编号</label>
+
+								<div class="col-md-8">
+									<input type="text" name="branchbankcode" class="form-control"  maxlength="50" id="branch_code">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-5">
+							<div class="form-group"><label class="col-md-4 control-label">支行名称</label>
+
+								<div class="col-md-8">
+									<input type="text" name="branchbankname" class="form-control"  maxlength="50" id="branch_name"></div>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<button class="btn btn-success bank-btn-query pull-right">查询</button>
+						</div>
+					</div>
+				</div>
+				<table data-toggle="table" id="M_CS_applybandTable"
+					   class="table table-striped table-checkable table-hover table-bordered"
+					   data-query-params="merchantNewBankBean"
+					   data-url="/system/bank/bankBranchList.json" data-pagination="true"
+					   data-side-pagination="server" data-page-size="5"
+					   data-pagination-first-text="First" data-page-list=[5]
+					   data-pagination-pre-text="上一页" data-pagination-next-text="下一页"
+					   data-pagination-loop="false"
+					   data-pagination-last-text="Last" data-method="post">
+					<thead>
+					<tr>
+						<th data-field="" data-radio="true"></th>
+						<th data-field="branchbankcode">支行编码</th>
+						<th data-field="branchbankname">支行名称</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关&nbsp;&nbsp;闭</button>
+				<button type="button" class="btn btn-success btn-confirm">确&nbsp;&nbsp;定</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<script type="text/javascript" src="js/oss/upLoadFileUI.js"></script><script>
+
+	//获取当前页面的参数
+	var review_args = UTIL.readUrlData({"currentUrl" : "merchant-csNormal-apply.html"});
+	var review_mercNo = review_args["mercNo"];
+	var review_agentId = review_args["agentId"];
+
+	var current_taskId=review_args["taskId"];
+
+	var city_code=null;
+	var area=null;
+	var custom_Mcc=null;
+	var custom_industry=null;//商户所属行业-top
+	var custom_mcc=null;//商户所属行业mcc
+	var bank_bankId=null;//结算开户行名称
+	var bank_branchbankName=null;//开户支行名称
+	var area2=null;
+	// 页面加载的时候先把城市和区填完整
+	$.ajax({
+		type:'get',
+		url:"/customer/find/"+review_mercNo+".json",
+		async: false,
+		success:function(res){
+
+			city_code=res.customer.peovinceId;
+			area=res.customer.cityId;
+			area2=res.customer.areaCode;
+			custom_industry=res.customer.industry;
+			custom_mcc=res.customer.mcc;
+			bank_bankId=res.customer.bankId;
+			bank_branchbankName=res.customer.branchbankName;
+		}
+	});
+
+	//填充通道
+	$.ajax({
+		url: "/inst/allInst",
+		method: 'get',
+		async:false,
+		success: function (res) {
+
+			$.each(res,function(i,v){
+				$("#N_cs_tongdao").append('<label class="radio-inline"><input type="checkbox" checked class="uniform" name="" value="'+res[i].instCode+'">'+res[i].instName+'</label>');
+			})
+		}
+	});
+
+/*	var Ncs_checkBox=$("#N_cs_tongdao").find("input[type='checkbox']");
+
+	var str1="";
+	if(Ncs_checkBox){
+		$.each(Ncs_checkBox,function(i,v){
+			if(Ncs_checkBox[i].checked){
+				str1+=$(this).val()+","
+			}
+		});
+	}
+
+
+	str1=str1.substring(0,str1.length-1);
+	$("#checkBoxVal").val(str1);*/
+	$("#reviewMercNo").val(review_mercNo);
+	$("#current_Id").val(current_taskId);
+
+
+	var agent_up=null;
+	$.ajax({
+		url: "/agent/getInsertInfo",
+		method: 'get',
+		async:false,
+		success: function (res) {
+			if(res.agentNo==null){
+//				agent_up=res;
+//				$("#N_searchAgent").css("display","none");
+//				console.log(agent_up)
+				$.each(res, function (i, n) {
+					if (res[i] == null) {
+						res[i] = 0;
+					}
+				})
+			}
+			//设置全局保存的数值；
+			agent_up=res;
+		}
+	});
+	// 手机商户设备列表参数
+	function deviceListQuery(argms) {
+		argms.mercNo = review_mercNo || "";
+		return argms;
+	};
+	//手机商户设备表  ---首选项
+	function firstSelectUpdate(index, row) {
+		var firstSelectList = row.isFirst;
+		if (firstSelectList == "0") {
+			return "否"
+		} else {
+			return "是"
+		}
+	}
+
+
+	//新增手机设备查询
+	$("#M_cs_PhoneModal .btn-query").on("click", function (e) {
+		e.preventDefault();
+		$("#M_CS_cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+	});
+
+	//所属代理商弹框表请求参数
+	function agentAddParams(argms){
+		argms.agentNo = $("#fagent").val();
+		return argms;
+	};
+
+	//银行支行模态窗口初始化数据
+	function merchantNewBankBean(argms) {
+		argms.bankcode = $("#M_cs_BankidTop option:selected").data('shortcode');
+		argms.branchbankcode = $("#bank-apply-modal input[name='branchbankcode']").val().trim() || "";
+		argms.branchbankname = $("#bank-apply-modal input[name='branchbankname']").val().trim() || "";
+		return argms;
+	};
+	//父代理商确定事件
+	$("#M_CS_sureFagent").on('click',function(){
+		var tempAgent = $("#fagentTable").bootstrapTable('getSelections');
+		if(tempAgent.length > 0){
+
+			tempAgent = tempAgent[0];
+			/* $("#parentAgentName").find("input[name='parentAgentName']").val(tempAgent.name).focus();
+			 $("#parentAgentId").find("input[name='parentAgentId']").val(tempAgent.agentNo);*/
+
+			$("#M_CS_parentAgentName").val(tempAgent.name).focus();
+			$("#M_CS_parentAgentId").val(tempAgent.agentNo);
+		}
+		$("#M_cs_AgentModal").modal("hide");
+	});
+
+	// 父代理商模态框中查询数据清空
+	$("#M_cs_AgentModal").on('hide.bs.modal', function() {
+		$("#fagent").val("");
+		$("#fagentTable").bootstrapTable("selectPage", 1);//清空选中项
+	})
+
+	//父代理商模态框关闭按钮
+	$("#closeFagent").on('click',function(){
+		$("#M_cs_AgentModal").modal("hide");
+	});
+	//弹出银行支行模态框
+	$('#bank-apply-modal-show').on('click', function () {
+		$("#bank-apply-modal").modal("show");
+	});
+
+
+
+	// 手机商户设备新增列表参数
+	function deviceQuery(argms) {
+		argms.agentNo = review_agentId || "";
+		argms.bodyNoStart = $("#M_cs_PhoneModal input[name='bodyNoStart']").val().trim() || "";
+		return argms;
+	};
+
+	$('[data-toggle="table"]').bootstrapTable();
+	//点击增加弹出模态框
+	$('#M_cs_AddPhone_Btn').on('click', function () {
+		$("#M_cs_PhoneModal").modal("show");
+	});
+
+	//点击弹出选者 所属代理商
+	$('#M_cs_SearchAgent').on('click', function () {
+		$("#M_cs_AgentModal").modal("show");
+	});
+
+	$("#M_cs_PhoneModal .confirm-btn").on("click", function () {
+		var manufacturer = $("#M_CS_cusEditDeviceAddTable").bootstrapTable('getSelections');
+		if (manufacturer.length > 0) {
+			manufacturer = manufacturer[0];
+
+			var deviceNo = manufacturer.deviceNo;
+			var isFirst = $("#M_cs_PhoneModal #isFirst").val();
+			var typeName = manufacturer.typeName;
+			var modeName = manufacturer.modeName;
+
+			//发送新增设备请求
+			var deviceBean = {
+				"customerId": review_mercNo,
+				"deviceNo": deviceNo,
+				"typeName": typeName,
+				"modeName": modeName,
+				"isFirst": isFirst
+
+			};
+
+			$.ajax({
+				type: "post",
+				dataType: "json",
+				contentType: "application/json",
+				url: "/customer/insert.json",
+				data: JSON.stringify(deviceBean),
+				success: function (res) {
+					if (res != null) {
+						//页面手机商户设备表刷新table
+//                         UTIL.clickDisappearSwal("新增成功！");
+						$('#M_CS_edit-device-list').bootstrapTable('refresh', {silent: true});
+						$("#M_CS_cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+//                          UTIL.clickDisappearSwal("新增成功！");
+					} else {
+						UTIL.clickDisappearSwal("新增失败！");
+					}
+				}
+			});
+		}
+		$("#M_cs_PhoneModal").modal("hide");
+	});
+
+	//单个删除
+	$(".Nor-cs-delPhone").on("click", function () {
+		var del_device_list = $("#M_CS_edit-device-list").bootstrapTable("getSelections");
+
+		var del_list_length = del_device_list.length;
+		if (del_list_length < 1) {
+			UTIL.clickDisappearSwal("没有选中所要删除的设备");
+
+		} else {
+			$("#Nor-csDel-phoneModal").modal("show");
+		}
+	});
+
+
+	// 批量删除设备,确定按钮
+	$("#Nor-csDel-confirm").click(
+			function () {
+				var deviceArray = [];
+				var del_device_list = $("#M_CS_edit-device-list").bootstrapTable(
+						"getSelections");
+
+				for (var i in del_device_list) {
+					deviceArray.push(del_device_list[i].deviceNo);
+				}
+
+				//发送删除请请求
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					contentType: "application/json",
+					url: "/customer/batchDelete/" + review_mercNo + ".json",
+					data: JSON.stringify(deviceArray),
+					success: function (res) {
+						if (res > 0) {
+							//重新加载设备列表
+							$('#M_CS_edit-device-list').bootstrapTable('refresh', {silent: true});
+							$("#M_CS_cusEditDeviceAddTable").bootstrapTable("selectPage", 1);
+							$("#Nor-csDel-phoneModal").modal("hide");
+							UTIL.clickDisappearSwal("删除成功！");
+						} else {
+							UTIL.clickDisappearSwal("删除失败！");
+						}
+
+					}
+				});
+
+			});
+
+
+
+
+
+
+
+
+
+	//---------------------------------------------------------
+
+
+	function changeBank($that, success) {
+		var shortcodeCode = $('option:selected', $that).data('shortcode').toString();
+
+		$('#M_CS_branchBank_content').val('');
+		$('#merchantNewBranchbankId').val('');
+	}
+	//初始化开户总行名称列表
+	$.ajax({
+		url: "/system/bank/loadAllBank",
+		method: 'post',
+		success: function (res) {
+			var $selectBankList = $form.find('select').filter(
+					function () {
+						return ($(this).attr('id') || '').toLowerCase()
+										.indexOf('bankid') >= 0;
+					});
+			$selectBankList.empty();
+			$selectBankList.each(function (index) {
+				for (var i = 0; i < res.length; i++) {
+					var str = $("#bankTmpl").html();
+					$(this).append(str.replace(/\{\{code\}\}/g, res[i].bankcode).replace(/\{\{bankcode\}\}/g, res[i].bankcode).replace(/\{\{shortcode\}\}/g, res[i].shortcode).replace(/\{\{showname\}\}/g, res[i].showname));
+				}
+				changeBank($(this));
+				$(this).change(function () {
+					var $that = $(this);
+					changeBank($that);
+				});
+			});
+		},
+		error: function (xhr, textStatus, errorThrown) {
+			alert("亲，初始化开户总行名称列表出错，请联系管理员！");
+		}
+	});
+
+
+	// 初始化table
+	$('[data-toggle="table"]').bootstrapTable();
+
+	// 开户行模态框消失时校验状态更新
+	$("#bank-apply-modal").on('hide.bs.modal', function () {
+		$form.data('formValidation').updateStatus('boCustomer.branchbankName', 'NOT_VALIDATED', null);
+	});
+
+
+	//弹出银行支行模态框
+	$('#bank-apply-modal-show').on('click', function () {
+		$("#bank-apply-modal").modal("show");
+	});
+
+	//银行支行模态窗
+
+
+	$("#bank-apply-modal").on('show.bs.modal', function () {
+		//在银行支行显示的时候给予银行名字赋值；
+		var bankName=$("#M_cs_BankidTop option:selected").text();
+		$("#bankName").val(bankName);
+		function merchantNewBankBean(argms) {
+
+			argms.bankcode = $("#M_cs_BankidTop  option:selected").data('shortcode');
+			argms.branchbankcode = $("#bank-apply-modal input[name='branchbankcode']").val().trim()||"";
+			argms.branchbankname = $("#bank-apply-modal input[name='branchbankname']").val().trim()||"";
+
+			return argms;
+		};
+		$("#M_CS_applybandTable").bootstrapTable("selectPage", 1);
+	});
+
+
+	var $form=$("#customer-csMpos-form-update");
+	$("#bank-apply-modal").on('hide.bs.modal', function () {
+		$("#bank-apply-modal input[name='branchbankId']").val("");
+		$("#bank-apply-modal input[name='branchbankName']").val("");
+		$("#M_CS_applybandTable").bootstrapTable("selectPage", 1);
+	});
+
+	// 银行支行查询按钮点击事件
+	var $sqdlsbhTableData =  $("#M_CS_applybandTable").bootstrapTable("getData");
+	$("#bank-apply-modal .bank-btn-query").on("click", function (e) {
+		e.preventDefault();
+		if($sqdlsbhTableData.length === 0 ){
+			var randomNum = parseInt(Math.random()*99999);
+
+			var sqdlsbhTableRefreshUrl =  $("#M_CS_applybandTable").data("url") + "?" + randomNum;
+			$("#M_CS_applybandTable").bootstrapTable("refresh", {
+				url:sqdlsbhTableRefreshUrl
+
+			});
+			$sqdlsbhTableData =  $("#M_CS_applybandTable").bootstrapTable("getData");
+		}
+		else{
+			$("#M_CS_applybandTable").bootstrapTable("selectPage", 1);
+		}
+
+	});
+
+	//银行支行模态框中查询数据清空
+	$("#bank-apply-modal").on('hide.bs.modal', function () {
+		$("#bank-apply-modal input[name='branchbankcode']").val("");
+		$("#bank-apply-modal input[name='branchbankname']").val("");
+		$("#bank-apply-modal").bootstrapTable("selectPage", 1);
+	});
+	// 银行支行确认按钮点击事件
+	$("#bank-apply-modal .btn-confirm").on("click", function () {
+		var manufacturer = $("#M_CS_applybandTable").bootstrapTable('getSelections');
+		if (manufacturer.length > 0) {
+			manufacturer = manufacturer[0];
+			$form.find("input[id='merchantNewBranchbankId']").val(manufacturer.branchbankcode);
+			$form.find("input[id='M_CS_branchBank_content']").val(manufacturer.branchbankname);
+		}
+		$("#bank-apply-modal").modal("hide");
+	});
+
+	//----------------------银行结束
+
+	$("#M_cs_BankidTop").val(bank_bankId);
+	$("#M_CS_branchBank_content").val(bank_branchbankName);
+
+	//----------------------------------------------------------------------
+
+
+
+
+
+	//---------------------------------------初始化商户所属行业，默认先加载全部行业
+	$.ajax({
+		url:"/system/mcc/loadData/0",
+		type:"get",
+		async:false,
+		dataType:"json",
+		success:function(res){
+			var str="";
+			$.each(res,function(i,v){
+				str+=('<option value ='+res[i].id+'>'+res[i].name+'</option>');
+			})
+			$("#csMpos_Custom_TypeTop").append(str);
+		}
+	});
+
+
+	$.ajax({
+		url:"/system/mcc/loadData/"+custom_industry,
+		type:"get",
+		async:false,
+		dataType:"json",
+		success:function(res){
+			var str="";
+			$.each(res,function(i,v){
+				str+=('<option value ='+res[i].id+'>'+res[i].name+'</option>');
+			});
+
+			$("#csMpos_Custom_TypeSecond").append(str);
+		}
+	});
+
+	$("#csMpos_Custom_TypeTop").val(custom_industry);
+	$("#csMpos_Custom_TypeSecond").val(custom_mcc);
+
+
+	//改变商户所属行业
+
+	$("#csMpos_Custom_TypeTop").change(function(){
+		var city=$(this).find("option:selected").attr("value");
+
+		changeTop(city)
+	});
+
+	function changeTop(a){
+		//$('#csNormal_Custom_TypeSecond option:gt(0)').remove();
+		$('#csMpos_Custom_TypeSecond').empty();
+		$.ajax({
+			url:"/system/mcc/loadData/"+a,
+			dataType: "json",
+			method: 'get',
+			success: function (res) {
+				var str="";
+				$.each(res,function (k,v) {
+					str=str+('<option value ='+res[k].id+'>'+res[k].name+'</option>');
+				});
+
+				$('#csMpos_Custom_TypeSecond').append(str);
+
+			},
+			error: function (error) {
+				console.log(error);
+			}
+		});
+
+	};
+
+	//----------------------------------------------------------------------------------------
+
+
+
+
+	//页面加载默先加载省，三级联动start
+	$.ajax({
+		url: "/system/address/loadAllData/0/0",
+		method: 'post',
+		data:"{'type':0,'code':0}",
+		success: function (res) {
+			var op='';
+			$.each(res,function (i,n){
+				op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+			});
+
+			$('#M_cs_province').append(op);
+			$('#M_cs_province').val(city_code);
+		},
+		error: function (xhr, textStatus, errorThrown) {
+			alert("亲，初始化省列表出错，请联系管理员！");
+		}
+	});
+
+
+$.ajax({
+		url:'/system/address/loadAllData/'+1+'/'+city_code,
+		method: 'post',
+		data:"{'type':0,'code':0}",
+		success: function (res) {
+			var op='';
+			$.each(res,function (i,n){
+				op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+			})
+
+			$('#M_cs_city').append(op);
+			$('#M_cs_city').val(area);
+		},
+		error: function (xhr, textStatus, errorThrown) {
+			alert("亲，初始化省列表出错，请联系管理员！");
+		}
+	});
+
+	$.ajax({
+		url:  '/system/address/loadAllData/'+2+'/'+area,
+		method: 'post',
+		data:"{'type':0,'code':0}",
+		success: function (res) {
+
+			var op='';
+			$.each(res,function (i,n){
+				op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+			})
+
+			$('#M_cs_area').append(op);
+			$('#M_cs_area').val(area2);
+		},
+		error: function (xhr,textStatus,errorThrown) {
+			alert("亲，初始化省列表出错，请联系管理员！");
+		}
+	});
+
+	//为省市区赋初值
+
+
+	$('#M_cs_province').change(function(){
+		var proAdd=$(this).find("option:selected").attr("value");
+		M_CS_change_city(1,proAdd);
+		$('#M_cs_area option:gt(0)').remove();
+	});
+
+
+	$("#M_cs_city").change(function (){
+		$('#M_cs_area option:gt(0)').remove();
+		var area=$(this).find("option:selected").attr("value");
+		M_CS_change_area(2,area)
+	});
+	function M_CS_change_city(e,n) {
+		$('#M_cs_city option:gt(0)').remove();
+		$.ajax({
+			url: '/system/address/loadAllData/'+e+'/'+n,
+			method: 'post',
+			success: function (res) {
+
+				var op='';
+				$.each(res,function (i,n){
+					op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+				})
+
+				$('#M_cs_city').append(op);
+			},
+			error: function (xhr, textStatus, errorThrown) {
+				alert("亲，初始化省列表出错，请联系管理员！");
+			}
+		})
+	}
+	function M_CS_change_area(e,n) {
+		if(n==0){
+			$('#M_cs_area option:gt(0)').remove();
+			return false;
+
+		}
+		$('#M_cs_area option:gt(0)').remove();
+		$.ajax({
+			url: '/system/address/loadAllData/'+e+'/'+n,
+			method: 'post',
+
+			success: function (res) {
+
+				var op='';
+				$.each(res,function (i,n){
+					op=op+('<option value ='+res[i].code+'>'+res[i].name+'</option>')
+				});
+				$('#M_cs_area').append(op);
+			},
+			error: function (xhr, textStatus, errorThrown) {
+				alert("亲，初始化省列表出错，请联系管理员！");
+			}
+		})
+	};
+
+	//-----------------------------------------------------------------------
+
+
+
+	// 回显更新页面的数据
+	$.ajax({
+		type:'get',
+		url:"/customer/find/"+review_mercNo+".json",
+		success:function(res){
+			$("#customer-csMpos-form-update").json2form(res);
+			//遍历拿取图片
+			$("#customer-csMpos-form-update .upImgs").each(function () {
+				$(this).uploadPreview();
+			});
+		}
+	});
+
+	//弹出手机设备添加框
+	$('#M_cs_AddPhone_Btn').on('click', function () {
+		$("#M_cs_PhoneModal").modal("show");
+	});
+
+	$(function(){//表单提交结束
+		$form.formValidation({ //开始表单验证
+			message: '此值无效', //此值无效
+			excluded: ["#paramsYybName", "#directorUserName", "#ywzgName", ":disabled"],
+			icon: {
+				valid: 'glyphicon',
+				invalid: 'glyphicon'
+			},
+			fields: {
+
+				"customer.agentName": {//商户代码
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户代码不能为空！'
+						}
+					}
+				},
+				"customer.mercNameShort": { //商户简称
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户简称不能为空！'
+						}
+					}
+				},
+
+				"customer.mercName": { //商户名称
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户名称不能为空！'
+						}
+					}
+				},
+				//商户附加信息
+				"customer.industry": { //商户所属行业
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户所属行业不能为空！'
+						},
+						between:{
+							min:1,
+							max:10000000000,
+							message:"请重新选择！"
+						}
+					}
+				},
+				"customer.mcc": { //商户类别(MCC)
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户类别(MCC)不能为空！'
+						},
+						between:{
+							min:1,
+							max:10000000000,
+							message:"请重新选择！"
+						}
+					}
+				},
+				"customer.address": { //商户所属地址
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户所属地址不能为空！'
+						}
+					}
+				},
+				"customer.businessLicense": { //商户营业执照号
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '商户营业执照号不能为空！'
+						}
+					}
+				},
+
+				//法人姓名
+				'customer.legalName': {
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '法人姓名不能为空！'
+						},
+						stringLength: {
+							min: 1,
+							max: 20,
+							message: "请输入20以内的字符！"
+
+						} ,
+						callback: {
+							callback: function (value, validator) {
+								$("#regaccountName").val(value);
+								return true;
+							}
+						}
+					}
+				},
+				'customer.mobile': { //法人手机号
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '手机号不能为空！'
+						},
+						regexp: {
+							regexp: /^1[34578]\d{9}$/,
+							message: '请填写11位正确的手机号码！'
+						}
+					}
+				},
+				'customer.idCard': { //法人身份证号码
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '身份证号码不能为空！'
+						},
+						regexp: {
+							regexp:/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
+							message: '请输入18位正确的身份证号码！'
+						}
+
+					}
+				},
+				//验证经营地址
+				'customer.peovinceId': { //商户经营地址，省
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '请选择省份！'
+						},
+						between: {
+							min:1,
+							max: 100000000000000,
+							message: '请选择！'
+						}
+					}
+				},
+				'customer.cityId': { //商户经营地址，省
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '请选择市或区！'
+						},
+						between: {
+							min:1,
+							max: 100000000000000,
+							message: '请选择！'
+						}
+					}
+				},
+				'customer.areaCode': { //商户经营地址，省
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '请选择区或县！'
+						},
+						between: {
+							min:1,
+							max: 100000000000000,
+							message: '请选择！'
+						}
+					}
+				},
+
+				'customer.branchbankName': { //开户支行名称
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '开户支行名称不能为空！'
+						}
+					}
+				},
+				'customer.accountName': { //结算账户账号,bankCode
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '结算账户名称不能为空！'
+						}
+					}
+				},
+
+
+				'customer.accountNo': { //结算账号
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						regexp: {
+							regexp: /^\d{16,19}$/,
+							message: '请输入为16至19位数字'
+						}
+					}
+				},
+
+				'customer.swingCardDebitRate': { //刷卡成本信息-借记卡手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.swingCardDebitRate,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				 'customer.swingCardCreditRate': { //刷卡成本信息-贷记卡手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.swingCardCreditRate,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				  'customer.swingCardSettleFee': { //刷卡成本信息-交易结算手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.swingCardSettleFee,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+
+				//无卡成本信息（借贷记一致）,两个始终一致
+				   'customer.nonCardCreditRate': { //第1个
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.nonCardCreditRate,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+
+
+				 'customer.posDebitRate': {//传统POS成本信息-借记卡手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.posDebitLimit,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				//
+				'customer.posCreditRate': {//传统POS成本信息-贷记卡手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.posCreditRate,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				'customer.posSettleFee': { //传统POS成本信息-交易结算手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.posSettleFee,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				//扫码成本信息（借贷记一致）
+				'customer.scanCodeWxRate': { //扫码成本信息-微信手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.scanCodeWxRate,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				'customer.scanCodeZfbRate': { //扫码成本信息-支付宝手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.scanCodeZfbRate,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				},
+				'customer.scanCodeYlRate': { //扫码成本信息-银联扫码手续费
+					group: '.form-group',
+					validators: {
+						notEmpty: {
+							message: '输入不能为空！'
+						},
+						between: {
+							min:agent_up.scanCodeYlRate ,
+							max: 100,
+							message: '请输入正确的数值'
+						}
+					}
+				}
+			}
+		}) .on('success.form.fv', function (e, data) {
+			e.preventDefault();
+
+			$form.find('[type="submit"]').addClass('disabled').prop("disabled", true);
+			//判断oss是否上传
+			// var lpPhoto = $form.find('input[name="imgList[0].url"]').val();
+			// var lpCardIdProsphoto = $form.find('input[name="imgList[1].url"]').val();
+			// var lpCardIdConsPhoto = $form.find('input[name="imgList[2].url"]').val();
+			// var bankPhoto = $form.find('input[name="imgList[3].url"]').val();
+
+
+			//上传图片文件
+
+			// if (lpPhoto == null || lpPhoto == '' || lpPhoto == 'undefined') {
+			//     UTIL.clickDisappearSwal("请上传法人图片", function () {
+			//         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+			//     });
+
+			//     return;
+			// }
+			// if (lpCardIdProsphoto == null || lpCardIdProsphoto == '' || lpCardIdProsphoto == 'undefined') {
+			//     UTIL.clickDisappearSwal("请上传法人身份证正面图片", function () {
+			//         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+			//     });
+			//     return;
+			// }
+			// if (lpCardIdConsPhoto == null || lpCardIdConsPhoto == '' || lpCardIdConsPhoto == 'undefined') {
+			//     UTIL.clickDisappearSwal("请上传法人身份证反面图片", function () {
+			//         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+			//     });
+			//     return;
+			// }
+			// if (bankPhoto == null || bankPhoto == '' || bankPhoto == 'undefined') {
+			//     UTIL.clickDisappearSwal("请上传银行卡照片图片", function () {
+			//         $("#customer_confirm_btn").removeClass('disabled').prop("disabled", false);
+			//     });
+			//     return;
+			// }
+
+			var Ncs_checkBox=$("#N_cs_tongdao").find("input[type='checkbox']");
+
+			var str1="";
+			console.log(Ncs_checkBox.length);
+			if(Ncs_checkBox){
+				$.each(Ncs_checkBox,function(i,v){
+					if(Ncs_checkBox[i].checked){
+						str1+=$(this).val()+","
+					}
+				});
+			}
+
+
+			str1=str1.substring(0,str1.length-1);
+			$("#checkBoxVal").val(str1);
+
+
+			showLoading();
+			UTIL.submitForm({
+				form: "#customer-csMpos-form-update",
+				url:"/customer/saveFirstReview.json",
+				success: function () {
+
+					hideLoading();
+					// 新建成功之后刷新商户查询table
+					if ($("#custom-list")) {
+						$("#custom-list").bootstrapTable("selectPage", 1);
+					}
+					UTIL.autoDisappearSwal("商户审核成功!", function () {
+						UTIL.closeCurrentPage({
+							delUrl: "merchant-csNormal-apply.html",
+							toUrl: "bussinss-manage.html"
+						});
+					})
+				}
+			})
+		});
+	})
+	//表单提交开始
+
+	//取消提交
+	$("#Mpos_customer_cancel_btn").click(function () {
+		UTIL.closeCurrentPage({
+			"delUrl": "merchant-csNormal-apply.html",
+			"toUrl": "bussinss-manage.html"
+		})
+	});
+
+
+	// 旋转图片
+	$("#M_CS_review-showImg-madal .rotateImg").click(function(){
+		ROTATEIMGFLAG = (++ROTATEIMGFLAG) % 4;
+		$(this).siblings('img').css({'transform': 'rotate(' + ROTATEIMGFLAG*90 + 'deg)'});
+	})
+</script>

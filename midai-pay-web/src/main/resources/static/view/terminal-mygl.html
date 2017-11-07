@@ -1,0 +1,125 @@
+<!-- 密钥管理
+author:黄亚茹
+ -->
+ <div class="container-fluid" id="terminal-mygl">
+ <script type="text/templ" id="terminal-mygl-merchant-template">
+     <option value="{{merchantId}}">{{merchantList}}</option>
+ </script>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget box">
+                <div class="widget-header"><h4><i class="icon-check"></i>密钥生成</h4></div>
+                <div class="widget-content">
+                    <form class="form-horizontal row-border" id="terminal-mygl-form"
+                        novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">厂商</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" name="facture" id="terminal-mygl-merchant-list">
+                                                <option value="CD02">支付通（刷卡器）</option>
+                                                <option value="CC01">支付通（刷卡头）</option>
+                                                <option value="CD14">锦弘霖（刷卡器）</option>
+                                                <option value="CD13">锦弘霖（刷卡头）</option>
+                                                <option value="CD05">BBPOS（刷卡器）</option>
+                                                <option value="CC06">魔方POS（刷卡头）</option>
+                                                <option value="CD07">米付天谕（刷卡器）</option>
+                                                <option value="CC08">米付天谕（刷卡头）</option>
+                                                <option value="CD17">掌付天谕（刷卡器）</option> 
+                                                <option value="CC18">掌付天谕（刷卡头）</option>  
+                                                <option value="501">海贝天喻（刷卡器）</option> 
+                                                <option value="502">海贝天喻（刷卡头）</option> 
+                                                <option value="CD21">动联（刷卡器）</option> 
+                                                <option value="CC22">动联（刷卡头）</option>                              
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">批次</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control email" name="batch" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">密钥数量</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control required url" name="num"  maxlength="10"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="clearfix"></div>
+                        <div class="form-actions">
+                            
+                            <input type="button" class="btn btn-success pull-right" id="terminal-export-key" value="导出密钥" />
+                            <button class="btn btn-default pull-right" id="terminal-generate-key">生成密钥</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+         
+</div>
+<script type="text/javascript">
+    $(function(){
+        // 生成厂商列表
+        (function(){
+            var keyManageTemplate = $("#terminal-mygl-merchant-template").text();
+            var $form = $("#terminal-mygl-form");
+            var formData = {};
+            $form.formValidation({
+                message: '这个字段还没验证',
+                icon: {
+                    valid: 'glyphicon',
+                    invalid: 'glyphicon'
+                },
+                fields :{
+                    "num":{
+                        group: '.form-group',
+                        validators : {
+                            notEmpty: {
+                                message: '密钥数量不能为空'
+                            },
+                            regexp : {
+                                regexp : /^[1-9]\d{0,9}$/ ,
+                                message : '请输入十位以内的数字！'
+                            }
+                        }
+                    }
+                }
+            }).on("success.form.fv", function(e){
+                e.preventDefault();
+                var generateKey = {
+                    "facture" : $form.find("select[name='facture']").val(),
+                    "num" : $form.find("input[name='num']").val()
+                };
+                $.ajax({
+                    url : "../secretkey/createkey/"+generateKey.facture + "/" + generateKey.num,
+                    success : function(res){
+                        $form.find("input[name='batch']").val(res.batch);
+                        UTIL.autoDisappearSwal("密钥生成成功");
+                        formData.batch = $form.find("input[name='batch']").val();
+                        formData.facture = $form.find("select[name='facture']").val();
+                        formData.num = $form.find("input[name='num']").val();
+                    }
+
+                })
+            })
+            // 导出密钥
+            $("#terminal-export-key").on("click", function(){
+                if(!formData.batch){
+                    UTIL.clickDisappearSwal("请先生成密钥");
+                }
+                else{
+                    window.location.href = "../secretkey/exportkey.json?batch=" + formData.batch + "&facture=" + formData.facture + "&num=" + formData.num;
+                }
+            })
+        })();
+    })
+</script>
